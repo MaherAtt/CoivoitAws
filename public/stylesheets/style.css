@@ -305,7 +305,7 @@ body {
     margin-left: 15%  ;
   }
   .titre_page {
-    margin-left: 6%  ;
+/*    margin-left: 6%  ;*/
   }
   header img {
     max-width: 240px;
@@ -340,6 +340,14 @@ body {
 
 /* Messagerie */
 
+#messagerie form {
+    padding-left: 50px;
+}
+#messagerie #response {
+    position: absolute;
+    z-index: 5;
+/*    opacity:0.8;*/
+}
 #messagerie textarea {
    resize : none ;
 }
@@ -347,6 +355,10 @@ body {
 
 #messagerie #messages .id_moi, #messagerie #messages .id_julia{
  /* max-width: 50px;*/
+}
+#messagerie #messages .badge {
+    white-space:normal;
+    text-align: left;
 }
 #messagerie #messages {
   list-style:none;

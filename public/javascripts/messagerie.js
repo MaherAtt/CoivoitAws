@@ -4,10 +4,10 @@
 
 
 $(document).ready(function(){
-    //var pos_contenu_conversation = 0;
+    //var pos_contenu_conversation = 0;;
+    
     let socket = io();
     let fichier = ""; /* fichier dans lequel je sauvegarde ma conversation*/
-
     /* Lorsque je clique sur une conversation donnée avec une personne j'affiche cette conversation à partir d'un fichier */
     $(".conversation").click(function() {
         var href = this.href;
@@ -16,7 +16,8 @@ $(document).ready(function(){
         $(".afficheConversation").attr("id", res)
 
         fichier = "./public/conversation/id_moi_"+res+".json";
-
+        
+        $('.alert').show();
         $("#messages").empty();
         socket.emit('afficher conversation', fichier);
 
@@ -32,7 +33,8 @@ $(document).ready(function(){
             date :  new Date().toJSON().slice(0,10),
             file : fichier
         };
-
+        
+         
         socket.emit('new message', data);
 
     });
@@ -40,7 +42,8 @@ $(document).ready(function(){
 
     /* ATTENTION CREER UNE DIV OU JE METTERZI UNE ALERT ERROR EN CAS DE PB*/
     socket.on('error message', function(phrase){
-        $('#response').html(phrase);
+        $('#response').append('<p>' + phrase + '</p>');
+         $('#response').show()
     });
 
     /* pour que l'utilisateur n'insere pas du code html et modifie note page */
@@ -70,10 +73,10 @@ $(document).ready(function(){
     socket.on('last message', function(contenu_conversation){
         for(var exKey in contenu_conversation.table) {
             if(Object.values(contenu_conversation.table[exKey])[0] == 'id_moi'){
-                $('#messages').append('<li class="id_moi d-flex justify-content-end"><p class=" badge badge-info">' + Object.values(contenu_conversation.table[exKey])[1] + '</p></li>');
+                $('#messages').append('<li class="id_moi d-flex justify-content-end"><div class=" text-right col-6"><p class=" badge badge-info ">' + Object.values(contenu_conversation.table[exKey])[1] + '</p></div></li>');
             }
             else {
-                $('#messages').append('<li  class="'+Object.values(contenu_conversation.table[exKey])[0]+' d-flex justify-content-start"><p class=" badge badge-light">' + Object.values(contenu_conversation.table[exKey])[1] + '</p></li>');
+                $('#messages').append('<li  class="'+Object.values(contenu_conversation.table[exKey])[0]+' d-flex justify-content-start"><div class="text-left col-6"><p class=" badge badge-light">' + Object.values(contenu_conversation.table[exKey])[1] + '</p></div></li>');
             }
         }
     });

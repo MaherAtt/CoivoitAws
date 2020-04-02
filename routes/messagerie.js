@@ -7,8 +7,8 @@ router.get('/', function(req, res, next) {
     res.render('messagerie');
 
     let lastMessage = new Array();
+   
     res.io.on('connection', function(client){
-
 
         /* Lit fichier .jon contenant une conversation. Renvoie le contenu si tout se passe bien*/
         client.on('afficher conversation', function(data){
@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
             }
         });
 
-        
+
         /* Lit le message l'affiche et le sauvegarde dans un fichier json */
         client.on('new message', function(data){
             // Vérification du pseudonyme
@@ -49,7 +49,7 @@ router.get('/', function(req, res, next) {
             saveInFile(data);
         });
 
-        
+
         /*sauvegarde d'un message dans un fichier json*/
         function saveInFile(data){
             let msg = {
@@ -63,8 +63,8 @@ router.get('/', function(req, res, next) {
             json = JSON.stringify(obj);
             fs.writeFile(data.file, json, err => {});
         };
-        
-        
+
+
         /*Déconnecte le client*/
         client.on('disconnect', function(){
             delete client;
