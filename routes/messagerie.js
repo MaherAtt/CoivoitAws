@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 
     let lastMessage = new Array();
    
-    res.io.on('connection', function(client){
+    res.io.once('connection', function(client){
 
         /* Lit fichier .jon contenant une conversation. Renvoie le contenu si tout se passe bien*/
         client.on('afficher conversation', function(data){

@@ -38,6 +38,7 @@ $(document).ready(function(){
         socket.emit('new message', data);
 
     });
+    
 
 
     /* ATTENTION CREER UNE DIV OU JE METTERZI UNE ALERT ERROR EN CAS DE PB*/
