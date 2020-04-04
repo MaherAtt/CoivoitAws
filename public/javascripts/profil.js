@@ -2,7 +2,11 @@ $("#voir_com").click(function(){
     $("#Modalavis").modal("show");
 });
 
-var ctxL = document.getElementById("lineChart").getContext('2d');
+//var c = document.getElementById('lineChart');//.getContext('2d');
+//var ctxL = c.getContext('2d');
+//console.log(ctxL);
+
+var ctxL = $('#lineChart');
 var myLineChart = new Chart(ctxL, {
     type: 'line',
     data: {

@@ -19,15 +19,28 @@ var logOutRouter = require('./routes/logout');
 var PosterRouter = require('./routes/poster');
 
 var app = express();
+//msgerie
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 // view engine setup
 var cons = require('consolidate');
+
 const session = require('express-session');
 var bodyParser = require('body-parser');
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({secret: 'secretCovoiturage',saveUninitialized: true,resave: true}));
+
+
+//msg
+app.use(function(req, res, next){
+    res.io = io;
+    next();
+});
+
+
 // view engine setup
 app.engine('html', cons.swig)
 app.set('views', path.join(__dirname, 'views'));
@@ -73,42 +86,9 @@ app.use(function(err, req, res, next) {
 
 
 
-//messagerie
-/*let io = require('socket.io');
-let lastMessage = new Array();
-io.on('connection', function(client){
-
-client.emit('last message', lastMessage);
-
-
-client.on('new message', function(data){
-    // Vérification du pseudonyme
-    if(!data.username || typeof data.username == undefined || data.username.length > 25){
-        client.emit('error message', "Le pseudonyme rentré n'est pas valide !");
-        return;
-    }
-
-    // Vérification du message
-    if(!data.message || typeof data.message == undefined || data.message.length > 255){
-        client.emit('error message', "Le message rentré n'est pas valide !");
-        return;
-    }
-    lastMessage.push(data.username + ' : ' + data.message);
-    for(var i = lastMessage.length-1; i--;){
-        if(i == 4){
-            lastMessage.shift();
-        }
-    }
-    io.emit('new message', data);
-});
-
-client.on('disconnect', function(){
-    delete client;
-});
-
-});
-*/
 
 
 
-module.exports = app;
+
+module.exports = {app: app, server: server};
+//module.exports = app;

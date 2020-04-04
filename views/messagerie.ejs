@@ -3,65 +3,64 @@
     <head>
         <%- include('./partials/head'); -%>
     </head>
+
     <body>
         <%- include('./partials/header'); -%>     
+
         <div id="messagerie" class="col-md-12 row">
+
             <h1 class="col-sm-12 col-md-12 text-center titre_page">Messagerie</h1>
+            <div class="col-md-12">
+                <div class="row">
+                    <!--  Liste des conversations  -->
+                    <div class="col-4">
+                        <div class="list-group" id="list-tab" role="tablist" style="height: 500px; background-color: white">
+                            <a class="list-group-item list-group-item-action active conversation" id="id_julia" data-toggle="list" href="#id_julia" role="tab" aria-controls="home">Julia</a>
+                            <a class="list-group-item list-group-item-action conversation" id="id_aziz" data-toggle="list" href="#id_aziz" role="tab" aria-controls="profile">Aziz</a>
+                            <a class="list-group-item list-group-item-action conversation" id="id_cynthia" data-toggle="list" href="#id_cynthia" role="tab" aria-controls="messages">Cynthia</a>
+                            <a class="list-group-item list-group-item-action conversation" id="id_salim" data-toggle="list" href="#id_salim" role="tab" aria-controls="settings">Salim</a>
+                        </div>
+                    </div>
+                    <!-- FIN Liste des conversations  -->
 
-            <form>
-                <input type="text" id="username" placeholder="Votre pseudonyme"><br />
-                <textarea id="message" placeholder="Votre message"></textarea><br />
-                <input type="submit" id="submit">
-            </form>
+                    <!--  Colonne de droite  -->
+                    <div class="col-8">
+<!--
+                        <div class=" col-md-12 alert alert-warning " id="response" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+-->
+                        <div class="tab-content" id="nav-tabContent">
+                            <!--  Détail conseration  -->
+                            <div class="tab-pane fade show active afficheConversation" id="list-home" role="tabpanel" aria-labelledby="messages">
+                                <ul id="messages" >
+                                </ul>
 
-            <div id="response"></div>
+                                <!-- Formulaire d'envoie de message -->
+                                <form class="col-md-12 row">
+                                    <input type="text" id="username" placeholder="Votre pseudonyme" class="col-md-12">
+                                    <textarea class="form-control col-md-9" rows="2" id="message" placeholder="Votre message"></textarea>
+                                    <button type="submit" id="submit" class="btn btn-primary col-md">Envoyer</button>
+                                </form>
+                                <!-- Fin Formulaire d'envoie de message  -->
 
-            <ul id="messages" style="list-style:none;"></ul>
+                            </div>
+                        </div>
+                        <!--  Fin détail conversation  -->
+                    </div>
+                    <!-- FIN Colonne de droite  -->
+                </div>
+            </div>
+
 
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-            <!--                    <script src="/socket.io/socket.io.js"></script>-->
-            <script>
-                /*function XSSPatcher(texte){
-                            return texte
-                                .replace(/&/g, "&amp;")
-                                .replace(/</g, "&lt;")
-                                .replace(/>/g, "&gt;")
-                                .replace(/"/g, "&quot;")
-                                .replace(/'/g, "&&#039;")
-                        }
-                        $(document).ready(function(){
-                            let socket = io();
-                            $('#submit').on('click', function(e){
-                                e.preventDefault();
+            <script src="/socket.io/socket.io.js"></script>
 
-                                let data = {
-                                    username: $('#username').val(),
-                                    message : $('#message').val()
-                                };
 
-                                socket.emit('new message', data);
-                            });
-
-                            socket.on('error message', function(phrase){
-                                $('#response').html(phrase);
-                            });
-
-                            socket.on('new message', function(data){
-                                $('#messages').append('<li>' + XSSPatcher(data.username) + ' : ' + XSSPatcher(data.message) + '</li>');
-                            });
-
-                            socket.on('last message', function(arr){
-                                for(i = 0;i < arr.length;i++){
-                                    $("#messages").append('<li>' + XSSPatcher(arr[i]) + '</li>');
-                                }
-                            });
-
-                        });*/
-            </script>
 
         </div>
-
-
 
         <%- include('./partials/menu'); -%>
         <%- include('./partials/footer'); -%>
