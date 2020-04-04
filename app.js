@@ -9,23 +9,31 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var rechercherRouter = require('./routes/rechercher');
 var inscriptionRouter = require('./routes/inscription');
-var connexionRouter = require('./routes/connexion');
+var connexionRouter = require('./routes/login');
 var profileRouter = require('./routes/profil');
 var proposerRouter = require('./routes/proposer');
 var messagerieRouter = require('./routes/messagerie');
+var registerRouter = require('./routes/register');
+var loginRouter = require('./routes/login');
+var logOutRouter = require('./routes/logout');
+var PosterRouter = require('./routes/poster');
 
 var app = express();
 
 app.use(express.static('public'));
 // view engine setup
 var cons = require('consolidate');
-
+const session = require('express-session');
+var bodyParser = require('body-parser');
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({secret: 'secretCovoiturage',saveUninitialized: true,resave: true}));
 // view engine setup
 app.engine('html', cons.swig)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-
+var sess;
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -40,6 +48,12 @@ app.use('/connexion', connexionRouter);
 app.use('/rechercher', rechercherRouter);
 app.use('/proposer',proposerRouter);
 app.use('/messagerie',messagerieRouter);
+app.use('/register',registerRouter);
+app.use('/login',loginRouter);
+app.use('/logout',logOutRouter);
+app.use('/poster',PosterRouter);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -4,7 +4,20 @@
         <%- include('./partials/head'); -%>
     </head>
     <body>
-        <%- include('./partials/header'); -%>     
+        <% if(logged==true){ %>
+           <%- include('./partials/headerLogged'); -%>
+         <% } else{ %>
+           <%- include('./partials/header'); -%>
+        <% } %>
+
+        <script>
+        <% if (typeof error!='undefined') { %>
+            alert('<%= error %>');
+        <% } %>
+        </script>
+
+
+
         <!--Reste de la page-->
         <div id="acceuil" class="col-md-12 row">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

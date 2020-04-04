@@ -4,61 +4,70 @@
 }
 .recherche-title{
     font-size: 50px;
-    /*padding-bottom: 100px;
-    padding-top: 70px; */
+    padding-bottom: 60px;
+    padding-top: 60px;
 }
 span.trajet-circle{
-    height: 15px;
-    width: 15px;
-    vertical-align: top;
-    margin: 0 auto;
+    height: 16px;
+    width: 16px;
+    background-color: black;
     border: solid black 2px;
     border-radius: 50%;
     display: inline-block;
 }
-
-
-.trajet-vertical-separator{
-    height: 50px;
+.vertical-line{
+    height: 60px;
+    width: 3px;
+    background-color: black;
+    margin: 0 auto;
 }
 
-#img-profil{
+.trajet-vertical-separator{
+    height: 60px;
+}
+
+#img-profile{
     border-radius: 50%;
-    /* position: absolute; */
-    /* top: 50%; */
-    /* left: 50%; */
-    width: 70px;
-    height: 70px;
-    /* margin-top: -30px; */
-    /* margin-left: -30px; */ /* Half the height */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    margin-top: -30px;
+    margin-left: -30px;
+}
+.img-arrow{
+    width: 20px;
+    height: 20px;
+    border : solid black 1px;
+    border-radius: 50%;
+    padding : 4px;
 }
 #rating-text{
     font-size: 1.8em;
-    /* position: absolute; */
-    /* margin: 15px; */
-    /* margin-top: 17px; */
-    /* margin-bottom: 15px; */
+    position: absolute;
+    margin-left: 15px;
 }
 #trajet-name{
     font-size: 1.3em;
 }
 .trajet-place{
-    font-size: 1.2em;
+    font-size: 15px;
 
 }
 
-#container1  div img:nth-child(1) {
-    /* position: relative;
-     top: 140px;
-     left: 9px;*/
+.no-gutter > [class*='col-'] {
+    padding-right:0;
+    padding-left:0;
 }
 
+/*
 @media screen and (max-width: 600px) {
     #container2{
-        /* margin-left: 13px; */
-        /* margin-right: 33px; */
+        margin-left: 13px;
+        margin-right: 33px;
         margin-top: 30px;
-        /*        width: -26px;*/
+        width: -26px;
     }
     #container2 #info_trajet {
         margin-bottom: 24px;
@@ -81,6 +90,7 @@ span.trajet-circle{
     }
 
 }
+*/
 
 #container1 .card {
     background-color: #7366a54f;

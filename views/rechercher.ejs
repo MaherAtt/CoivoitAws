@@ -4,11 +4,12 @@
         <%- include('./partials/head'); -%>
     </head>
     <body>
-        <%- include('./partials/header'); -%> 
+        <%- include('./partials/header'); -%>
 
-          
+
 <div class="container" id="container1" >
-    <form id="myForm" action="post" class="form-horizontal"  role="form">
+
+    <form id="myForm" action="/rechercher" method="get" class="form-horizontal"  role="form">
 
         <div class="mx-auto offset-md-2 col-md-8 card">
             <div class="col-md-12 row text-center" id="titre">
@@ -20,56 +21,59 @@
                 </div>
             </div>
             <div class="form-group" style="margin-bottom: 50px;">
-                <input type="text" class="form-control input-lg" onFocus="geolocate()" id="autocomplete" placeholder="Départ">
-            </div>
-            <div class="form-group" style="margin-bottom: 50px;">
-                <input type="text" class="form-control input-lg" onFocus="geolocate()" id="autocomplete" placeholder="Destination">
-            </div>
+                    <input type="search" class="form-control input-lg" id="adr-depart-input" placeholder="Départ">
+                  </div>
+                  <div class="form-group" style="margin-bottom: 50;">
+                    <input type="text" class="form-control input-lg" onFocus="geolocate()" id="adr-dest-input" placeholder="Destination">
+                  </div>
 
 
-            <div class="row" style="margin-bottom: 30px;">
-                <div class="col-md" >
-                    <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd" >
-                        <input class="form-control input-lg" type="text" value="Quand ?" readonly>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                  <div class="row" style="margin-bottom: 30px;">
+                    <div class="col-md" >
+                        <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd" >
+                            <input class="form-control input-lg" type="text" value="Quand ?" readonly>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                        <input type="hidden" id="dtp_input2" value="" /><br/>
                     </div>
-                    <input type="hidden" id="dtp_input2" value="" /><br/>
-                </div>
-                <div class="col-md">
-                    <div class="input-group date form_time" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
-                        <input class="form-control input-lg" type="text" value="À quelle heure ?" readonly>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                    <div class="col-md">
+                        <div class="input-group date form_time" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+                            <input class="form-control input-lg" type="text" value="À quelle heure ?" readonly>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                        </div>
+                        <input type="hidden" id="dtp_input3" value="" /><br/>
                     </div>
-                    <input type="hidden" id="dtp_input3" value="" /><br/>
-                </div>
-            </div>
+                  </div>
 
-            <div class="text-center" style="margin-bottom: 15px;" > 
-                <button type="button" onclick="myFunction()" class="btn btn-primary btn-lg" >Rechercher</button>
-            </div>
-
+                  <div class="text-center" >
+                    <button onclick="rechercheTrajet()" type="button" class="btn btn-primary btn-lg" >Rechercher</button>
+                  </div>
 
         </div>
 
     </form>
-    
-    
-   
+
+
+
 </div>
- 
+
+
 <!-- les Trajets recherchés,  -->
-<div id="trajets"></div>
+<div id="trajets_recherche" class="row d-flex justify-content-center"></div>
 
 
 
 
-<script type="text/javascript" src="./bootstrap/jquery/jquery-1.8.3.min.js" charset="UTF-8"></script>
+<!-- Affichage du calendrier de la date et l'heure-->
+<script type="text/javascript" src="javascripts//bootstrap-datetimepicker.js" charset="UTF-8"></script>
 
-<script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="./bootstrap/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<!-- Auocomplete Address-->
+<script src="https://cdn.jsdelivr.net/npm/places.js@1.18.1/dist/cdn/placesInstantsearchWidget.min.js"></script>
+
+
 
 <script type="text/javascript">
-    // Format de la date
+    // Format de la date et du timePicker
     ;(function($){
         $.fn.datetimepicker.dates['fr'] = {
             days: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"],
@@ -84,7 +88,6 @@
             format: "dd/mm/yyyy hh:ii"
         };
     }(jQuery));
-
     $('.form_date').datetimepicker({
         language:  'fr',
         weekStart: 1,
@@ -107,26 +110,160 @@
         forceParse: 0
     });
 
-    //Ajout des trajets quand l'utulisateur click sur Recherche
-    function myFunction() {
+    //Autocomplete pour addresse
+    (function() {
+        var searchBox = placesInstantsearchWidget({
+          appId: 'plKD0BHKH6A7',
+          apiKey: 'd73e81b8f89e712327f4c6daa086e67c',
+          container: document.querySelector('#adr-depart-input')
+        });
+        var searchBox2 = placesInstantsearchWidget({
+          appId: 'plKD0BHKH6A7',
+          apiKey: 'd73e81b8f89e712327f4c6daa086e67c',
+          container: document.querySelector('#adr-dest-input')
+        });
+        search.addWidget(searchBox);
+        search.addWidget(searchBox2);
 
-        var trajet = '<div class="container shadow-lg p-3 mb-5 bg-white rounded " id="container2"><div class="col-md-12 row" id="info_trajet">           <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 col-1" > <div class="short-div trajet-place" id="depart-time-trajet">10:00</div>                 <div class="short-div trajet-vertical-separator"></div> <div class="short-div trajet-place" id="arrivee-time-trajet" style="margin-top: -10px;">16:45</div> </div> <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 offset-sm-1 offset-md-0 offset-1 col-1"><div class="short-div "> <span class="dot trajet-circle" style="vertical-align: bottom;"></span> </div>  <div class="short-div vertical-line  trajet-vertical-separator"></div><div class="short-div"><span class="dot trajet-circle"></span></div></div> <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 col-1" >  <div class="short-div trajet-place" id="depart-trajet">Paris</div> <div class="short-div trajet-vertical-separator" ></div> <div class="short-div trajet-place" id="arrivee-trajet" style="margin-top: -10px;">Lyon</div> </div> <div class="col-lg-2 col-md-3  col-sm-2 col-xs-2 offset-md-7 offset-2 col-5 trajet-place text-right" id="prix-trajet">54,00$</div> </div>  <div class="col-md-12 col-12 row"> <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-4 align-self-center">  <div class="short-div" id="trajet-nom-prenom"> <span id="trajet-name">Ismail</span> </div> <div class="short-div " style="height: 30px;"></div> <div class="short-div " id="trajet-rating"> <img src="img/star.png" id="trajet-star" alt="img-star" style="margin-top: -16px;" height="30" width="30"> <strong id="rating-text" >5</strong> </div> </div> <div class="col-lg-2 col-md-1 col-sm-1 col-xs-1 col-5" > <img src="img/img-profil.jpg" id="img-profil" alt="img-profil"> </div> </div></div>';
+        search.start();
+    })();
 
-        var trajet2 = '';
-        for (var i = 0; i < 6; i++) {
-            trajet2 = trajet2 + trajet;
+
+    //afficher tous les trajet apres une recherche
+    function rechercheTrajet(){
+
+        //Recuperation des inputs du formulaire
+
+
+        var nbr_trajet = 6;
+        var html_content = "";
+
+        //Pour chaque trajet
+        for(var i = 0; i < nbr_trajet; i++){
+
+
+            //recuperation des infos du trajet
+            var trajet_id = i;
+            var trajet_userName = "smail@gmail.com";
+            var trajet_raiting = 5;
+            var trajet_heure_depart = "10:00";
+            var trajet_heure_arrivee = "10:00";
+            var trajet_address_depart = "31 avenue du marechal de lattre de tassigny";
+            var trajet_address_arrivee = "45 avenue des états unis";
+            var trajet_prix = 23.00;
+            var trajet_voiture = "Golf 7 , Noir";
+            var trajet_commentaire = "Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla<br/> Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla<br/> Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla<br/>Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla<br/>Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla<br/> ";
+
+
+            var content_trajet = '<div class="col-md-7" ">'+
+                '<div class="container shadow-lg p-3 mb-5 rounded" id="container2" style=" margin-top: 30px;" >'+
+                '<div class="row">'+
+                '<div class="container" id="'+trajet_id+'" onclick="showDetail(this.id)" style="cursor: pointer;">'+
+                '<div class="row" >'+
+                '<div class="container">'+
+                    '<div class="row no-gutter" >'+
+                        '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">'+
+                            '<div class="trajet-place" id="depart-time-trajet" style="text-align: center; height: 25px;">'+trajet_heure_depart+'</div>'+
+                            '<div class="trajet-vertical-separator"></div> '+
+                            '<div class="trajet-place" id="arrivee-time-trajet" style="text-align: center; height: 25px;">'+trajet_heure_arrivee+'</div> '+
+                        '</div>'+
+                        '<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">'+
+                            '<div class="" style="height: 25px; text-align: center;">'+
+                                '<span class="trajet-circle" style="margin-top: 9px;"></span>'+
+                            '</div>'+
+                            '<div class="" style=" text-align: center;">'+
+                                '<div class="vertical-line"></div>'+
+                            '</div> '+
+                            '<div class="" style=" height: 25px; text-align: center;"> '+
+                                '<span class="trajet-circle"></span>'+
+                            '</div> '+
+                        '</div>'+
+                        '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-4" >'+
+                            '<div class="trajet-place" id="depart-trajet" style="text-align: center; height: 25px;">'+trajet_address_depart+'</div> '+
+                            '<div class="trajet-vertical-separator" ></div> '+
+                            '<div class="trajet-place" id="arrivee-trajet" style="text-align: center; height: 25px;">'+trajet_address_arrivee+'</div>'+
+                        '</div>'+
+                        '<div class="col-lg-4 col-md-4 col-sm-4 col-xs-1" ></div>'+
+                        '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="text-align: center;">'+trajet_prix+' $</div>'+
+                    '</div>'+
+                '</div>'+
+                '</div>'+
+                '<div class="row" style="margin-top: 30px;">'+
+                '<div class="col-lg-2 col-md-3 col-sm-3 col-xs-4"  > '+
+                    '<img src="img/img-profil.jpg" id="img-profile" alt="img-profile"> '+
+                '</div> '+
+                '<div class="col-lg-4 col-md-5 col-sm-6 col-xs-6"> '+
+                    '<div class="short-div" id="trajet-nom-prenom"> '+
+                        '<form action="./profil" method="post">'+
+                        '<input type="hidden" name="userDemand" value="'+trajet_userName+'">'+
+                        '<button type="submit" class="buttonProf buttonProfiles">'+trajet_userName+'<img src="img/star.png" id="trajet-star" alt="img-star" height="30" width="30" /><strong id="rating-text" >'+trajet_raiting+'</strong>'+
+                        '</button>'+
+                        '</form>'+
+                    '</div> '+
+
+                '</div> '+
+                '</div>'+
+                '<div class="row"> '+
+                 '<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" > '+
+                    '<img src="img/down-arrow.png" id="img-arrow-'+trajet_id+'" class="img-arrow" alt="img-profile"> '+
+                '</div>'+
+                '</div>'+
+                '</div>'+
+                '</div>'+
+                '<div class="row" id="detail-container-'+trajet_id+'" style="display: none; border-top: solid 0.5px black; padding: 25px; margin : 5px;">'+
+                '<div class="row" style="margin-bottom: 10px;">'+
+                        '<p>'+trajet_commentaire+'</p>'+
+                '</div>'+
+                '<div class="row" style="margin-bottom: 10px;">'+
+                    '<p>Contacter  &nbsp;</p><a href="" style="display: block;">'+trajet_userName+'</a>'+
+                '</div>'+
+                '<div class="row" style="margin-bottom: 10px;">'+
+                    '<p>'+trajet_voiture+'</p>'+
+                '</div>'+
+                '<div class="row">'+
+                    '<button class="btn btn-success btn-lg" style="margin: 0 auto;"'+
+                    ' onclick="reserveTrajet('+trajet_id+')">Réserver </button>'+
+                '</div>'+
+                '</div>'+
+                '</div>'+
+                '</div>'+
+                '</div>';
+
+            html_content = html_content + content_trajet;
+
         }
-        document.getElementById("trajets").innerHTML = trajet2;
+        //Affichage des trajets
+        document.getElementById("trajets_recherche").innerHTML = html_content;
+
 
     }
 
+    //enregistrer la demande de reservation d'un trajet
+    function reserveTrajet(trajet_id){
+
+        window.alert("trajet "+trajet_id);
+
+    }
+
+    //afficher les detail du trajet
+    function showDetail(clicked_id){
+
+        if (document.getElementById("detail-container-"+clicked_id).style.display == "none") {
+            document.getElementById("detail-container-"+clicked_id).style.display = "block";
+            document.getElementById("img-arrow-"+clicked_id).src = "img/up-arrow.png";
+        }
+        else{
+            document.getElementById("detail-container-"+clicked_id).style.display = "none";
+            document.getElementById("img-arrow-"+clicked_id).src = "img/down-arrow.png";
+        }
+
+    }
+
+
 </script>
 
-<!-- API Google avec la clé -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDz-PGb0TE9S_tIIZ9ePo7XnNqPROUGT7o&libraries=places&callback=initAutocomplete" async defer></script>
+<%- include('./partials/menu'); -%>
+<%- include('./partials/footer'); -%>
 
- <%- include('./partials/menu'); -%>
-        <%- include('./partials/footer'); -%>
-    
     </body>
 </html>
