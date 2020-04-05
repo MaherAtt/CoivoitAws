@@ -3,7 +3,6 @@ var fs=require('fs');
 var router = express.Router();
 var traitements = require('./traitements.js');
 
-const axios = require('axios');
 /* GET home page. */
 router.get('/', function(req, res, next) {
     sess=req.session;
