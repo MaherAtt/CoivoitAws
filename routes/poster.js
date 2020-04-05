@@ -27,6 +27,7 @@ router.post('/', function(req, res, next) {
     connection.query('INSERT INTO avis SET IdEmmeteur =?,IdRecepteur=?, Sens=?,Commentaire=?, Note=?',data,function(err,result){
 
     })
+
     res.redirect('./profil');
 });
 

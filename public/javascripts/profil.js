@@ -2,6 +2,12 @@ $("#voir_com").click(function(){
     $("#Modalavis").modal("show");
 });
 
+$(window).on('load',function(){
+    $('#Modalavis').modal('show');
+});
+
+
+
 //var c = document.getElementById('lineChart');//.getContext('2d');
 //var ctxL = c.getContext('2d');
 //console.log(ctxL);
@@ -27,3 +33,4 @@ var myLineChart = new Chart(ctxL, {
                         responsive: true
                     }
 });
+
