@@ -2,9 +2,7 @@ $("#voir_com").click(function(){
     $("#Modalavis").modal("show");
 });
 
-$(window).on('load',function(){
-    $('#Modalavis').modal('show');
-});
+
 
 
 

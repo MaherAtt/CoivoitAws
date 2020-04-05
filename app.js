@@ -1,6 +1,5 @@
 var createError = require('http-errors');
 var express = require('express');
-
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -38,8 +37,32 @@ app.use(function(req, res, next){
     res.io = io;
     next();
 });
+var mysql = require('mysql');
 
+var connection = mysql.createConnection({
+    host     : 'us-cdbr-iron-east-01.cleardb.net',
+    user     : 'b68f308ddca3d1',
+    password : '754810b0',
+    database : 'heroku_d1dd061e72cfd25'
+});
+function handleDisconnect(connection){
+    connection.on('error', function(err){
+        if(!err.fatal)
+        {
+            return;
+        }
+        if(err.code !== 'PROTOCOL_CONNECTION_LOST')
+        {
+            throw err;
+        }
+        console.log('\nRe-connecting lost connection: ' +err.stack);
 
+        connection = mysql.createConnection(connection.config);
+        handleDisconnect(connection);
+        connection.connect();
+    });
+};
+handleDisconnect(connection);
 // view engine setup
 app.engine('html', cons.swig)
 app.set('views', path.join(__dirname, 'views'));
@@ -66,7 +89,6 @@ app.use('/logout',logOutRouter);
 app.use('/poster',PosterRouter);
 
 
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     next(createError(404));
@@ -90,4 +112,5 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = {app: app, server: server};
+exports.connection=connection;
 //module.exports = app;

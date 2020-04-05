@@ -1,7 +1,7 @@
 var express = require('express');
 var fs=require('fs');
 var router = express.Router();
-
+var databa=require('../app');
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
@@ -10,23 +10,11 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
 
-
-
     var email=req.body.emailLog;
     var pass=req.body.passLog;
-    var mysql = require('mysql');
-    var bodyParser=require("body-parser");
-    var connection = mysql.createConnection({
-        host     : 'us-cdbr-iron-east-01.cleardb.net',
-        user     : 'b68f308ddca3d1',
-        password : '754810b0',
-        database : 'heroku_d1dd061e72cfd25'
-    });
 
-    connection.connect(function(err) {
-        if (err) throw err;
-        console.log("Connected!");
-    });
+    var bodyParser=require("body-parser");
+
 
     let crypto = require('crypto')
     const hash = crypto.createHmac('sha256', pass)
@@ -35,7 +23,7 @@ router.post('/', function(req, res, next) {
 
 
     var data = [email, hash]
-    connection.query('Select * from accounts,profils where accounts.Username =? and Password=? and accounts.Username=profils.Username',data,function(err,result){
+    databa.connection.query('Select * from accounts,profils where accounts.Username =? and Password=? and accounts.Username=profils.Username',data,function(err,result){
 
         if(result.length==0) res.redirect('.');
         else {
