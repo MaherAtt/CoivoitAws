@@ -1,8 +1,4 @@
 
-
-
-
-
 $(document).ready(function(){
     //var pos_contenu_conversation = 0;;
     

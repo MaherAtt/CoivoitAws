@@ -391,3 +391,109 @@ body {
 
 
 /* fin Messagerie */
+
+
+
+/*Recherche profil */
+#recherche_profil #search  input{
+  background: none;
+  border: none;
+  color: white;
+    margin-top:1%;
+  margin-bottom:1%;
+}
+#recherche_profil #search  {
+  margin-left: 15%;
+  margin-right: 15%;
+  
+  
+/*  width: 70%;*/
+  height: 90px;
+  font-size: 40px;
+}
+
+#recherche_profil .box_search {
+  padding-bottom: 50px;
+}
+
+
+#recherche_profil .border_img {
+  border-width: 1px;
+  border-color: #ededed;
+  border-style: solid;
+}
+#recherche_profil img {
+  max-width: 100%;
+}
+
+#recherche_profil #liste {
+  padding: 5px;
+}
+#recherche_profil #liste  .card {
+  padding-top: 1%;
+}
+
+#recherche_profil #liste .profil {
+  height: 150px;
+  margin: 15px;
+  border-radius: 2%;
+}
+
+#recherche_profil #liste .profil ul {
+  padding-left: 0px;
+}
+#recherche_profil #liste .profil {
+    opacity: 1;
+}
+#recherche_profil #liste .profil:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+#recherche_profil #liste .profil li {
+  list-style: none;
+}
+
+#recherche_profil .input-group {
+  margin: 10px;
+}
+
+#recherche_profil .input-group-text {
+  width: 200px;
+}
+
+#recherche_profil #accordion {
+  width: 600px;
+}
+#recherche_profil .rating {
+   direction: rtl;
+}
+
+.rating a {
+   color: #aaa;
+   text-decoration: none;
+   font-size: 3em;
+   transition: color .4s;
+}
+
+.rating a:hover,
+.rating a:focus,
+.rating a:hover ~ a,
+.rating a:focus ~ a {
+   color: orange;
+   cursor: pointer;
+} 
+
+
+
+
+@media screen and (max-width: 800px) {
+  #recherche_profil img {
+    max-width: 30%;
+  }
+  
+  #recherche_profil #liste .profil {
+    height: 250px;
+  }
+
+}
+/*Fin Recherche profil */

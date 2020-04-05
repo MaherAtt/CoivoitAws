@@ -5,12 +5,12 @@
     </head>
     <body>
         <% if(logged==true){ %>
-                   <%- include('./partials/headerLogged'); -%>
-                 <% } else{ %>
-                   <%- include('./partials/header'); -%>
-                <% } %>
+        <%- include('./partials/headerLogged'); -%>
+        <% } else{ %>
+        <%- include('./partials/header'); -%>
+        <% } %>
         <!-- le profil de l'utilisateur -->
-        <div id="profil" class="col-md-12 row">
+        <div id="profil" class="col-md-12">
             <h1 class="col-sm-12 col-md-12 text-center titre_page">Informations personnelles</h1>
             <div class="col-md-12 row" >
                 <!-- Info perso -->
@@ -103,17 +103,18 @@
                                     <section class="text-center text-lg-left dark-grey-text">
                                         <div class="text-center font-weight-bold"><span>4</span> comments</div>
                                         <div class="form-group mt-4">
-                                        <form action="./Poster" method="post">
-                                         <input type="hidden" name="profilOf" value="<%= useremail %> ">
-                                         <label for="quickReplyFormComment">Your comment</label>
-                                         <textarea class="form-control" id="quickReplyFormComment" rows="5" name="commentaire"></textarea>
-                                         <div class="text-center my-4">
-                                         <button class="btn btn-info btn-sm" type="submit">Post</button>
-                                         </form>
-                                         </div>
-                                          </div>
-                                         <% for(var i=0; i < avis.length; i++) { %>
-                                            <div class="media d-block d-md-flex mt-4">
+                                            <form action="./Poster" method="post">
+                                                <input type="hidden" name="profilOf" value="<%= useremail %> ">
+                                                <label for="quickReplyFormComment">Your comment</label>
+                                                <textarea class="form-control" id="quickReplyFormComment" rows="5" name="commentaire"></textarea>
+                                                <div class="text-center my-4">
+                                                    <button class="btn btn-info btn-sm" type="submit">Post</button>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <% for(var i=0; i < avis.length; i++) { %>
+                                        <div class="media d-block d-md-flex mt-4">
                                             <img class="card-img-64 rounded z-depth-1 d-flex mx-auto mb-3"
                                                  src="https://mdbootstrap.com/img/Photos/Avatars/img (20).jpg" alt="Generic placeholder image">
                                             <div class="media-body text-center text-md-left ml-md-3 ml-0">
@@ -123,13 +124,13 @@
                                                         <i class="fa fa-reply"></i>
                                                     </a>
                                                 </p>
-                                                    <%= avis[i].Commentaire %>
+                                                <%= avis[i].Commentaire %>
                                                 <!-- Quick Reply -->
 
 
                                             </div>
                                         </div>
-                                         <% } %>
+                                        <% } %>
 
 
 
@@ -143,16 +144,16 @@
             </div>
             <!-- Fin Modal commentaires -->
 
-          
+
         </div>
 
 
         <%- include('./partials/menu'); -%>
         <script src="javascripts/profil.js"></script>
         <%- include('./partials/footer'); -%>
-        
+
 
     </body>
-    
+
 </html>
 

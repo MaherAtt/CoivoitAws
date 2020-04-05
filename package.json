@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "academic-email-verifier": "^2.0.11",
     "consolidate": "^0.15.1",
     "cookie-parser": "^1.4.5",
     "debug": "^2.6.9",
@@ -15,7 +16,6 @@
     "http-errors": "~1.6.3",
     "moment": "^2.24.0",
     "morgan": "~1.9.1",
-
     "pug": "^2.0.4",
     "socket.io": "^2.3.0",
     "swig": "^1.4.2"

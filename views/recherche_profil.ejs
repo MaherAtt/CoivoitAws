@@ -1,0 +1,88 @@
+    <!DOCTYPE html>
+    <html lang="fr">
+        <head>
+            <%- include('./partials/head'); -%>
+        </head>
+        <body>
+            <%- include('./partials/header'); -%>     
+            <!--Reste de la page-->
+            <div id="recherche_profil" class="col-md-12 align-middle">
+                <!--
+    <div class="text-center">
+    <img class="rounded mx-auto d-block img-fluid " src="img/img2.jpg"/>
+    </div>
+    -->
+                <div class="text-center box_search align-middle justify-content-center">
+                    <div id="search" class="badge-pill badge-dark "><input class="offset-1 col-md-10" type="text"  id="data"  placeholder="Rechercher un profil ..."><i class="fas fa-search col-md-1"></i></div>
+                    <div class="col-md-12 row justify-content-center">
+
+                        <div id="accordion" >
+
+                            <div class="" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                        Recherche avancée
+                                    </button>
+                                </h5>
+                            </div>
+                            <div class="card">
+                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <div class="input-group input-group-lg">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" >Nom</span>
+                                            </div>
+                                            <input type="text" class="form-control" id="nom " >
+                                        </div>
+                                        <div class="input-group input-group-lg">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" >Ville / Région </span>
+                                            </div>
+                                            <input type="text" class="form-control" id="lieux" >
+                                        </div>
+                                        <div class="input-group input-group-lg">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"  >Note supérieure à :</span>
+                                            </div>
+                                            <div class="rating">
+                                                <a href="#5" title="Donner 5 étoiles">☆</a>
+                                                <a href="#4" title="Donner 4 étoiles">☆</a>
+                                                <a href="#3" title="Donner 3 étoiles">☆</a>
+                                                <a href="#2" title="Donner 2 étoiles">☆</a>
+                                                <a href="#1" title="Donner 1 étoile">☆</a>
+                                            </div>
+                                        </div>  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="liste" class="row justify-content-center">
+                    <% for(var i=0; i < 9; i++) { %>
+                    <div class="profil col-md-3 row  card  " id="profils">
+                        <div class="col-md-4  align-self-center"> 
+                            <img class="rounded mx-auto d-block img-fluid rounded-circle border_img" alt="photo_profil" src="img/img-profil.jpg"/>
+                        </div>
+                        <div class="col-md-8 align-self-center">
+                            <ul>
+                                <li class="">Nom</li>
+                                <li class="">Prénom</li>
+                                <li class="">Ville</li>
+                                <li class="">Nbr voyages</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <% } %>   
+                </div>
+
+
+
+            </div>
+
+
+
+            <%- include('./partials/menu'); -%>
+            <%- include('./partials/footer'); -%>
+        </body>
+    </html>

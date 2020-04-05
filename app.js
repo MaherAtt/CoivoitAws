@@ -17,6 +17,8 @@ var registerRouter = require('./routes/register');
 var loginRouter = require('./routes/login');
 var logOutRouter = require('./routes/logout');
 var PosterRouter = require('./routes/poster');
+var demande = require('./routes/demande');
+var recherche_profil = require('./routes/recherche_profil');
 
 var app = express();
 //msgerie
@@ -65,6 +67,8 @@ app.use('/register',registerRouter);
 app.use('/login',loginRouter);
 app.use('/logout',logOutRouter);
 app.use('/poster',PosterRouter);
+app.use('/demande',demande);
+app.use('/search',recherche_profil);
 
 
 
