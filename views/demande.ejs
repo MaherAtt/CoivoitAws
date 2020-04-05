@@ -1,17 +1,145 @@
-<!DOCTYPE html>
-<html lang="fr">
-    <head>
-        <%- include('./partials/head'); -%>
-    </head>
-    <body>
-        <%- include('./partials/header'); -%>     
-        <!--Reste de la page-->
-        <div id="demande" class="col-md-12">
-        </div>
+    <!DOCTYPE html>
+    <html lang="fr">
+        <head>
+            <%- include('./partials/head'); -%>
+        </head>
+        <body>
+            <%- include('./partials/header'); -%>     
+            <!--Reste de la page-->
+            <div id="demande" class="col-md-12">
+                <div  class="text-center box_search align-middle justify-content-center">
+                    <div class="col-md-12 row justify-content-center">
+                        <div class="col-md-12" id="accordion" >
 
-        
+                            <div class="" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                        Recherche avancée
+                                    </button>
+                                </h5>
+                            </div>
+                            <div class=" justify-content-center" id="filtre">
+                                <form id="collapseOne">
+                                    <div class="form-check form-check-inline">
+                                        <input type="checkbox" class="form-check-input" id="attente">
+                                        <label class="form-check-label" for="attente">En attente</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="checkbox" class="form-check-input" id="refuse">
+                                        <label class="form-check-label" for="refuse">Refusé</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="checkbox" class="form-check-input" id="accepte">
+                                        <label class="form-check-label" for="accepte">Accepté</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="checkbox" class="form-check-input" id="historique">
+                                        <label class="form-check-label" for="historique">Historque trajets</label>
+                                    </div>
+                                    <a type="submit"  title="rechercher"><i class="fas fa-search"></i></a>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card liste">
+                            <div class="row ">
+                                <div class="col-md-2 align-self-center"> 
+                                    <a type="button" href="#"><img class="rounded mx-auto d-block img-fluid rounded-circle border_img" alt="photo_profil" title="voir le profil" src="img/img-profil.jpg"/></a>
+                                </div>
+                                <div class="col-md-3 align-self-center">Bonjour, je viens de voir que vous êtes encore à la recherche d'une personne pour le trajet : Mantes-la-jolie -> Versailles
+                                </div>
+                                <div class="col-md-4 align-self-center">Trajet ; Mantes-la-jolie -> Versailles <br/> Départ 10/04/2020 à 9h <br> 2/5 places restantes, non fumeur et pas d'animaux
+                                </div>
+                                <div class="col-md-1 align-self-center">05/04/20 à 16h03
+                                </div>
+                                <div class="col-md-2 align-self-center">
+                                    <button type="button" class="btn btn-warning etat" title="répondre" data-toggle="modal" data-target="#exampleModalCenter">EN ATTENTE</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card liste">
+                            <div class="row ">
+                                <div class="col-md-2 align-self-center"> 
+                                    <a type="button" href="#"><img class="rounded mx-auto d-block img-fluid rounded-circle border_img" alt="photo_profil" title="voir le profil" src="img/img-profil.jpg"/></a>
+                                </div>
+                                <div class="col-md-3 align-self-center">Bonjour, je viens de voir que vous êtes encore à la recherche d'une personne pour le trajet : Mantes-la-jolie -> Versailles
+                                </div>
+                                <div class="col-md-4 align-self-center">Trajet ; Mantes-la-jolie -> Versailles <br/> Départ 10/04/2020 à 9h <br> 2/5 places restantes, non fumeur et pas d'animaux
+                                </div>
+                                <div class="col-md-1 align-self-center">05/04/20 à 16h03
+                                </div>
+                                <div class="col-md-2 align-self-center">
+                                    <button type="button" class="btn btn-danger disabled etat" >REFUSÉ</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card liste">
+                            <div class="row ">
+                                <div class="col-md-2 align-self-center"> 
+                                    <a type="button" href="#"><img class="rounded mx-auto d-block img-fluid rounded-circle border_img" alt="photo_profil" title="voir le profil" src="img/img-profil.jpg"/></a>
+                                </div>
+                                <div class="col-md-3 align-self-center">Bonjour, je viens de voir que vous êtes encore à la recherche d'une personne pour le trajet : Mantes-la-jolie -> Versailles
+                                </div>
+                                <div class="col-md-4 align-self-center">Trajet ; Mantes-la-jolie -> Versailles <br/> Départ 10/04/2020 à 9h <br> 2/5 places restantes, non fumeur et pas d'animaux
+                                </div>
+                                <div class="col-md-1 align-self-center">05/04/20 à 16h03
+                                </div>
+                                <div class="col-md-2 align-self-center">
+                                    <button type="button" class="btn btn-success disabled etat" >VALIDÉ</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card liste">
+                            <div class="row ">
+                                <div class="col-md-2 align-self-center"> 
+                                    <a type="button" href="#"><img class="rounded mx-auto d-block img-fluid rounded-circle border_img" alt="photo_profil" title="voir le profil" src="img/img-profil.jpg"/></a>
+                                </div>
+                                <div class="col-md-3 align-self-center">Bonjour, je viens de voir que vous êtes encore à la recherche d'une personne pour le trajet : Mantes-la-jolie -> Versailles
+                                </div>
+                                <div class="col-md-4 align-self-center">Trajet ; Mantes-la-jolie -> Versailles <br/> Départ 10/04/2020 à 9h <br> 2/5 places restantes, non fumeur et pas d'animaux
+                                </div>
+                                <div class="col-md-1 align-self-center">05/04/20 à 16h03
+                                </div>
+                                <div class="col-md-2 align-self-center">
+                                    <button type="button" class="btn btn-dark disabled etat" >HISTORIQUE</button>
+                                </div>
+                            </div>
+                        </div>
 
-        <%- include('./partials/menu'); -%>
-        <%- include('./partials/footer'); -%>
-    </body>
-</html>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Modal reponse demandes -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Trajet Mantes-la-jolie -- Versailles</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Acceptez-vous que Salim vous accompagne sur votre trajet  Mantes-la-jolie -- Versailles du 10/04/2020 à 9h ? 
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Refuser</button>
+                            <button type="button" class="btn btn-success" >Accepter</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<script>
+    $('#attente').click(function(){
+         $('#exampleModalCenter').modal('show');
+    });
+</script> 
+            <%- include('./partials/menu'); -%>
+            <%- include('./partials/footer'); -%>
+        </body>
+    </html>
+ 

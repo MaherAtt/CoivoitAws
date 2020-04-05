@@ -497,3 +497,19 @@ body {
 
 }
 /*Fin Recherche profil */
+
+
+/*Demande */
+#demande .liste {
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  
+  margin: 20px;
+}
+
+#demande .liste .etat {
+  width: 150px;
+}
+
+/*Fin Demande */
