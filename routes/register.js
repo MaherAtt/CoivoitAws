@@ -5,10 +5,10 @@ function Inscription(prenom, nom, email, mdp,univ){
     var mysql      = require('mysql');
     var bodyParser=require("body-parser");
     var connection = mysql.createConnection({
-        host     : 'localhost',
-        user     : 'root',
-        password : '',
-        database : 'covoitaws'
+        host     : 'us-cdbr-iron-east-01.cleardb.net',
+        user     : 'b68f308ddca3d1',
+        password : '754810b0',
+        database : 'heroku_d1dd061e72cfd25'
     });
 
     connection.connect(function(err) {
