@@ -7,7 +7,11 @@
     </head>
 
     <body>
-        <%- include('./partials/header'); -%>
+        <% if(logged==true){ %>
+                   <%- include('./partials/headerLogged'); -%>
+                 <% } else{ %>
+                   <%- include('./partials/header'); -%>
+                <% } %>
 
 
         <!-- Formulaire de recherche d'un trajet -->

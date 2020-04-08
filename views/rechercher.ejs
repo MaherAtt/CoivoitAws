@@ -4,12 +4,16 @@
         <%- include('./partials/head'); -%>
     </head>
     <body>
-        <%- include('./partials/header'); -%>
+        <% if(logged==true){ %>
+                   <%- include('./partials/headerLogged'); -%>
+                 <% } else{ %>
+                   <%- include('./partials/header'); -%>
+                <% } %>
 
 
 <div class="container" id="container1" >
 
-    <form id="myForm" action="/rechercher" method="get" class="form-horizontal"  role="form">
+    <form id="myForm" action="./rechercher" method="post" class="form-horizontal"  role="form">
 
         <div class="mx-auto offset-md-2 col-md-8 card">
             <div class="col-md-12 row text-center" id="titre">
@@ -20,25 +24,26 @@
                     <h1 class=" text-center recherche-title">Envie de se déplacer ?</h1>
                 </div>
             </div>
+
             <div class="form-group" style="margin-bottom: 50px;">
-                    <input type="search" class="form-control input-lg" id="adr-depart-input" placeholder="Départ">
+                    <input type="search" class="form-control input-lg" id="adr-depart-input" placeholder="Départ" name="AdresseDep">
                   </div>
                   <div class="form-group" style="margin-bottom: 50;">
-                    <input type="text" class="form-control input-lg" onFocus="geolocate()" id="adr-dest-input" placeholder="Destination">
+                    <input type="text" class="form-control input-lg" onFocus="geolocate()" id="adr-dest-input" placeholder="Destination" name="AdresseDest">
                   </div>
 
 
                   <div class="row" style="margin-bottom: 30px;">
                     <div class="col-md" >
-                        <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd" >
-                            <input class="form-control input-lg" type="text" value="Quand ?" readonly>
+                        <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd"  >
+                            <input class="form-control input-lg" type="text" value="Quand ?" name="DateDep" readonly>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
                         <input type="hidden" id="dtp_input2" value="" /><br/>
                     </div>
                     <div class="col-md">
                         <div class="input-group date form_time" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
-                            <input class="form-control input-lg" type="text" value="À quelle heure ?" readonly>
+                            <input class="form-control input-lg" type="text" value="Heure d'arrivée souhaitée ?" name="HeureDep" readonly>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
                         </div>
                         <input type="hidden" id="dtp_input3" value="" /><br/>
@@ -46,7 +51,7 @@
                   </div>
 
                   <div class="text-center" >
-                    <button onclick="rechercheTrajet()" type="button" class="btn btn-primary btn-lg" >Rechercher</button>
+                    <button type="submit" type="button" class="btn btn-primary btn-lg" >Rechercher</button>
                   </div>
 
         </div>
@@ -59,9 +64,114 @@
 
 
 <!-- les Trajets recherchés,  -->
-<div id="trajets_recherche" class="row d-flex justify-content-center"></div>
+<div id="trajets_recherche" class="row d-flex justify-content-center">
+<input type="hidden" value="<%= user %>">
+ <% for(var i=0; i < trajecto.length; i++) { %>
+                <div class="col-md-7" ">
+                <div class="container shadow-lg p-3 mb-5 rounded" id="container2" style=" margin-top: 30px;" >
+                <div class="row">
+                <div class="container" id="'+i+'" onclick="showDetail(this.id)" style="cursor: pointer;">
+                <div class="row" >
+                <div class="container">
+                    <div class="row no-gutter" >
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">
+                            <div class="trajet-place" id="depart-time-trajet" style="text-align: center; height: 25px;"><%= trajecto[i].DateDep.toString().substring(16,21) %></div>
+                            <div class="trajet-vertical-separator"></div>
+                            <div class="trajet-place" id="arrivee-time-trajet" style="text-align: center; height: 25px;"><%= trajecto[i].DateArr.toString().substring(16,21) %></div>
+                        </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            <div class="" style="height: 25px; text-align: center;">
+                                <span class="trajet-circle" style="margin-top: 9px;"></span>
+                            </div>
+                            <div class="" style=" text-align: center;">
+                                <div class="vertical-line"></div>
+                            </div>
 
+                            <div class="" style=" height: 25px; text-align: center;">
+                                <span class="trajet-circle"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4" >
+                            <div class="trajet-place" id="depart-trajet" style="text-align: center; height: 25px;"><%= trajecto[i].AdresseDep %></div>
+                            <div class="trajet-vertical-separator" ></div>
+                            <div class="trajet-place" id="arrivee-trajet" style="text-align: center; height: 25px;"><%= trajecto[i].AdresseArr %></div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-1" ></div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="text-align: center;"><%= trajecto[i].Prix %>$</div>
+                    </div>
+                </div>
+                </div>
+                <div class="row" style="margin-top: 30px;">
+                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-4"  >
+                    <img src='../Pictures/<%= trajecto[i].IdChauffeur.split("@")[0] %>.png' onerror="this.onerror=null; this.src='../img/img-profil.jpg'" id="img-profile" alt="img-profile" height="32" width="32">
+                </div>
+                <div class="col-lg-4 col-md-5 col-sm-6 col-xs-6">
+                    <div class="short-div" id="trajet-nom-prenom">
+                        <a href="./Profil/<%= trajecto[i].IdChauffeur %>"><%= trajecto[i].NomChauffeur %> <%= trajecto[i].PrenomChauffeur %> </a></br>  <img src="img/star.png" id="trajet-star" alt="img-star" height="10" width="10" />5
+                    </div>
 
+                </div>
+                </div>
+                <div class="row">
+                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" >
+                    <img src="img/down-arrow.png" id="img-arrow-'+i+'" class="img-arrow" alt="img-profile">
+                </div>
+                </div>
+                </div>
+                </div>
+                <div class="row" id="detail-container-'+i+'" style="display: none; border-top: solid 0.5px black; padding: 25px; margin : 5px;">
+                <div class="row" style="margin-bottom: 10px;">
+                        <p><%= trajecto[i].Commentaire %></p>
+                </div>
+                <div class="row" style="margin-bottom: 10px;">
+                    <p>Contacter  &nbsp;</p><a href="" style="display: block;"><%= trajecto[i].IdChauffeur %></a>
+                </div>
+                <div class="row" style="margin-bottom: 10px;">
+                    <p>Golf</p>
+                </div>
+                <div class="row">
+
+                    <button class="btn btn-success btn-lg" style="margin: 0 auto;" onclick="reserveTrajet('<%= trajecto[i].IdTrajet %>','<%= trajecto[i].IdChauffeur %>','<%= user %>')">Réserver </button>
+
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>';
+
+<% } %>
+</div>
+
+<!-- Modal reservation -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="./Reserver" method="post">
+                        <div class="modal-body">
+                            <label for="Emet" class="col-sm-4 col-form-label">IdDemandeur</label>
+                            <input id="Emet"  value="" name="Emmeteur" readonly>
+                            <label for="Trajet" class="col-sm-4 col-form-label">IdTrajet</label>
+                            <input id="Traj"  value="" name="Trajet" readonly>
+                            <label for="Chauff" class="col-sm-4 col-form-label">IdChauffeur</label>
+                            <input id="Chauff"  value="" name="Chauffeur" readonly>
+                             <label for="Msg" class="col-sm-4 col-form-label">Message</label>
+                             <input type="text" id="Msg"  value="" name="Message" >
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger"  data-dismiss="modal">Anuller</button>
+                            <button type="submit" class="btn btn-success" name="Reserver" >Valider</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
 
 <!-- Affichage du calendrier de la date et l'heure-->
@@ -130,119 +240,15 @@
 
 
     //afficher tous les trajet apres une recherche
-    function rechercheTrajet(){
-
-        //Recuperation des inputs du formulaire
 
 
-        var nbr_trajet = 6;
-        var html_content = "";
-
-        //Pour chaque trajet
-        for(var i = 0; i < nbr_trajet; i++){
-
-
-            //recuperation des infos du trajet
-            var trajet_id = i;
-            var trajet_userName = "smail@gmail.com";
-            var trajet_raiting = 5;
-            var trajet_heure_depart = "10:00";
-            var trajet_heure_arrivee = "10:00";
-            var trajet_address_depart = "31 avenue du marechal de lattre de tassigny";
-            var trajet_address_arrivee = "45 avenue des états unis";
-            var trajet_prix = 23.00;
-            var trajet_voiture = "Golf 7 , Noir";
-            var trajet_commentaire = "Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla<br/> Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla<br/> Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla<br/>Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla<br/>Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla<br/> ";
-
-
-            var content_trajet = '<div class="col-md-7" ">'+
-                '<div class="container shadow-lg p-3 mb-5 rounded" id="container2" style=" margin-top: 30px;" >'+
-                '<div class="row">'+
-                '<div class="container" id="'+trajet_id+'" onclick="showDetail(this.id)" style="cursor: pointer;">'+
-                '<div class="row" >'+
-                '<div class="container">'+
-                    '<div class="row no-gutter" >'+
-                        '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">'+
-                            '<div class="trajet-place" id="depart-time-trajet" style="text-align: center; height: 25px;">'+trajet_heure_depart+'</div>'+
-                            '<div class="trajet-vertical-separator"></div> '+
-                            '<div class="trajet-place" id="arrivee-time-trajet" style="text-align: center; height: 25px;">'+trajet_heure_arrivee+'</div> '+
-                        '</div>'+
-                        '<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">'+
-                            '<div class="" style="height: 25px; text-align: center;">'+
-                                '<span class="trajet-circle" style="margin-top: 9px;"></span>'+
-                            '</div>'+
-                            '<div class="" style=" text-align: center;">'+
-                                '<div class="vertical-line"></div>'+
-                            '</div> '+
-                            '<div class="" style=" height: 25px; text-align: center;"> '+
-                                '<span class="trajet-circle"></span>'+
-                            '</div> '+
-                        '</div>'+
-                        '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-4" >'+
-                            '<div class="trajet-place" id="depart-trajet" style="text-align: center; height: 25px;">'+trajet_address_depart+'</div> '+
-                            '<div class="trajet-vertical-separator" ></div> '+
-                            '<div class="trajet-place" id="arrivee-trajet" style="text-align: center; height: 25px;">'+trajet_address_arrivee+'</div>'+
-                        '</div>'+
-                        '<div class="col-lg-4 col-md-4 col-sm-4 col-xs-1" ></div>'+
-                        '<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="text-align: center;">'+trajet_prix+' $</div>'+
-                    '</div>'+
-                '</div>'+
-                '</div>'+
-                '<div class="row" style="margin-top: 30px;">'+
-                '<div class="col-lg-2 col-md-3 col-sm-3 col-xs-4"  > '+
-                    '<img src="img/img-profil.jpg" id="img-profile" alt="img-profile"> '+
-                '</div> '+
-                '<div class="col-lg-4 col-md-5 col-sm-6 col-xs-6"> '+
-                    '<div class="short-div" id="trajet-nom-prenom"> '+
-                        '<form action="./profil" method="post">'+
-                        '<input type="hidden" name="userDemand" value="'+trajet_userName+'">'+
-                        '<button type="submit" class="buttonProf buttonProfiles">'+trajet_userName+'<img src="img/star.png" id="trajet-star" alt="img-star" height="30" width="30" /><strong id="rating-text" >'+trajet_raiting+'</strong>'+
-                        '</button>'+
-                        '</form>'+
-                    '</div> '+
-
-                '</div> '+
-                '</div>'+
-                '<div class="row"> '+
-                 '<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" > '+
-                    '<img src="img/down-arrow.png" id="img-arrow-'+trajet_id+'" class="img-arrow" alt="img-profile"> '+
-                '</div>'+
-                '</div>'+
-                '</div>'+
-                '</div>'+
-                '<div class="row" id="detail-container-'+trajet_id+'" style="display: none; border-top: solid 0.5px black; padding: 25px; margin : 5px;">'+
-                '<div class="row" style="margin-bottom: 10px;">'+
-                        '<p>'+trajet_commentaire+'</p>'+
-                '</div>'+
-                '<div class="row" style="margin-bottom: 10px;">'+
-                    '<p>Contacter  &nbsp;</p><a href="" style="display: block;">'+trajet_userName+'</a>'+
-                '</div>'+
-                '<div class="row" style="margin-bottom: 10px;">'+
-                    '<p>'+trajet_voiture+'</p>'+
-                '</div>'+
-                '<div class="row">'+
-                    '<button class="btn btn-success btn-lg" style="margin: 0 auto;"'+
-                    ' onclick="reserveTrajet('+trajet_id+')">Réserver </button>'+
-                '</div>'+
-                '</div>'+
-                '</div>'+
-                '</div>'+
-                '</div>';
-
-            html_content = html_content + content_trajet;
-
-        }
-        //Affichage des trajets
-        document.getElementById("trajets_recherche").innerHTML = html_content;
-
-
-    }
 
     //enregistrer la demande de reservation d'un trajet
-    function reserveTrajet(trajet_id){
-
-        window.alert("trajet "+trajet_id);
-
+    function reserveTrajet(trajet,chauffeur,demandeur){
+         $("#Emet").val(demandeur);
+         $("#Traj").val(trajet);
+         $("#Chauff").val(chauffeur);
+         $("#exampleModalCenter").modal('toggle');
     }
 
     //afficher les detail du trajet
@@ -261,6 +267,8 @@
 
 
 </script>
+
+
 
 <%- include('./partials/menu'); -%>
 <%- include('./partials/footer'); -%>

@@ -19,7 +19,7 @@
 
 
         <!--Reste de la page-->
-        <div id="acceuil" class="col-md-12 row">
+        <div id="acceuil" class="col-md-12">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -60,18 +60,6 @@
             </div>
         </div>
 
-        <!-- c'est la balise qui contient le menu -->
-        <!-- on doit l'avoir dans toutes les pages du site -->
-        <div id="mySidebar" class="sidebar">
-            <div class="col-md-12">
-                <a href="./" class="col-md-1"><img src="img/icon_home.png" title="home" width="30px"></a>
-                <a href="javascript:void(0)" class=" col-md- 6 closebtn" onclick="hideMenu()">&times;</a>
-            </div>
-
-            <a href="./Profil">Profil</a>
-            <a href="./Rechercher">Rechercher</a>
-            <a href="./Proposer">Proposer un trajet</a>
-        </div>
 
         <%- include('./partials/menu'); -%>
         <%- include('./partials/footer'); -%>

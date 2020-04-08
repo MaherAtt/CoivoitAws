@@ -15,11 +15,19 @@ var registerRouter = require('./routes/register');
 var loginRouter = require('./routes/login');
 var logOutRouter = require('./routes/logout');
 var PosterRouter = require('./routes/poster');
+var demande = require('./routes/demande');
+var repondre = require('./routes/repondre');
+var recherche_profil = require('./routes/recherche_profil');
+var reserver = require('./routes/reserver');
+var messages = require('./routes/messages');
+var upload=require('./routes/upload');
 
 var app = express();
 //msgerie
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 // view engine setup
@@ -37,6 +45,8 @@ app.use(function(req, res, next){
     res.io = io;
     next();
 });
+
+
 var mysql = require('mysql');
 
 var connection = mysql.createConnection({
@@ -87,6 +97,12 @@ app.use('/register',registerRouter);
 app.use('/login',loginRouter);
 app.use('/logout',logOutRouter);
 app.use('/poster',PosterRouter);
+app.use('/demande',demande);
+app.use('/search',recherche_profil);
+app.use('/repondre',repondre);
+app.use('/reserver',reserver);
+app.use('/messages',messages);
+app.use('/upload',upload);
 
 
 // catch 404 and forward to error handler

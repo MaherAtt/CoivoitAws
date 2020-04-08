@@ -9,18 +9,26 @@
                  <% } else{ %>
                    <%- include('./partials/headerProfil'); -%>
                 <% } %>
+
         <!-- le profil de l'utilisateur -->
-        <div id="profil" class="col-md-12 row">
+        <div id="profil" class="col-md-12">
             <h1 class="col-sm-12 col-md-12 text-center titre_page">Informations personnelles</h1>
             <div class="col-md-12 row" >
                 <!-- Info perso -->
                 <div  class="col-md-6 col-sm-6 card" id="info_perso">
                     <div class= "row">
                         <div id="photo_profil" class=" col-md-4 col-sm-12 ">
-                            <img src="../img/img-profil.jpg" alt="photo de profil" title="photo de profil" class="rounded-circle"/>
-                            <div class="col-md-12"><input type="file" class="form-control-file" id="exampleFormControlFile1"></div>
+
+                            <img src='../Pictures/<%= photo %>' onerror="this.onerror=null; this.src='../img/img-profil.jpg'" alt="photo de profil" title="photo de profil" class="rounded-circle"/>
+                             <%if (canEdit==true) { %>
+                                    <form action="upload" method="post" enctype="multipart/form-data">
+
+                                    <div class="col-md-12"><input type="file" onchange="form.submit()" class="form-control-file" id="exampleFormControlFile1" name="PictureFile" ></div>
+                                    </form>
+                                   <% } %>
+
                             <div class="separation_paragraphe"></div>
-                            <a href="./messagerie" title="page messagerie"> <div class="col-md-12"><i class="fas fa-comments fa-2x msg"></i><span class="badge badge-light msg" id="msg_non_lu">4</span></div></a>
+                            <a href="./messagerie" title="page messagerie"> <div class="col-md-12"><i class="fas fa-comments fa-2x msg"></i><span class="badge badge-light msg" id="msg_non_lu"></span></div></a>
                         </div>
                         <div id="infos" class=" col-md-8 col-sm-12">
                             <div class="list-group">
@@ -81,7 +89,7 @@
                             <canvas id="lineChart"></canvas>
                         </div>
                         <div class="col-sm-12 row">
-                            <a href="#" class="stretched-link text-right col-sm-12" id="voir_com">Voir les (4) commentaires  </a>
+                            <a href="#" class="stretched-link text-right col-sm-12" id="voir_com">Voir les Avis  </a>
                         </div>
 
                     </div>
@@ -101,30 +109,64 @@
                                 <div class="">
                                     <!--Section: Content-->
                                     <section class="text-center text-lg-left dark-grey-text">
-                                        <div class="text-center font-weight-bold"><span>4</span> comments</div>
+                                        <div class="text-center font-weight-bold"><span> <%= avis.length %></span> Avis</div>
                                         <div class="form-group mt-4">
-                                        <form action="../Poster" method="post">
-                                         <input type="hidden" name="profilOf" value="<%= useremail %> ">
-                                         <label for="quickReplyFormComment">Your comment</label>
-                                         <textarea class="form-control" id="quickReplyFormComment" rows="5" name="commentaire"></textarea>
-                                         <div class="text-center my-4">
-                                         <button id="postercom" class="btn btn-info btn-sm" type="submit">Post</button>
-                                         </form>
+                                         <%if (canEdit==false) { %>
+                                            <form action="../Poster" method="post">
+                                              <input type="hidden" name="profilOf" value="<%= useremail %> ">
+                                              <label>
+                                                  <input type="radio" name="stars" value="1" />
+                                                  <span class="icon">★</span>
+                                                </label>
+                                                <label>
+                                                  <input type="radio" name="stars" value="2" />
+                                                  <span class="icon">★</span>
+                                                  <span class="icon">★</span>
+                                                </label>
+                                                <label>
+                                                  <input type="radio" name="stars" value="3" />
+                                                  <span class="icon">★</span>
+                                                  <span class="icon">★</span>
+                                                  <span class="icon">★</span>
+                                                </label>
+                                                <label>
+                                                  <input type="radio" name="stars" value="4" />
+                                                  <span class="icon">★</span>
+                                                  <span class="icon">★</span>
+                                                  <span class="icon">★</span>
+                                                  <span class="icon">★</span>
+                                                </label>
+                                                <label>
+                                                  <input type="radio" name="stars" value="5" />
+                                                  <span class="icon">★</span>
+                                                  <span class="icon">★</span>
+                                                  <span class="icon">★</span>
+                                                  <span class="icon">★</span>
+                                                  <span class="icon">★</span>
+                                                </label> <br/>
+                                              <label for="quickReplyFormComment">Votre Avis :</label>
+                                              <textarea class="form-control" id="quickReplyFormComment" rows="5" name="commentaire"></textarea>
+                                               <div class="text-center my-4">
+                                             <button id="postercom" class="btn btn-info btn-sm" type="submit">Post</button>
+                                             </form>
+                                             <% } %>
+
                                          </div>
                                           </div>
                                           <div id="containComment">
                                          <% for(var i=0; i < avis.length; i++) { %>
                                             <div class="media d-block d-md-flex mt-4">
+
                                             <img class="card-img-64 rounded z-depth-1 d-flex mx-auto mb-3"
-                                                 src="https://mdbootstrap.com/img/Photos/Avatars/img (20).jpg" alt="Generic placeholder image">
+                                                 src='../Pictures/<%= avis[i].photo.split("@")[0] %>.png' onerror="this.onerror=null; this.src='../img/img-profil.jpg'">
                                             <div class="media-body text-center text-md-left ml-md-3 ml-0">
                                                 <p class="font-weight-bold my-0">
-                                                    <%= avis[i].NomEmm + " " + avis[i].PrenomEmm %>
+                                                    <%= avis[i].NomEmm + " " + avis[i].PrenomEmm %> -- [ Note Attribué : <%= avis[i].Note %> ]
                                                     <a href="" class="pull-right ml-1">
                                                         <i class="fa fa-reply"></i>
                                                     </a>
                                                 </p>
-                                                    <%= avis[i].Commentaire %>
+                                                <%= avis[i].Commentaire %>
                                                 <!-- Quick Reply -->
 
 
@@ -132,6 +174,7 @@
                                         </div>
                                          <% } %>
                                         </div>
+
 
 
                                     </section>
@@ -144,7 +187,7 @@
             </div>
             <!-- Fin Modal commentaires -->
 
-          
+
         </div>
 
         <script >
@@ -160,7 +203,8 @@
         <%- include('./partials/footerProfil'); -%>
         
 
+
     </body>
-    
+
 </html>
 

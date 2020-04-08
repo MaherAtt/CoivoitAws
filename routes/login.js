@@ -15,7 +15,6 @@ router.post('/', function(req, res, next) {
 
     var bodyParser=require("body-parser");
 
-
     let crypto = require('crypto')
     const hash = crypto.createHmac('sha256', pass)
         .update('I love cupcakes')
@@ -27,10 +26,8 @@ router.post('/', function(req, res, next) {
 
         if(result.length==0) res.redirect('.');
         else {
-
             sess=req.session;
             sess.Username=email;
-
             sess.prenom=result[0].Prenom;
             sess.nom=result[0].Nom;
             res.redirect('.');

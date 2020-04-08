@@ -10,8 +10,9 @@ router.get('/', function(req, res, next) {
     if(!req.session.isViewingAvis) isView=false;
     else isView=true;
     if(sess.Username) {
-        app.connection.query('Select * from avis where IdRecepteur=?',sess.Username,function(err,avis){
-            res.render('profil',{ logged:true,prenom: sess.prenom,nom: sess.nom,useremail: sess.Username,adresse:'Haja',avis:avis,isViewingAvis:isView});
+        app.connection.query('Select a.Username as photo,a.Nom as NomEmm,a.Prenom as PrenomEmm from profils a,avis a2 where a2.IdRecepteur=? and a2.IdEmmeteur=a.Username',sess.Username,function(err,avis){
+           console.log(avis);
+            res.render('profil',{ photo:req.session.Username.split("@")[0]+'.png',canEdit:true,logged:true,prenom: sess.prenom,nom: sess.nom,useremail: sess.Username,adresse:'Adr',avis:avis,isViewingAvis:isView});
         });
     }
     else {
@@ -21,22 +22,36 @@ router.get('/', function(req, res, next) {
 
 router.get('/:user', function(req, res, next) {
     var sess=req.session;
-    var isView;
-    if(!req.session.isViewingAvis) isView=false;
-    else isView=true;
-    var profilSuggested=req.params.user;
-    var avis;
-    app.connection.query('Select * from avis where IdRecepteur=?',profilSuggested,function(err,avis){
-        app.connection.query('Select * from profils where Username =?',profilSuggested,function(err,profil){
-            if(profil.length==0) res.redirect('../');
-            else
-                res.render('profil',{ logged:true,prenom: profil[0].Prenom,nom: profil[0].Nom,useremail: profilSuggested,adresse:'Haja',avis:avis,isViewingAvis: isView});
+    if(!sess.Username) res.redirect('../');
+    else {
+        var profilSuggested = req.params.user;
+        var isView;
+        if (!req.session.isViewingAvis) isView = false;
+        else isView = true;
+        var autorisation;
+        if (sess.userName == profilSuggested) autorisation = true;
+        else autorisation = false;
+
+        var avis;
+        app.connection.query('Select a.Username as photo,a.Nom as NomEmm,a.Prenom as PrenomEmm,a2.Commentaire,a2.Note from profils a,avis a2 where a2.IdRecepteur=? and a2.IdEmmeteur=a.Username', profilSuggested, function (err, avis) {
+            app.connection.query('Select * from profils where Username =?', profilSuggested, function (err, profil) {
+                if (profil.length == 0) res.redirect('../');
+                else
+                    res.render('profil', {
+                        photo:profilSuggested.split("@")[0]+'.png',
+                        canEdit: autorisation,
+                        logged: true,
+                        prenom: profil[0].Prenom,
+                        nom: profil[0].Nom,
+                        useremail: profilSuggested,
+                        adresse: 'Haja',
+                        avis: avis,
+                        isViewingAvis: isView
+                    });
+            });
         });
-    });
 
-
-
-
+    }
 
 
 });

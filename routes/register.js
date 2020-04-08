@@ -1,19 +1,15 @@
 var express = require('express');
 var fs=require('fs');
 var router = express.Router();
-function Inscription(prenom, nom, email, mdp,univ){
-    var mysql      = require('mysql');
-    var bodyParser=require("body-parser");
-    var connection = mysql.createConnection({
-        host     : 'us-cdbr-iron-east-01.cleardb.net',
-        user     : 'b68f308ddca3d1',
-        password : '754810b0',
-        database : 'heroku_d1dd061e72cfd25'
-    });
+var app=require('../app');
+var NodeGeocoder = require('node-geocoder')
 
-    connection.connect(function(err) {
-        if (err) throw err;
-        console.log("Connected!");
+function Inscription(prenom, nom, email, mdp,univ,adr){
+
+
+    var geocoder = NodeGeocoder({
+        provider: 'opencage',
+        apiKey: '7ba3430907eb4b55aa72623fd71ba90d'
     });
 
     let crypto = require('crypto')
@@ -24,13 +20,18 @@ function Inscription(prenom, nom, email, mdp,univ){
 
 
             var data = [email, hash]
-            var dataProf= [email,nom, prenom,univ,'default_pic.png',4]
-            connection.query('INSERT INTO accounts SET Username =?, Password=?',data,function(err,result){
+
+            app.connection.query('INSERT INTO accounts SET Username =?, Password=?',data,function(err,result){
 
             })
-            connection.query('INSERT INTO profils SET Username =?,Nom=?,Prenom=?, University=?, Picture=?, Note=?',dataProf,function(err,result){
+            geocoder.geocode(adr,function (err,adrComp) {
+                var ville=adrComp[0].city;
+                var dataProf= [email,nom, prenom,univ,'default_pic.png',4,ville]
+                app.connection.query('INSERT INTO profils SET Username =?,Nom=?,Prenom=?, University=?, Picture=?, Note=?,Adresse=?',dataProf,function(err,result){
 
-            })
+                })
+                });
+
 
 
     }
@@ -43,7 +44,8 @@ router.post('/', function(req, res, next) {
     var surname=req.body.PrenomReg;
     var password=req.body.MdpReg;
     var university=req.body.University;
-    Inscription(surname,name,email,password,university);
+    var adress=req.body.adress;
+    Inscription(surname,name,email,password,university,adress);
     sess=req.session;
     sess.erreur='Vous avez été enregistré avec succes';
     res.redirect('.');

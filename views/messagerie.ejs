@@ -5,20 +5,26 @@
     </head>
 
     <body>
-        <%- include('./partials/header'); -%>     
+        <% if(logged==true){ %>
+                           <%- include('./partials/headerLoggedProfil'); -%>
+                         <% } else{ %>
+                           <%- include('./partials/headerProfil'); -%>
+                        <% } %>
 
-        <div id="messagerie" class="col-md-12 row">
+        <div id="messagerie" class="col-md-12">
 
             <h1 class="col-sm-12 col-md-12 text-center titre_page">Messagerie</h1>
             <div class="col-md-12">
                 <div class="row">
                     <!--  Liste des conversations  -->
                     <div class="col-4">
+
                         <div class="list-group" id="list-tab" role="tablist" style="height: 500px; background-color: white">
-                            <a class="list-group-item list-group-item-action active conversation" id="id_julia" data-toggle="list" href="#id_julia" role="tab" aria-controls="home">Julia</a>
-                            <a class="list-group-item list-group-item-action conversation" id="id_aziz" data-toggle="list" href="#id_aziz" role="tab" aria-controls="profile">Aziz</a>
-                            <a class="list-group-item list-group-item-action conversation" id="id_cynthia" data-toggle="list" href="#id_cynthia" role="tab" aria-controls="messages">Cynthia</a>
-                            <a class="list-group-item list-group-item-action conversation" id="id_salim" data-toggle="list" href="#id_salim" role="tab" aria-controls="settings">Salim</a>
+                            <a style="pointer-events: none; cursor: default;" class="list-group-item list-group-item-action conversation" id="MyUsername" data-toggle="list" href="#<%= user %>" role="tab" aria-controls="home"><%= user %></a>
+                            <% for(var i=0; i < users.length; i++) { %>
+                            <a class="list-group-item list-group-item-action conversation" id="<%= users[i].Id %>" data-toggle="list" href="#<%= users[i].Id %>" role="tab" aria-controls="home"><%= users[i].Id %></a>
+
+                              <% } %>
                         </div>
                     </div>
                     <!-- FIN Liste des conversations  -->
@@ -40,9 +46,8 @@
 
                                 <!-- Formulaire d'envoie de message -->
                                 <form class="col-md-12 row">
-                                    <input type="text" id="username" placeholder="Votre pseudonyme" class="col-md-12">
-                                    <textarea class="form-control col-md-9" rows="2" id="message" placeholder="Votre message"></textarea>
-                                    <button type="submit" id="submit" class="btn btn-primary col-md">Envoyer</button>
+                                    <textarea class="form-control col-md-9" rows="2" id="Message" placeholder="Votre message" ></textarea>
+                                    <button type="submit" id="send" class="btn btn-primary col-md">Envoyer</button>
                                 </form>
                                 <!-- Fin Formulaire d'envoie de message  -->
 
@@ -55,12 +60,14 @@
             </div>
 
 
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<!--            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>-->
             <script src="/socket.io/socket.io.js"></script>
 
 
 
         </div>
+       
+
 
         <%- include('./partials/menu'); -%>
         <%- include('./partials/footer'); -%>

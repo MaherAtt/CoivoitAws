@@ -1,13 +1,9 @@
 
-
-
-
-
 $(document).ready(function(){
     //var pos_contenu_conversation = 0;;
-    
+
     let socket = io();
-    let fichier = ""; /* fichier dans lequel je sauvegarde ma conversation*/
+
     /* Lorsque je clique sur une conversation donnée avec une personne j'affiche cette conversation à partir d'un fichier */
     $(".conversation").click(function() {
         var href = this.href;
@@ -15,36 +11,35 @@ $(document).ready(function(){
 
         $(".afficheConversation").attr("id", res)
 
-        fichier = "./public/conversation/id_moi_"+res+".json";
-        
+
+
         $('.alert').show();
         $("#messages").empty();
-        socket.emit('afficher conversation', fichier);
+        socket.emit('afficher conversation', res);
 
     });
 
     /* Lorsque j'envoie un message -- données enregistrées dans data */
-    $('#submit').on('click', function(e){
+    $('#send').on('click', function(e){
         e.preventDefault();
 
         let data = {
-            username: $('#username').val(),
-            message : $('#message').val(),
-            date :  new Date().toJSON().slice(0,10),
-            file : fichier
+            Emmeteur:$('#MyUsername').text(),
+            Destinataire: $('.active.conversation').text(),
+            Message : $('#Message').val()
         };
-        
-         
+
+
         socket.emit('new message', data);
 
     });
-    
+
 
 
     /* ATTENTION CREER UNE DIV OU JE METTERZI UNE ALERT ERROR EN CAS DE PB*/
     socket.on('error message', function(phrase){
         $('#response').append('<p>' + phrase + '</p>');
-         $('#response').show()
+        $('#response').show()
     });
 
     /* pour que l'utilisateur n'insere pas du code html et modifie note page */
@@ -59,25 +54,33 @@ $(document).ready(function(){
 
     /* j'affiche le message dans une balise <li> elle a des caractéristiques différentes en fonction de l'id */
     socket.on('new message', function(data){
-        if(data.username == 'id_moi'){
-            $('#messages').append('<li class="id_moi d-flex justify-content-end"><p class=" badge badge-info"> ' + XSSPatcher(data.message) + '</p></li>');
+        var user= $('#MyUsername').text();
+        console.log("Sent By:"+data.Emmeteur+" "+data.Destinataire+" "+user);
+        if(data.Emmeteur==user){
+            $('#messages').append('<li class="id_moi d-flex justify-content-end"><p class=" badge badge-info"> ' + XSSPatcher(data.Message) + '</p></li>');
 
         }else {
-            $('#messages').append('<li  class="'+data.username+' d-flex justify-content-start"><p class=" badge badge-light">     ' + XSSPatcher(data.message) + '</p></li>');
-
+            if(data.Destinataire==user) {
+                $('#messages').append('<li  class=" d-flex justify-content-start"><p class=" badge badge-light">     ' + XSSPatcher(data.Message) + '</p></li>');
+            }
         }
 
     });
 
 
     /*Je récupère les conversations situés dans un fichier*/
-    socket.on('last message', function(contenu_conversation){
-        for(var exKey in contenu_conversation.table) {
-            if(Object.values(contenu_conversation.table[exKey])[0] == 'id_moi'){
-                $('#messages').append('<li class="id_moi d-flex justify-content-end"><div class=" text-right col-6"><p class=" badge badge-info ">' + Object.values(contenu_conversation.table[exKey])[1] + '</p></div></li>');
+    socket.on('last message', function(content){
+        var user= $('#MyUsername').text();
+
+        for(i=0;i<content.length;i++) {
+
+            if(content[i].IdEmmeteur==user){
+                $('#messages').append('<li class="id_moi d-flex justify-content-end"><div class=" text-right col-6"><p class=" badge badge-info ">' + content[i].Message + '</p></div></li>');
             }
             else {
-                $('#messages').append('<li  class="'+Object.values(contenu_conversation.table[exKey])[0]+' d-flex justify-content-start"><div class="text-left col-6"><p class=" badge badge-light">' + Object.values(contenu_conversation.table[exKey])[1] + '</p></div></li>');
+                if(content[i].IdRecepteur==user){
+                    $('#messages').append('<li  class="'+content[i].Message+' d-flex justify-content-start"><div class="text-left col-6"><p class=" badge badge-light">' + content[i].Message + '</p></div></li>');
+                }
             }
         }
     });
