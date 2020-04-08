@@ -5,6 +5,9 @@
   "scripts": {
     "start": "node ./bin/www"
   },
+  "engines": {
+    "node": "12.16.1"
+  },
   "dependencies": {
     "academic-email-verifier": "^2.0.11",
     "consolidate": "^0.15.1",
