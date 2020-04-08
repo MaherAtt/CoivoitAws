@@ -7,7 +7,8 @@ var app=require('../app');
 router.get('/', function(req, res, next) {
     if(req.session.Username) {
         data = [req.session.Username, req.session.Username];
-        app.connection.query('Select t.AdresseDep as AdrDep,t.AdresseArr as AdrArr,t.IdTrajet as IdTrajet,t.DateDep as DateTrajet,d.Message as Message,d.Etat as Etat,t.NbPlaces as NbPlacesDispo,d.IdEmmeteur as Emmeteur,d.IdRecepteur as Recepteur from trajets t,demandes d where t.IdTrajet=d.IdTrajet and d.IdEmmeteur=? or d.IdRecepteur=?', data, function (err, result) {
+        app.connection.query('Select t.AdresseDep as AdrDep,t.AdresseArr as AdrArr,t.IdTrajet as IdTrajet,t.DateDep as DateTrajet,d.Message as Message,d.Etat as Etat,t.NbPlaces as NbPlacesDispo,d.IdEmmeteur as Emmeteur,d.IdRecepteur as Recepteur from trajets t,demandes d where t.IdTrajet=d.IdTrajet and (d.IdEmmeteur=? or d.IdRecepteur=?)', data, function (err, result) {
+           console.log(result);
             res.render('demande', {logged: true, demandes: result, user: req.session.Username});
         });
     }
