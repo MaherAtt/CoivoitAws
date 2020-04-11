@@ -5,27 +5,40 @@
     </head>
     <body>
         <% if(logged==true){ %>
-                   <%- include('./partials/headerLoggedProfil'); -%>
-                 <% } else{ %>
-                   <%- include('./partials/headerProfil'); -%>
-                <% } %>
+        <%- include('./partials/headerLoggedProfil'); -%>
+        <% } else{ %>
+        <%- include('./partials/headerProfil'); -%>
+        <% } %>
 
         <!-- le profil de l'utilisateur -->
-        <div id="profil" class="col-md-12">
-            <h1 class="col-sm-12 col-md-12 text-center titre_page">Informations personnelles</h1>
-            <div class="col-md-12 row" >
+        <div id="profil" class="col-md-12 row">
+            <div class="col-6" id="photo_profil2">
+                <img src='../Pictures/<%= photo %>' onerror="this.onerror=null; this.src='../img/img-profil.jpg'" alt="photo de profil" title="photo de profil" class="rounded-circle"/>
+                <%if (canEdit==true) { %>
+                <form action="upload" method="post" enctype="multipart/form-data">
+
+                    <div class="col-md-12">
+                        <input type="file" onchange="form.submit()" class="form-control-file" id="exampleFormControlFile1" name="PictureFile" >
+                    </div>
+                </form>
+                <% } %>
+            </div>
+            <h1 class="col-6 col col-md-12 text-center titre_page">Informations personnelles</h1>
+            <div class="d-flex justify-content-center row" >
                 <!-- Info perso -->
                 <div  class="col-md-6 col-sm-6 card" id="info_perso">
-                    <div class= "row">
-                        <div id="photo_profil" class=" col-md-4 col-sm-12 ">
+                    <div class= "d-flex justify-content-center row">
+                        <div id="photo_profil1" class=" col-md-4 col-sm-12  d-flex justify-content-center row">
 
                             <img src='../Pictures/<%= photo %>' onerror="this.onerror=null; this.src='../img/img-profil.jpg'" alt="photo de profil" title="photo de profil" class="rounded-circle"/>
-                             <%if (canEdit==true) { %>
-                                    <form action="upload" method="post" enctype="multipart/form-data">
+                            <%if (canEdit==true) { %>
+                            <form action="upload" method="post" enctype="multipart/form-data">
 
-                                    <div class="col-md-12"><input type="file" onchange="form.submit()" class="form-control-file" id="exampleFormControlFile1" name="PictureFile" ></div>
-                                    </form>
-                                   <% } %>
+                                <div class="col-md-12">
+                                    <input type="file" onchange="form.submit()" class="form-control-file" id="exampleFormControlFile1" name="PictureFile" >
+                                </div>
+                            </form>
+                            <% } %>
 
                             <div class="separation_paragraphe"></div>
                             <a href="./messagerie" title="page messagerie"> <div class="col-md-12"><i class="fas fa-comments fa-2x msg"></i><span class="badge badge-light msg" id="msg_non_lu"></span></div></a>
@@ -34,23 +47,20 @@
                             <div class="list-group">
                                 <form>
                                     <div class="form-group row">
-                                        <label for="prenom" class="col-sm-3 col-form-label">Prénom</label>
-                                        <div class="col-sm-9">
+                                        <label for="prenom" class="col-sm-3 col-4 col-form-label">Prénom</label>
+                                        <div class="col-sm-9 col">
                                             <input type="text"  class="form-control " id="prenom" value="<%= prenom %>" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="nom" class="col-sm-3 col-form-label">Nom</label>
-                                        <div class="col-sm-9">
+                                        <label for="nom" class="col-sm-3 col-4 col-form-label">Nom</label>
+                                        <div class="col-sm-9 col">
                                             <input type="text"  class="form-control " id="nom" value="<%= nom %>" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="email" class="col-sm-3 col-form-label">Email </label>
-                                        <div class="col-sm-9 input-group mb-2">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></div>
-                                            </div>
+                                        <label for="email" class="col-sm-3 col-4 col-form-label">Email </label>
+                                        <div class="col-sm-9 col input-group mb-2">
                                             <input type="email"  class="form-control " id="email" value="<%= useremail %>" readonly>
                                         </div>
                                     </div>
@@ -67,16 +77,16 @@
                     <div class=" col-md-12 col-sm-12 ">
                         <h1 class="col-sm-12 text-center"> Avis </h1>
                         <div class="col-sm-12 row" id="Ponctualité">
-                            <p class="col-sm-5">Ponctualité </p>
-                            <div class="col-sm-7 ">
+                            <p class="col-sm-5 col-7">Ponctualité </p>
+                            <div class="col-sm-7 col">
                                 <div class="progress ">
                                     <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" ></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-12 row" id="confiance">
-                            <p class="col-sm-5">Confiance </p>
-                            <div class="col-sm-7 ">
+                            <p class="col-sm-5 col-7">Confiance </p>
+                            <div class="col-sm-7 col">
                                 <div class="progress ">
                                     <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
@@ -111,68 +121,68 @@
                                     <section class="text-center text-lg-left dark-grey-text">
                                         <div class="text-center font-weight-bold"><span> <%= avis.length %></span> Avis</div>
                                         <div class="form-group mt-4">
-                                         <%if (canEdit==false) { %>
+                                            <%if (canEdit==false) { %>
                                             <form action="../Poster" method="post">
-                                              <input type="hidden" name="profilOf" value="<%= useremail %> ">
-                                              <label>
-                                                  <input type="radio" name="stars" value="1" />
-                                                  <span class="icon">★</span>
+                                                <input type="hidden" name="profilOf" value="<%= useremail %> ">
+                                                <label>
+                                                    <input type="radio" name="stars" value="1" />
+                                                    <span class="icon">★</span>
                                                 </label>
                                                 <label>
-                                                  <input type="radio" name="stars" value="2" />
-                                                  <span class="icon">★</span>
-                                                  <span class="icon">★</span>
+                                                    <input type="radio" name="stars" value="2" />
+                                                    <span class="icon">★</span>
+                                                    <span class="icon">★</span>
                                                 </label>
                                                 <label>
-                                                  <input type="radio" name="stars" value="3" />
-                                                  <span class="icon">★</span>
-                                                  <span class="icon">★</span>
-                                                  <span class="icon">★</span>
+                                                    <input type="radio" name="stars" value="3" />
+                                                    <span class="icon">★</span>
+                                                    <span class="icon">★</span>
+                                                    <span class="icon">★</span>
                                                 </label>
                                                 <label>
-                                                  <input type="radio" name="stars" value="4" />
-                                                  <span class="icon">★</span>
-                                                  <span class="icon">★</span>
-                                                  <span class="icon">★</span>
-                                                  <span class="icon">★</span>
+                                                    <input type="radio" name="stars" value="4" />
+                                                    <span class="icon">★</span>
+                                                    <span class="icon">★</span>
+                                                    <span class="icon">★</span>
+                                                    <span class="icon">★</span>
                                                 </label>
                                                 <label>
-                                                  <input type="radio" name="stars" value="5" />
-                                                  <span class="icon">★</span>
-                                                  <span class="icon">★</span>
-                                                  <span class="icon">★</span>
-                                                  <span class="icon">★</span>
-                                                  <span class="icon">★</span>
+                                                    <input type="radio" name="stars" value="5" />
+                                                    <span class="icon">★</span>
+                                                    <span class="icon">★</span>
+                                                    <span class="icon">★</span>
+                                                    <span class="icon">★</span>
+                                                    <span class="icon">★</span>
                                                 </label> <br/>
-                                              <label for="quickReplyFormComment">Votre Avis :</label>
-                                              <textarea class="form-control" id="quickReplyFormComment" rows="5" name="commentaire"></textarea>
-                                               <div class="text-center my-4">
-                                             <button id="postercom" class="btn btn-info btn-sm" type="submit">Post</button>
-                                             </form>
-                                             <% } %>
+                                                <label for="quickReplyFormComment">Votre Avis :</label>
+                                                <textarea class="form-control" id="quickReplyFormComment" rows="5" name="commentaire"></textarea>
+                                                <div class="text-center my-4">
+                                                    <button id="postercom" class="btn btn-info btn-sm" type="submit">Post</button>
+                                                    </form>
+                                                <% } %>
 
-                                         </div>
-                                          </div>
-                                          <div id="containComment">
-                                         <% for(var i=0; i < avis.length; i++) { %>
+                                                </div>
+                                        </div>
+                                        <div id="containComment">
+                                            <% for(var i=0; i < avis.length; i++) { %>
                                             <div class="media d-block d-md-flex mt-4">
 
-                                            <img class="card-img-64 rounded z-depth-1 d-flex mx-auto mb-3"
-                                                 src='../Pictures/<%= avis[i].photo.split("@")[0] %>.png' onerror="this.onerror=null; this.src='../img/img-profil.jpg'">
-                                            <div class="media-body text-center text-md-left ml-md-3 ml-0">
-                                                <p class="font-weight-bold my-0">
-                                                    <%= avis[i].NomEmm + " " + avis[i].PrenomEmm %> -- [ Note Attribué : <%= avis[i].Note %> ]
-                                                    <a href="" class="pull-right ml-1">
-                                                        <i class="fa fa-reply"></i>
-                                                    </a>
-                                                </p>
-                                                <%= avis[i].Commentaire %>
-                                                <!-- Quick Reply -->
+                                                <img class="card-img-64 rounded z-depth-1 d-flex mx-auto mb-3"
+                                                     src='../Pictures/<%= avis[i].photo.split("@")[0] %>.png' onerror="this.onerror=null; this.src='../img/img-profil.jpg'">
+                                                <div class="media-body text-center text-md-left ml-md-3 ml-0">
+                                                    <p class="font-weight-bold my-0">
+                                                        <%= avis[i].NomEmm + " " + avis[i].PrenomEmm %> -- [ Note Attribué : <%= avis[i].Note %> ]
+                                                        <a href="" class="pull-right ml-1">
+                                                            <i class="fa fa-reply"></i>
+                                                        </a>
+                                                    </p>
+                                                    <%= avis[i].Commentaire %>
+                                                    <!-- Quick Reply -->
 
 
+                                                </div>
                                             </div>
-                                        </div>
-                                         <% } %>
+                                            <% } %>
                                         </div>
 
 
@@ -191,17 +201,27 @@
         </div>
 
         <script >
-        <%if (isViewingAvis==true) { %>
- $(window).on('load',function(){
-                                           $('#Modalavis').modal('show');
-                                       });        <% } %>
+            <%if (isViewingAvis==true) { %>
+            $(window).on('load',function(){
+                $('#Modalavis').modal('show');
+            });        <% } %>
 
 
         </script>
+        <script> 
+            $(document).ready(function(){
+                /*je colore l'icone profil pour dire que je suis sur cette page*/
+                $('#mySidebar .menu a:nth-child(n)').find('i').removeClass('change_page')
+                $('#mySidebar .menu a:nth-child(2)').find('i').addClass('change_page')
+                $('#mySidebar .menu a:nth-child(n)').removeClass('change_page')
+                $('#mySidebar .menu a:nth-child(2)').addClass('change_page')
+            })
+        </script>
+        
         <%- include('./partials/menuProfil'); -%>
         <script src="javascripts/profil.js"></script>
         <%- include('./partials/footerProfil'); -%>
-        
+
 
 
     </body>

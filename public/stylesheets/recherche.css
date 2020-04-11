@@ -1,11 +1,15 @@
 #titre {
-    padding-bottom: 65px;
-    padding-top: 70px;
+    padding: 20px
 }
 .recherche-title{
+/*
     font-size: 50px;
     padding-bottom: 60px;
     padding-top: 60px;
+*/
+        font-size: 60px;
+    padding-bottom: 15px;
+    padding-top: 15px;
 }
 span.trajet-circle{
     height: 16px;
@@ -94,4 +98,30 @@ span.trajet-circle{
 
 #container1 .card {
     background-color: #7366a54f;
+    padding :1% 1% 3% 3%;
+}
+
+#container1 .espace {
+    padding: 15px;
+}
+
+@media screen and (max-width: 450px) {
+    .recherche-title{
+        font-size: 20px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+    }
+    
+    #container1 img {
+        width: 50px;
+    }
+    
+    #container1 .espace {
+        padding: 5px;
+    }
+    
+    #titre {
+        padding: 10px;
+    }
+
 }

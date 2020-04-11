@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
     else isView=true;
     if(sess.Username) {
         app.connection.query('Select a.Username as photo,a.Nom as NomEmm,a.Prenom as PrenomEmm from profils a,avis a2 where a2.IdRecepteur=? and a2.IdEmmeteur=a.Username',sess.Username,function(err,avis){
-           console.log(avis);
+//           console.log(avis);
             res.render('profil',{ photo:req.session.Username.split("@")[0]+'.png',canEdit:true,logged:true,prenom: sess.prenom,nom: sess.nom,useremail: sess.Username,adresse:'Adr',avis:avis,isViewingAvis:isView});
         });
     }

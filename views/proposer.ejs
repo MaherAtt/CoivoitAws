@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-    <html lang="fr">
+<html lang="fr">
 
     <head>
         <%- include('./partials/head'); -%>
@@ -8,105 +8,109 @@
 
     <body>
         <% if(logged==true){ %>
-                   <%- include('./partials/headerLogged'); -%>
-                 <% } else{ %>
-                   <%- include('./partials/header'); -%>
-                <% } %>
+        <%- include('./partials/headerLogged'); -%>
+        <% } else{ %>
+        <%- include('./partials/header'); -%>
+        <% } %>
 
 
         <!-- Formulaire de recherche d'un trajet -->
         <div class="container" id="container1" >
-            <form id="myForm" class="form-horizontal"  role="form" action="./proposer" method="post">
+            <div id="proposer">
+                <form id="myForm" class="form-horizontal"  role="form" action="./proposer" method="post">
 
-              <div class="mx-auto" style="width: 60%;">
-                  <h1 class="text-center recherche-title">Publier un Trajet</h1>
+                    <div class=" d-flex justify-content-center row" >
+                        <h1 class="text-center recherche-title col-md-12">Nouveau Trajet</h1>
 
-                  <div class="form-group" style="margin-bottom: 50px;">
-                    <input type="search" class="form-control input-lg" id="adr-depart-input" placeholder="Départ" name="adrDepart">
-                  </div>
-                  <div class="form-group" style="margin-bottom: 50px;">
-                    <input type="text" class="form-control input-lg" onFocus="geolocate()" id="adr-dest-input" placeholder="Destination" name="adrDestination">
-                  </div>
+                        <div class="col-md-10 d-flex justify-content-center row">
 
-
-                  <div>
-                        <label class="form-check-label" for="Aller-retour">Aller-retour ?&nbsp;&nbsp;</label>
-                        <input class="form-check-input" type="checkbox" name="Aller-retour" id="Aller-retour" value="Aller-retour" onclick="showRetourContainer()">
-                  </div>
-
-                  <div class="row container" >
-                    <label class="form-check-label" for="Aller-retour" style="margin-top: 20px;margin-bottom: 10px;">Date de l'aller :</label>
-
-                    <div class="row">
-                        <div class="col-md" >
-                            <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd" >
-                                <input class="form-control input-lg" type="text" value="Quand ?" name="dateDep" readonly>
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            <div class="form-group col-md-12" >
+                                <input type="search" class="form-control input-lg" id="adr-depart-input" required placeholder="Départ" name="adrDepart">
                             </div>
-                            <input type="hidden" id="dtp_input2" value="" /><br/>
-                        </div>
-                        <div class="col-md">
-                            <div class="input-group date form_time" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
-                                <input class="form-control input-lg" type="text" value="À quelle heure ?" name="heureDep" readonly>
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                            <div class="form-group col-md-12" >
+                                <input type="text" class="form-control input-lg" onFocus="geolocate()" required id="adr-dest-input" placeholder="Destination" name="adrDestination">
                             </div>
-                            <input type="hidden" id="dtp_input3" value="" /><br/>
+                            <div class="form-check col-md-12">
+                                <label class="form-check-label" for="Aller-retour">Aller-retour ?</label>
+                                <input class="" type="checkbox" checked name="Aller-retour" id="Aller-retour" value="Aller-retour" onclick="showRetourContainer()">
+<!--                                <input class="form-check-input" type="checkbox" name="Aller-retour" id="Aller-retour" value="Aller-retour" onclick="showRetourContainer()">-->
+                            </div>
+                            
+                            <div class="form-group col-md-12 row ">
+                                <label class="col-md-4 col-12" for="Aller-retour">Date de l'aller :</label>
+
+                                <div class="col-md-8 col-12 row">
+                                    <div class="col-md-6 col-6">
+                                        <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                            <input class="form-control input-lg"  type="text" value="Quand ?" name="dateDep" readonly="">
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                        <input type="hidden" id="dtp_input2" value="">
+                                    </div>
+                                    <div class="col-md-6 col-6">
+                                        <div class="input-group date form_time" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+                                            <input class="form-control input-lg" type="text" value="À quelle heure ?" name="heureDep" readonly="">
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                                        </div>
+                                        <input type="hidden" id="dtp_input3" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                           
+                            <div id="date-retour-container" class="form-group col-md-12 row" >
+                                <label class="col-md-4 col-12" for="Aller-retour" >Date du retour :</label>
+                                <div class="col-md-8  col-12 row">
+                                    <div class="col-md-6 col-6">
+                                        <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                            <input class="form-control input-lg" type="text" value="Quand ?" name="dateDep2" readonly>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                        <input type="hidden" id="dtp_input2" value="" />
+                                    </div>
+                                    <div class="col-md-6 col-6">
+                                        <div class="input-group date form_time" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+                                            <input class="form-control input-lg" type="text" value="À quelle heure ?" name="heureDep2" readonly>
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                                        </div>
+                                        <input type="hidden" id="dtp_input3" value="" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group  col-md-12 col-12 row">
+                                <label for="input-prix" class="col-1 col-5 form-label">Prix</label>
+                                <div class="col-2 col-7">
+                                    <input class="form-control" type="number" required value="10" id="input-prix" name="prix">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12 col-12 row ">
+                                <label for="commentaire-trajet" >Ajoutez des détails !</label>
+                                <textarea class="form-control" id="commentaire-trajet" rows="3" name="commentaire"></textarea>
+                            </div>
+
+                            <div class="text-center" >
+                                <button type="submit" class="btn btn-primary btn-lg"  >Publier</button>
+                            </div>
                         </div>
+
                     </div>
-                  </div>
 
-                  <div id="date-retour-container" class="row container" style="display: none;" >
-                    <label class="form-check-label" for="Aller-retour" style="margin-top: 10px;margin-bottom: 10px;">Date du retour :</label>
-                    <div class="row">
-                        <div class="col-md" >
-                            <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd" >
-                                <input class="form-control input-lg" type="text" value="Quand ?" name="dateDep2" readonly>
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                            </div>
-                            <input type="hidden" id="dtp_input2" value="" /><br/>
-                        </div>
-                        <div class="col-md">
-                            <div class="input-group date form_time" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
-                                <input class="form-control input-lg" type="text" value="À quelle heure ?" name="heureDep2" readonly>
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
-                            </div>
-                            <input type="hidden" id="dtp_input3" value="" /><br/>
-                        </div>
-                    </div>
-                  </div>
+                </form>
 
-                  <div class="form-group row" style="margin-top: 20px;">
-                    <label for="input-prix" class="col-1 col-form-label">Prix</label>
-                    <div class="col-3">
-                        <input class="form-control" type="number" value="10" id="input-prix" name="prix">
-                    </div>
-                  </div>
-
-                  <div class="form-group ">
-                    <label for="commentaire-trajet" style="margin-top: 10px; margin-bottom: 10px;">Ajoutez des détails !</label>
-                    <textarea class="form-control" id="commentaire-trajet" rows="3" name="commentaire"></textarea>
-                  </div>
-
-                  <div class="text-center" style="margin-top: 30px; margin-bottom: 50px;">
-                    <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 30px; padding-right: 30px;" >Publier</button>
-                  </div>
-
-
-              </div>
-
-            </form>
+            </div>
         </div>
 
 
+        <!-- Affichage du calendrier de la date et l'heure-->
+        <script type="text/javascript" src="javascripts//bootstrap-datetimepicker.js" charset="UTF-8"></script>
 
-<!-- Affichage du calendrier de la date et l'heure-->
-<script type="text/javascript" src="javascripts//bootstrap-datetimepicker.js" charset="UTF-8"></script>
-
-<!-- Auocomplete Address-->
-<script src="https://cdn.jsdelivr.net/npm/places.js@1.18.1/dist/cdn/placesInstantsearchWidget.min.js"></script>
+        <!-- Auocomplete Address-->
+        <script src="https://cdn.jsdelivr.net/npm/places.js@1.18.1/dist/cdn/placesInstantsearchWidget.min.js"></script>
 
 
-<script type="text/javascript">
+        <script type="text/javascript">
 
 
             // Format de la date et du timePicker
@@ -146,17 +150,17 @@
                 forceParse: 0
             });
 
-             //Autocomplete pour addresse
+            //Autocomplete pour addresse
             (function() {
                 var searchBox = placesInstantsearchWidget({
-                  appId: 'plKD0BHKH6A7',
-                  apiKey: 'd73e81b8f89e712327f4c6daa086e67c',
-                  container: document.querySelector('#adr-depart-input')
+                    appId: 'plKD0BHKH6A7',
+                    apiKey: 'd73e81b8f89e712327f4c6daa086e67c',
+                    container: document.querySelector('#adr-depart-input')
                 });
                 var searchBox2 = placesInstantsearchWidget({
-                  appId: 'plKD0BHKH6A7',
-                  apiKey: 'd73e81b8f89e712327f4c6daa086e67c',
-                  container: document.querySelector('#adr-dest-input')
+                    appId: 'plKD0BHKH6A7',
+                    apiKey: 'd73e81b8f89e712327f4c6daa086e67c',
+                    container: document.querySelector('#adr-dest-input')
                 });
 
                 search.addWidget(searchBox);
@@ -181,13 +185,23 @@
             function showRetourContainer(){
 
                 if (document.getElementById("date-retour-container").style.display == "none") {
-                    document.getElementById("date-retour-container").style.display = "block";
+                    document.getElementById("date-retour-container").style.display = "flex";
                 }
                 else{
                     document.getElementById("date-retour-container").style.display = "none";
                 }
             }
 
+        </script>
+        
+        <script> 
+            $(document).ready(function(){
+                /*je colore l'icone proposer pour dire que je suis sur cette page*/
+                $('#mySidebar .menu a:nth-child(n)').find('i').removeClass('change_page')
+                $('#mySidebar .menu a:nth-child(6)').find('i').addClass('change_page')
+                $('#mySidebar .menu a:nth-child(n)').removeClass('change_page')
+                $('#mySidebar .menu a:nth-child(6)').addClass('change_page')
+            })
         </script>
 
         <%- include('./partials/menu'); -%>
@@ -196,4 +210,4 @@
 
 
     </body>
-    </html>
+</html>

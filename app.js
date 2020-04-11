@@ -55,23 +55,25 @@ var connection = mysql.createConnection({
     password : '754810b0',
     database : 'heroku_d1dd061e72cfd25'
 });
+
 function handleDisconnect(connection){
     connection.on('error', function(err){
         if(!err.fatal)
         {
             return;
         }
-        if(err.code !== 'PROTOCOL_CONNECTION_LOST')
+        if(err.code != 'PROTOCOL_CONNECTION_LOST')
         {
             throw err;
         }
-        console.log('\nRe-connecting lost connection: ' +err.stack);
-
+        console.log('\nRe-connecting lost connection : ' +err.stack);
         connection = mysql.createConnection(connection.config);
         handleDisconnect(connection);
         connection.connect();
+                   
     });
 };
+connection = mysql.createConnection(connection.config);
 handleDisconnect(connection);
 // view engine setup
 app.engine('html', cons.swig)

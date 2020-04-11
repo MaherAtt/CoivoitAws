@@ -46,7 +46,7 @@ function verifInsc() {
         return false;
     }
     else{
-        alert("Demande confirmé");
+        alert("Demande confirmée");
 
     }
 }
