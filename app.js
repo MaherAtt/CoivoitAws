@@ -49,30 +49,12 @@ app.use(function(req, res, next){
 
 var mysql = require('mysql');
 
-var connection = mysql.createConnection({
+var connection = mysql.createPool({
     host     : 'us-cdbr-iron-east-01.cleardb.net',
     user     : 'b68f308ddca3d1',
     password : '754810b0',
     database : 'heroku_d1dd061e72cfd25'
 });
-function handleDisconnect(connection){
-    connection.on('error', function(err){
-        if(!err.fatal)
-        {
-            return;
-        }
-        if(err.code !== 'PROTOCOL_CONNECTION_LOST')
-        {
-            throw err;
-        }
-        console.log('\nRe-connecting lost connection: ' +err.stack);
-
-        connection = mysql.createConnection(connection.config);
-        handleDisconnect(connection);
-        connection.connect();
-    });
-};
-handleDisconnect(connection);
 // view engine setup
 app.engine('html', cons.swig)
 app.set('views', path.join(__dirname, 'views'));
