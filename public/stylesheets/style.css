@@ -1,30 +1,45 @@
 /* Fichier Css */
 /* header */
-header {
-  padding-top: 5px;
+header, .haut {
+    /*  padding-top: 5px;*/
+    background: white;
+    height: 80px;
+    border-bottom: 1pt solid #842929;
 }
 
+h1, h5, .modal-header {
+    color: #842929;
+}
 
 /* lien inscription_connexion */
 
 .modal-open .modal {
-  overflow: hidden;
+    overflow: hidden;
 }
 #inscription_connexion {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  max-width: 300px;
-  /* margin-righ: -5%;*/
+    /*  position: absolute;*/
+    top: 5px;
+/*
+    right: 5px;
+    max-width: 300px;
+*/
+    /* margin-righ: -5%;*/
 }
-#inscription_connexion a{
-  color: black;
-  font-size: 20px;
+#inscription_connexion a, #deconnexion p, #bjr  {
+    color: #842929;
+    font-size: 20px;
 }
+
+#bjr {
+    position: relative;
+    top: -63px;
+    left: 0;
+}
+
 #inscription_connexion a:hover{
-  color: #66748a;
-  font-size: 20px;
-  text-decoration-line: none;
+    color: #66748a;
+    font-size: 20px;
+    text-decoration-line: none;
 }
 
 /* Fin lien inscription_connexion */
@@ -34,154 +49,255 @@ header {
 /* Fin header */
 /* Menu */
 .sidebar {
-  height: 100%;
-  width: 0; /* c'est l'attribut qui permet d'afficher ou non le menu (width=0 => menu fermé)*/
-  position: absolute;
-  z-index: 5;
-  top: 0;
-  left: 0;
-  background-color: #ff6666;
-  overflow-x: hidden; /* pour dire que si le contenu deppase le width il ne l'affiche pas */
-  /* donc quand le width=0 il va pas afficher le menu */
-  padding-top: 0px;
-  transition: 0.5s;
-  /* box-shadow: 2px 2px 2px #2a3951; */
+    height: 100%;
+    /*  height: inherit;*/
+    width: 0; /* c'est l'attribut qui permet d'afficher ou non le menu (width=0 => menu fermé)*/
+    position: absolute;
+    z-index: 5;
+    top: 0;
+    left: 0;
+    background-color: #842929;
+    overflow-x: hidden; /* pour dire que si le contenu deppase le width il ne l'affiche pas */
+    /* donc quand le width=0 il va pas afficher le menu */
+    padding-top: 0px;
+    transition: 0.5s;
+    /* box-shadow: 2px 2px 2px #2a3951; */
 }
 
 /* les elements du menu */
 .sidebar div {
-  padding: 0px;
+    padding: 0px;
 }
 .sidebar #login {
-  padding-top: 8px;
+    padding-top: 8px;
 
 }
 .sidebar a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: white;
-  display: block;
-  transition: 0.3s;
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+    transition: 0.3s;
 }
 
 .buttonProf {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 2px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 2px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
 }
 
 .buttonProfiles {
-  background-color: white;
-  color: black;
-  border: 2px solid #4CAF50;
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50;
 }
 
 .sidebar a:hover {
-  color: black;
+    color: black;
 }
 
 /* le bouton qui ferme le menu */
 .sidebar .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
 }
 
-#mySidebar a:nth-child(1) {
-  /*padding-top: 110px;*/
-  padding-top: 70px;
+#mySidebar #gdmenu a:nth-child(1) {
+    /*padding-top: 110px;*/
+    padding-top: 70px;
 }
 
-#mySidebar div a img:nth-child(1) {
-  position: absolute;
-  top: 20px;
+#mySidebar #gdmenu div a img:nth-child(1) {
+    position: absolute;
+    top: 20px;
 }
 
+
+@media screen and (max-width: 600px) {
+    #mySidebar #gdmenu {
+        visibility: hidden;
+        height: 0px;
+        width: 0px;
+        overflow: hidden;
+    }
+    #mySidebar #ptmenu{
+        visibility: visible;
+        margin-top: 70px;
+    }
+
+    #mySidebar #ptmenu .closebtn {
+        position: absolute;
+        top: -75px;
+        left: -52px;
+
+    }
+}
+
+@media screen and (min-width: 601px) {
+    #mySidebar #gdmenu {
+        visibility: visible;
+    }
+    #mySidebar #ptmenu {
+        visibility: hidden;
+        height: 0px;
+        overflow: hidden;
+    }
+}
 /* le bouton qui ouvre le menu */
 .openbtn {
-  font-size: 20px;
-  cursor: pointer;
-  background-color: #ededed;
-  /*background-color: #bedff1;*/
-  color: black;
-  padding: 10px 15px;
-  border: none;
-  position: absolute;
-  z-index: 3;
-  top: 0px;
+    font-size: 20px;
+    cursor: pointer;
+    /*  background-color: #ededed;*/
+    background-color: white;
+    color: black;
+    padding: 10px 15px;
+    padding-bottom: 3px;
+    border: none;
+    position: absolute;
+    z-index: 3;
+    top: 0px;
 }
 
 
 .openbtn:hover {
-  background-color: #66748a;
+    background-color: #842929;
 }
 
+
+
+
 #pageContent {
-  transition: margin-left .5s;
-  padding: 20px;
-  padding-top: 85px;
-  /*background-image:url(../img/arizona1.jpg); */
-  /*   background-image:url(../img/arizona.jpg)no-repeat center center fixed; */
-  /*-webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;*/
-  /*background-color: #ededed;*/
-  /* background-color: #bedff1;*/
-  /*background-color: white;*/
+    transition: margin-left .5s;
+    padding: 20px;
+    padding-top: 35px;
+    /*background-image:url(../img/arizona1.jpg); */
+    /*   background-image:url(../img/arizona.jpg)no-repeat center center fixed; */
+    /*-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;*/
+    /*background-color: #ededed;*/
+    /* background-color: #bedff1;*/
+    /*background-color: white;*/
 
 }
 
 
 
 /*carousel */
+#aa {
+    /*  background: red;*/
+}
+#aa #carous {
+    /*  background: blue;*/
+    width: 70%;
+}
 .carousel-inner {
-  max-height: 650px;
+    /*  height: 650px;*/
 
 }
 .carousel-inner img {
-  max-height: 600px;
-  width: 100%;
+    max-height: 600px;
+    width: 100%;
 
 }
 .carousel-caption {
-  right: 30%;
-  left: 30%;
+    right: 30%;
+    left: 30%;
 }
 
+@media screen and (max-width: 450px) {
+    #acceuil #description article p {
+        font: 12px;
+    }
+
+    #acceuil #description {
+        padding-top: 20px;
+    }
+
+    #acceuil #aa #carous {
+        height: 150px;
+    }
+
+    #acceuil section {
+        visibility: visible;
+    }
+
+}
+
+@media screen and (min-width: 451px) {
+    #acceuil section {
+        visibility: hidden;
+        height: 0px;
+        overflow: hidden;
+    }
+
+}
 
 /* Inscription / connexion */
 #exampleModalCenter .modal-content{
-  box-shadow: 2px 2px 2px #2a3951
+    box-shadow: 2px 2px 2px #2a3951
 }
 #exampleModalCenter .form-control{
 
-  border: 0.1px solid white;
+    border: 0.1px solid white;
 }
 
 #exampleModalCenter .form-group{
-  margin-left: 5px;
-  margin-right: 5px;
-  padding-top:5px;
-  padding-bottom:5px;
-  border: 1px solid #66748a;
-  border-radius: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-top:5px;
+    padding-bottom:5px;
+    border: 1px solid #66748a;
+    border-radius: 10px;
 }
 
 
 /*.modal-content{
 height: 400px;
 }*/
+
+
+
+@media screen and (max-width: 450px) {
+    #inscription_connexion {
+        padding-top: 10px;
+        position: absolute;
+        right: 0px;
+
+    }
+
+    #deconnexion {
+        padding-top: 10px;
+        position: absolute;
+/*        right: 0px;*/
+
+    }
+
+    #inscription_connexion p, #deconnexion p, #bjr {
+        font-size: 11px;
+    }
+    
+    #bjr {
+        position: relative;
+        top: -63px;
+        left: -31px;
+    }
+
+}
+
+
 /* Fin Inscription / connexion */
 
 
@@ -191,155 +307,217 @@ height: 400px;
 /* CSS files add styling rules to your content */
 
 body {
-  font-family: helvetica, arial, sans-serif;
-  margin: 0px 0px 0px 0px;
-  padding: 0px 0px 0px 0px;
-  background-color: #ededed;
-  height:100vh;
-  width: 100%;
+    font-family: 'Comic Neue', cursive;
+/*    font-family: helvetica, arial, sans-serif;*/
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    background-color: #ededed;
+    min-height:100vh;
+    width: 100%;
+    position: relative;
 }
 
+.change_page, .sidebar .change_page {
+    color: black;
+}
 
-
+/*
 .menu {
-  position: relative;
-  background-color: #99ffcc;
-  width: 20%;
-  height: 700px;
-  float: left;
-  display: block;
-  text-align: center;
-  margin-top: 0px;
-  margin-right: 10px;
-  margin-left: 0%;
-  transition-duration: 0.2s;
+    position: relative;
+    background-color: #99ffcc;
+    width: 20%;
+    height: 700px;
+    float: left;
+    display: block;
+    text-align: center;
+    margin-top: 0px;
+    margin-right: 10px;
+    margin-left: 0%;
+    transition-duration: 0.2s;
 }
 .img-container {
-  text-align: center;
-  display: block;
-  width:100%;
-  height:38%;
+    text-align: center;
+    display: block;
+    width:100%;
+    height:38%;
 }
 .img-container img {
-  width:70%;
-  height:100%;
+    width:70%;
+    height:100%;
 }
 .menu {
-  position: relative;
-  line-height: 1.9;
-  text-align: left;
-  font-weight: bold;
-  padding: 0px 1px 1px 1px;
+    position: relative;
+    line-height: 1.9;
+    text-align: left;
+    font-weight: bold;
+    padding: 0px 1px 1px 1px;
 }
+*/
 
 
 /* debut Profil */
 
 
 .form-control-file, .form-control-range{
-  width: 60%;
+    width: 60%;
 }
 
 #profil {
-  /*padding-left: 50px;
-  padding-right: 50px; */
+    /*padding-left: 50px;
+    padding-right: 50px; */
 }
 
 .userCard {
-  display: "";
+    display: "";
 }
 #profil .card{
-  background-color: #7366a54f;
-  /*border: 2px solid red;*/
-  /*height: 100px;*/
-  box-shadow: 2px 2px 2px #2a3951;
+    background-color: #7366a54f;
+    /*border: 2px solid red;*/
+    /*height: 100px;*/
+    box-shadow: 2px 2px 2px #2a3951;
 }
 
 .demandeContainer {
-  display:inline;
+    display:inline;
 }
 
 #profil #info_perso .card {
-  padding: 50px;
+    padding: 50px;
 }
 #profil #info_perso {
-  padding: 20px;
+    padding: 20px;
 }
 #profil #avis {
-  padding: 19px;
-  margin: 5px;
+    padding: 19px;
+    margin: 5px;
 }
 #profil .titre_page {
-  padding-top: 50px;
-  padding-bottom: 50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
-#profil #photo_profil img{
-  height: 150px;
-  width: 70%;
+#profil #photo_profil1 img{
+    height: 150px;
+    width: 70%;
 
 }
 
 
 
 #profil #avis #voir_com {
-  font-size: 10px;
+    font-size: 10px;
 }
 
 #profil #Modalavis .modal-body{
-  height : 500px;
-  overflow-x: hidden;
-  overflow-y: auto;
+    height : 500px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+#profil .form-control, #profil .progress-bar {
+    background-color: #842929;
 }
 
-@media screen and (max-width: 450px) {
-  header img {
-    max-width: 85px;
-    position: absolute;
-    top: 5px;
-    left: 12%;
-  }
-  /* Réduire la taille du menu sur les smartphones */
-  .sidebar {
-    padding-top: 15px;
-    background-image: linear-gradient(#292323, #68659699,#1236340f,#e0ddddc9);
-    /*background-color: #1236340f;*/
-    height: 250px;
-    width: 450px;
-  }
-  .sidebar a {
-    font-size: 18px;
-  }
+#profil .form-control {
+    color: white; 
 }
-@media  (min-width: 450px) and  (max-width: 800px) {
-  #profil #info_perso {
-    margin: 5px  ;
-  }
-  .titre_page {
-    margin: 0px 0px 8px;
-  }
-  header img {
-    max-width: 160px;
-    position: absolute;
-    top: -8px;
-    left: 10%;
-  }
+
+@media screen and (max-width: 650px) {
+    header img {
+        max-width: 30%;
+        position: absolute;
+        top: 12px;
+        left: 40%;
+        right: 30%;
+    }
+    /* Réduire la taille du menu sur les smartphones */
+    .sidebar {
+        padding-top: 15px;
+        /*background-color: #1236340f;*/
+        /*    min-height: 100%;*/
+        /*    width: 150px;*/
+
+    }
+    .sidebar a {
+        font-size: 18px;
+    }
+}
+@media screen and (max-width: 450px) {
+    #profil .card {
+        background: none;
+        box-shadow: none;
+    }
+
+    #profil #avis {
+        margin: 0px; 
+    }
+    #profil .titre_page {
+        /*        visibility: hidden;*/
+        /*        height: 0px;*/
+        padding-top: 10px;
+        padding-bottom: 0px;
+        font-size: 25px;
+    }
+
+    #profil #photo_profil1 {
+        visibility: hidden;
+        height: 0px;
+        width: 0px;
+        margin: 0px;
+        padding: 0px;
+    }
+    #profil #photo_profil2 {
+        visibility: visible;
+    }
+    #profil #photo_profil2 img{
+        height: 75px;
+        width: 40%;
+
+    }
+
+}
+
+@media screen and (min-width: 450px) {
+    #profil #photo_profil2 {
+        visibility: hidden;
+        height: 0px;
+        width: 0px;
+        margin: 0px;
+        padding: 0px;
+    }
+    #profil #photo_profil1 {
+        visibility: visible;
+    }
+}
+
+@media  (min-width: 650px) and  (max-width: 800px) {
+    #profil #info_perso {
+        margin: 5px  ;
+    }
+    .titre_page {
+        margin: 0px 0px 8px;
+    }
+    header img {
+        max-width: 160px;
+        position: absolute;
+        top: -8px;
+        left: 10%;
+    }
 }
 
 @media screen and (min-width: 800px) {
-  #profil #info_perso {
-    margin: 5px;
-    margin-left: 15%  ;
-  }
-  .titre_page {
-/*    margin-left: 6%  ;*/
-  }
-  header img {
-    max-width: 240px;
-    position: absolute;
-    top: -20px;
-    left: 40%;
-  }
+    #profil #info_perso {
+        margin: 5px;
+        margin-left: 15%  ;
+    }
+    .titre_page {
+        /*    margin-left: 6%  ;*/
+    }
+    header img {
+        max-width: 240px;
+        position: absolute;
+        top: -60px;
+        left: 45%;
+    }
 }
 
 .separation_paragraphe {
@@ -347,14 +525,18 @@ body {
 }
 
 #profil .msg {
-     display: inline-block;
+    display: inline-block;
 }
 
 #profil #msg_non_lu {
     position: relative;
     top: -18px;
     left: -10px;
+
+}
     
+#profil .commentaire {
+    font-family: 'Comic Neue', cursive;
 }
 
 /* fin profil */
@@ -373,30 +555,38 @@ body {
 #messagerie #response {
     position: absolute;
     z-index: 5;
-/*    opacity:0.8;*/
+    /*    opacity:0.8;*/
 }
 #messagerie textarea {
-   resize : none ;
+    resize : none ;
 }
 
 
 #messagerie #messages .id_moi, #messagerie #messages .id_julia{
- /* max-width: 50px;*/
+    /* max-width: 50px;*/
 }
 #messagerie #messages .badge {
     white-space:normal;
     text-align: left;
 }
 #messagerie #messages {
-  list-style:none;
-  height: 400px;
-  overflow: auto;
-  font-size: 25px;
+    list-style:none;
+    height: 400px;
+    overflow: auto;
+    font-size: 25px;
 }
 #messagerie #messages .id_moi{
-/*  background-color: orange;*/
+    /*  background-color: orange;*/
 }
 
+
+@media screen and (max-width: 450px) {
+    #messagerie #nav-tabContent {
+        background: red;
+        margin-top: 60px;
+    }
+
+}
 
 /* fin Messagerie */
 
@@ -404,104 +594,172 @@ body {
 
 /*Recherche profil */
 #recherche_profil #search  input{
-  background: none;
-  border: none;
-  color: white;
+    background: none;
+    border: none;
+    color: white;
     margin-top:1%;
-  margin-bottom:1%;
+    margin-bottom:1%;
 }
 #recherche_profil #search  {
-  margin-left: 15%;
-  margin-right: 15%;
-  
-  
-/*  width: 70%;*/
-  height: 90px;
-  font-size: 40px;
+    margin-left: 15%;
+    margin-right: 15%;
+
+
+    /*  width: 70%;*/
+    height: 90px;
+    font-size: 40px;
 }
 
 #recherche_profil .box_search {
-  padding-bottom: 50px;
+    padding-bottom: 50px;
 }
 
 
 #recherche_profil .border_img {
-  border-width: 1px;
-  border-color: #ededed;
-  border-style: solid;
+    border-width: 1px;
+    border-color: #ededed;
+    border-style: solid;
 }
 #recherche_profil img {
-  max-width: 100%;
+    max-width: 100%;
 }
 
 #recherche_profil #liste {
-  padding: 5px;
+    padding: 5px;
 }
 #recherche_profil #liste  .card {
-  padding-top: 1%;
+    padding-top: 1%;
+    background: #842929;
+    color: white;
+    flex-direction: row;
 }
 
 #recherche_profil #liste .profil {
-  height: 150px;
-  margin: 15px;
-  border-radius: 2%;
+    height: 150px;
+    margin: 15px;
+    border-radius: 2%;
 }
 
 #recherche_profil #liste .profil ul {
-  padding-left: 0px;
+    padding-left: 0px;
 }
 #recherche_profil #liste .profil {
     opacity: 1;
 }
 #recherche_profil #liste .profil:hover {
-  opacity: 0.8;
-  cursor: pointer;
+    opacity: 0.8;
+    cursor: pointer;
 }
 #recherche_profil #liste .profil li {
-  list-style: none;
+    list-style: none;
 }
 
 #recherche_profil .input-group {
-  margin: 10px;
+    margin-top: 10px;
 }
 
 #recherche_profil .input-group-text {
-  width: 200px;
+    width: 200px;
 }
 
 #recherche_profil #accordion {
-  width: 600px;
+    width: 600px;
 }
 #recherche_profil .rating {
-   direction: rtl;
+    direction: rtl;
 }
 
 .rating a {
-   color: #aaa;
-   text-decoration: none;
-   font-size: 3em;
-   transition: color .4s;
+    color: #aaa;
+    text-decoration: none;
+    font-size: 3em;
+    transition: color .4s;
 }
 
-.rating a:hover,
-.rating a:focus,
-.rating a:hover ~ a,
-.rating a:focus ~ a {
-   color: orange;
-   cursor: pointer;
+.rating a:hover, .rating a:focus, .rating a:hover ~ a, .rating a:focus ~ a {
+    color: #842929;
+    cursor: pointer;
 } 
 
 
 
 
-@media screen and (max-width: 800px) {
-  #recherche_profil img {
-    max-width: 30%;
-  }
-  
-  #recherche_profil #liste .profil {
-    height: 250px;
-  }
+@media (min-width: 450px) and (max-width: 800px) {
+    #recherche_profil img {
+        max-width: 30%;
+    }
+
+    #recherche_profil #liste .profil {
+        height: 250px;
+    }
+
+}
+
+
+@media screen and (max-width: 450px) {
+    #recherche_profil img {
+        max-width: 100%;
+    }
+
+    #recherche_profil #liste .profil {
+        height: 120px;
+    }
+    #recherche_profil #search  {
+        /*    width: 70%;*/
+        height: 45px;
+        font-size: 15px;
+
+        margin-left: 20%;
+        margin-right: 20%;
+
+    }
+    
+
+    #recherche_profil #search input {
+        margin-top: 4%;
+        margin-bottom: 4%;
+    }
+    
+    #recherche_profil .box_search {
+        padding-bottom: 2px;
+    }
+
+
+    #recherche_profil .input-group-text {
+        width: 155px;
+    }
+    
+    #recherche_profil #headingOne button {
+        padding: 0px;
+        margin: 0px;
+        color: #842929;
+    }
+    #recherche_profil #headingOne button:hover {
+/*        color: orange;*/
+    }
+    
+    #recherche_profil .input-group {
+        margin-top: 10px;
+    }
+    
+    #recherche_profil .input-group-lg div:nth-child(n) , #recherche_profil .input-group-lg input:nth-child(n){
+        height: 30px;
+        padding: 0px;
+        margin: 0px;
+    }
+    #recherche_profil .input-group-lg span {
+        font-size: 15px;
+    }
+    
+    .rating a {
+        font-size: 20px;
+        padding : 0px 2px;
+    }
+    
+    .rating {
+        padding : 1px 0px;
+    }
+
 
 }
 /*Fin Recherche profil */
@@ -509,15 +767,54 @@ body {
 
 /*Demande */
 #demande .liste {
-  padding: 5px;
-  padding-left: 15px;
-  padding-right: 15px;
-  
-  margin: 20px;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    margin: 20px;
 }
 
 #demande .liste .etat {
-  width: 150px;
+    width: 150px;
 }
 
 /*Fin Demande */
+
+
+
+
+/*Début Proposer */
+#proposer .form-check-input {
+     position: relative; 
+}
+
+#proposer .form-group {
+    margin : 0px;
+    margin-bottom: 5px;
+}
+
+
+
+/*Fin Proposer */
+
+
+
+/*Modal inscription*/
+
+@media screen and (max-width:450px) {
+    .modal-dialog {
+        margin: 0px;
+        padding: 0px 30px 0px 15px;
+    }
+}
+
+.btn-dark {
+    color: #fff;
+    background-color: #4a43419c !important;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #227d35 !important;
+}
+/*Modal inscription*/

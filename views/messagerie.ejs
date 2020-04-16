@@ -6,10 +6,10 @@
 
     <body>
         <% if(logged==true){ %>
-                           <%- include('./partials/headerLoggedProfil'); -%>
-                         <% } else{ %>
-                           <%- include('./partials/headerProfil'); -%>
-                        <% } %>
+        <%- include('./partials/headerLoggedProfil'); -%>
+        <% } else{ %>
+        <%- include('./partials/headerProfil'); -%>
+        <% } %>
 
         <div id="messagerie" class="col-md-12">
 
@@ -17,26 +17,26 @@
             <div class="col-md-12">
                 <div class="row">
                     <!--  Liste des conversations  -->
-                    <div class="col-4">
+                    <div class="col-md-4 col-12">
 
                         <div class="list-group" id="list-tab" role="tablist" style="height: 500px; background-color: white">
                             <a style="pointer-events: none; cursor: default;" class="list-group-item list-group-item-action conversation" id="MyUsername" data-toggle="list" href="#<%= user %>" role="tab" aria-controls="home"><%= user %></a>
                             <% for(var i=0; i < users.length; i++) { %>
                             <a class="list-group-item list-group-item-action conversation" id="<%= users[i].Id %>" data-toggle="list" href="#<%= users[i].Id %>" role="tab" aria-controls="home"><%= users[i].Id %></a>
 
-                              <% } %>
+                            <% } %>
                         </div>
                     </div>
                     <!-- FIN Liste des conversations  -->
 
                     <!--  Colonne de droite  -->
-                    <div class="col-8">
-<!--
-                        <div class=" col-md-12 alert alert-warning " id="response" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
+                    <div class="col-md-8 col-12">
+                        <!--
+<div class=" col-md-12 alert alert-warning " id="response" role="alert">
+<button type="button" class="close" data-dismiss="alert" aria-hidden="true" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
 -->
                         <div class="tab-content" id="nav-tabContent">
                             <!--  Détail conseration  -->
@@ -60,14 +60,22 @@
             </div>
 
 
-<!--            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>-->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
             <script src="/socket.io/socket.io.js"></script>
 
 
 
         </div>
-       
 
+        <script> 
+            $(document).ready(function(){
+                /*je colore l'icone msg pour dire que je suis sur cette page*/
+                $('#mySidebar .menu a:nth-child(n)').find('i').removeClass('change_page')
+                $('#mySidebar .menu a:nth-child(3)').find('i').addClass('change_page')
+                $('#mySidebar .menu a:nth-child(n)').removeClass('change_page')
+                $('#mySidebar .menu a:nth-child(3)').addClass('change_page')
+            })
+        </script>
 
         <%- include('./partials/menu'); -%>
         <%- include('./partials/footer'); -%>

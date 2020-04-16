@@ -1,161 +1,174 @@
-    <!DOCTYPE html>
-    <html lang="fr">
-        <head>
-            <%- include('./partials/head'); -%>
-        </head>
-        <body>
-            <% if(logged==true){ %>
-                       <%- include('./partials/headerLogged'); -%>
-                     <% } else{ %>
-                       <%- include('./partials/header'); -%>
-                    <% } %>
-            <!--Reste de la page-->
-            <div id="recherche_profil" class="col-md-12 align-middle">
-                <!--
-    <div class="text-center">
-    <img class="rounded mx-auto d-block img-fluid " src="img/img2.jpg"/>
-    </div>
-    -->
-                <div class="text-center box_search align-middle justify-content-center">
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <%- include('./partials/head'); -%>
+    </head>
+    <body>
+        <% if(logged==true){ %>
+        <%- include('./partials/headerLogged'); -%>
+        <% } else{ %>
+        <%- include('./partials/header'); -%>
+        <% } %>
+        <!--Reste de la page-->
+        <div id="recherche_profil" class="col-md-12 align-middle">
+            <!--
+<div class="text-center">
+<img class="rounded mx-auto d-block img-fluid " src="img/img2.jpg"/>
+</div>
+-->
+            <div class="text-center box_search align-middle d-flex justify-content-center row">
 
-                    <div id="search" class="badge-pill badge-dark "><input class="offset-1 col-md-10" type="text"  onkeyup="myFunction()" id="data"  placeholder="Rechercher un profil ..."><i class="fas fa-search col-md-1"></i></div>
-                    <div class="col-md-12 row justify-content-center">
+                <div id="search" class="badge-pill badge-dark "><input class=" col-md-10 col-9 " type="text"  onkeyup="myFunction()" id="data"  placeholder="Rechercher un profil ..."><i class="fas fa-search col-md-1 col-1"></i></div>
+                <div class="col-md-12 row justify-content-center">
 
-                        <div id="accordion" >
+                    <div id="accordion" >
 
-                            <div class="" id="headingOne">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                        Recherche avancée
-                                    </button>
-                                </h5>
-                            </div>
-                            <div class="card">
-                                <div id="collapseOne" class="collapse"  aria-labelledby="headingOne" data-parent="#accordion">
-                                    <div class="card-body">
+                        <div class="" id="headingOne">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    Recherche avancée
+                                </button>
+                            </h5>
+                        </div>
+                        <div class="card">
+                            <div id="collapseOne" class="collapse"  aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
 
-                                        <div class="input-group input-group-lg">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text" >Ville / Région </span>
-                                            </div>
-                                            <input type="text" onkeyup="myFunctionVille()" class="form-control" id="lieux" >
+                                    <div class="input-group input-group-lg">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" >Ville / Région </span>
                                         </div>
-                                        <div class="input-group input-group-lg">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"  >Note supérieure à :</span>
-                                            </div>
-                                            <div class="rating">
-                                                <a onclick="myFunctionNote(5)" href="#" title="Donner 5 étoiles">☆</a>
-                                                <a onclick="myFunctionNote(4)" href="#" title="Donner 4 étoiles">☆</a>
-                                                <a onclick="myFunctionNote(3)" href="#" title="Donner 3 étoiles">☆</a>
-                                                <a onclick="myFunctionNote(2)" href="#" title="Donner 2 étoiles">☆</a>
-                                                <a onclick="myFunctionNote(1)" href="#" title="Donner 1 étoile">☆</a>
-                                            </div>
-                                        </div>  
+                                        <input type="text" onkeyup="myFunctionVille()" class="form-control" id="lieux" >
                                     </div>
+                                    <div class="input-group input-group-lg">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"  >Note supérieure à :</span>
+                                        </div>
+                                        <div class="rating">
+                                            <a onclick="myFunctionNote(5)" href="#" title="Donner 5 étoiles">☆</a>
+                                            <a onclick="myFunctionNote(4)" href="#" title="Donner 4 étoiles">☆</a>
+                                            <a onclick="myFunctionNote(3)" href="#" title="Donner 3 étoiles">☆</a>
+                                            <a onclick="myFunctionNote(2)" href="#" title="Donner 2 étoiles">☆</a>
+                                            <a onclick="myFunctionNote(1)" href="#" title="Donner 1 étoile">☆</a>
+                                        </div>
+                                    </div>  
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div id="liste" class="row justify-content-left">
-                    <% for(var i=0; i < profils.length; i++) { %>
-                    <div class="userCard profil col-md-3 row  card  " id="profils" >
-                        <div class="col-md-4  align-self-center"> 
-                            <img class="rounded mx-auto d-block img-fluid rounded-circle border_img" alt="photo_profil" src="img/img-profil.jpg"/>
-                        </div>
-                        <div class="col-md-8 align-self-center">
-                            <ul>
-                                <li class="">Nom :<%= profils[i].Nom  %> </li>
-                                <li class="">Prénom : <%= profils[i].Prenom  %></li>
-                                <li class="">Ville : <%= profils[i].Adresse  %></li>
-                                <li class="">Note : <span><%= profils[i].Note  %></span></li>
-                            </ul>
-                        </div>
+            </div>
+            <div id="liste" class="d-flex justify-content-center row">
+                <% for(var i=0; i < profils.length; i++) { %>
+                <div class="userCard profil col-md-3 row  card  " id="profils" >
+                    <div class="col-md-4 col-4 align-self-center"> 
+                        <img class="rounded mx-auto d-block img-fluid rounded-circle border_img" alt="photo_profil" src="img/img-profil.jpg"/>
                     </div>
-                    <% } %>   
+                    <div class="col-md-8 col-8" id="voir_profil" value="id_personne">
+                        <ul>
+                            <li class="">Nom : <%= profils[i].Nom  %> </li>
+                            <li class="">Prénom : <%= profils[i].Prenom  %></li>
+                            <li class="">Ville : <%= profils[i].Adresse  %></li>
+                            <li class="">Note : <span><%= profils[i].Note  %></span></li>
+                        </ul>
+                    </div>
                 </div>
-
-
-
+                <% } %>   
             </div>
 
 
 
-            <%- include('./partials/menu'); -%>
-            <%- include('./partials/footer'); -%>
+        </div>
 
-            <script>
+
+        <script> 
+            $('#voir_profil').click(function(){
+                window.location = "./voir_profil"
+                
+            })
+            $(document).ready(function(){
+                /*je colore l'icone search pour dire que je suis sur cette page*/
+                $('#mySidebar .menu a:nth-child(n)').find('i').removeClass('change_page')
+                $('#mySidebar .menu a:nth-child(5)').find('i').addClass('change_page')
+                $('#mySidebar .menu a:nth-child(n)').removeClass('change_page')
+                $('#mySidebar .menu a:nth-child(5)').addClass('change_page')
+            })
+        </script>
+        
+        <%- include('./partials/menu'); -%>
+        <%- include('./partials/footer'); -%>
+
+        <script>
             function myFunctionVille() {
-              var input, filter, ul, li, a, i, txtValue;
+                var input, filter, ul, li, a, i, txtValue;
 
-              input = document.getElementById('lieux');
-              filter = input.value.toUpperCase();
-              liste=document.getElementById("liste");
-              elements = liste.getElementsByClassName('profil');
+                input = document.getElementById('lieux');
+                filter = input.value.toUpperCase();
+                liste=document.getElementById("liste");
+                elements = liste.getElementsByClassName('profil');
 
-              for (i = 0; i < elements.length; i++) {
-                Ville = elements[i].getElementsByTagName("li")[2];
+                for (i = 0; i < elements.length; i++) {
+                    Ville = elements[i].getElementsByTagName("li")[2];
 
-                txtVille = Ville.textContent || Ville.innerText;
+                    txtVille = Ville.textContent || Ville.innerText;
 
-                if (txtVille.toUpperCase().indexOf(filter) > -1  ) {
-                   elements[i].style.display="";
+                    if (txtVille.toUpperCase().indexOf(filter) > -1  ) {
+                        elements[i].style.display="";
+                    }
+                    else
+                    {
+                        elements[i].style.display="none";
+                    }
                 }
-                else
-                {
-                   elements[i].style.display="none";
-                }
-              }
             }
 
             function myFunctionNote(val) {
-                          var input, filter, ul, li, a, i, txtValue;
+                var input, filter, ul, li, a, i, txtValue;
 
 
-                          liste=document.getElementById("liste");
-                          elements = liste.getElementsByClassName('profil');
+                liste=document.getElementById("liste");
+                elements = liste.getElementsByClassName('profil');
 
-                          for (i = 0; i < elements.length; i++) {
+                for (i = 0; i < elements.length; i++) {
 
-                            Nota = elements[i].getElementsByTagName("li")[3];
-                            Note = Nota.getElementsByTagName("span")[0];
-                            txtNote= Note.textContent || Ville.innerText;
-                            if ( parseInt(txtNote) >= val ) {
-                               elements[i].style.display="";
-                            }
-                            else
-                            {
-                               elements[i].style.display="none";
-                            }
-                          }
-                        }
+                    Nota = elements[i].getElementsByTagName("li")[3];
+                    Note = Nota.getElementsByTagName("span")[0];
+                    txtNote= Note.textContent || Ville.innerText;
+                    if ( parseInt(txtNote) >= val ) {
+                        elements[i].style.display="";
+                    }
+                    else
+                    {
+                        elements[i].style.display="none";
+                    }
+                }
+            }
 
-                        function myFunction() {
-                                                  var input, filter, ul, li, a, i, txtValue;
+            function myFunction() {
+                var input, filter, ul, li, a, i, txtValue;
 
-                                                  input = document.getElementById('data');
-                                                  filter = input.value.toUpperCase();
-                                                  liste=document.getElementById("liste");
-                                                  elements = liste.getElementsByClassName('profil');
+                input = document.getElementById('data');
+                filter = input.value.toUpperCase();
+                liste=document.getElementById("liste");
+                elements = liste.getElementsByClassName('profil');
 
-                                                  for (i = 0; i < elements.length; i++) {
-                                                    Name = elements[i].getElementsByTagName("li")[0];
-                                                    Surname = elements[i].getElementsByTagName("li")[1];
-                                                    txtName = Name.textContent || Name.innerText;
-                                                    txtSurname = Surname.textContent || Surname.innerText;
-                                                    if (txtName.toUpperCase().indexOf(filter) > -1 || txtSurname.toUpperCase().indexOf(filter) > -1 ) {
-                                                       elements[i].style.display="";
-                                                    }
-                                                    else
-                                                    {
-                                                       elements[i].style.display="none";
-                                                    }
-                                                  }
-                                                }
+                for (i = 0; i < elements.length; i++) {
+                    Name = elements[i].getElementsByTagName("li")[0];
+                    Surname = elements[i].getElementsByTagName("li")[1];
+                    txtName = Name.textContent || Name.innerText;
+                    txtSurname = Surname.textContent || Surname.innerText;
+                    if (txtName.toUpperCase().indexOf(filter) > -1 || txtSurname.toUpperCase().indexOf(filter) > -1 ) {
+                        elements[i].style.display="";
+                    }
+                    else
+                    {
+                        elements[i].style.display="none";
+                    }
+                }
+            }
 
 
 
-            </script>
-        </body>
-    </html>
+        </script>
+    </body>
+</html>

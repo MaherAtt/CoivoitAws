@@ -1,5 +1,6 @@
 $(".menu_connexion").click(function(){
     $("#Modalconnexion").modal("show");
+    
 });
 $(".menu_inscription").click(function(){
     $("#Modalinscription").modal("show");

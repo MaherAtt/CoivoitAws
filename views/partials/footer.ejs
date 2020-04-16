@@ -1,136 +1,141 @@
 
 <!-- importe les codes javascript utilisés -->
-        <script src="javascripts/script.js" defer></script>
-        <script src="javascripts/inscription.js" defer></script>
-        <script src="javascripts/auto-complete.js"></script>
-        <script src="javascripts/profil.js"></script>
-        <script src="javascripts/register.js"></script>
-        <script src="javascripts/autocomplete.js"></script>
-        <script src="javascripts/messagerie.js"></script>
+<script src="javascripts/script.js" defer></script>
+<script src="javascripts/inscription.js" defer></script>
+<!--        <script src="javascripts/auto-complete.js"></script>-->
+<script src="javascripts/profil.js"></script>
+<script src="javascripts/register.js"></script>
+<script src="javascripts/autocomplete.js"></script>
+<script src="javascripts/messagerie.js"></script>
 <!--        <script src="javascripts/profil.js"></script>-->
 
 
-        <script src="javascripts/demande.js"></script>
-        <!--  Modal   connexion -->
-        <div class="modal fade" id="Modalconnexion" tabindex="-1" role="dialog" aria-labelledby="Modalconnexion"  aria-hidden="true" >
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3>Connexion</h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-
-                    </div>
-                    <form method="post" action="./login" >
-                    <div class="modal-body" >
-                        <div class="form-group row">
-                            <label for="email" class="col-sm-4 col-form-label">Email</label>
-                            <div class="col-sm-8">
-                                <input type="email" required="required" class="form-control" id="email" placeholder="Email" name="emailLog">
+<script src="javascripts/demande.js"></script>
 
 
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="mdp" class="col-sm-4 col-form-label">Mot de passe</label>
-                            <div class="col-sm-8">
-                                <input type="password" required="required" class="form-control" id="mdp" placeholder="*******" name="passLog">
-                            </div>
+<!--  Modal   connexion -->
+<div class="modal fade" id="Modalconnexion" tabindex="-1" role="dialog" aria-labelledby="Modalconnexion"  aria-hidden="true" >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Connexion</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
 
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" >Annuler</button>
-                        <button type="submit" class="btn btn-success">Valider</button>
-                    </div>
-                    </form>
-                </div>
             </div>
-        </div>
-        <!-- Fin Modal   connexion -->
+            <form method="post" action="./login" >
+                <div class="modal-body" >
+                    <div class="form-group row">
+                        <label for="email" class="col-sm-4 col-5 col-form-label">Email</label>
+                        <div class="col-sm-8 col">
+                            <input type="email" autofocus required="required" class="form-control " id="email" placeholder="Email" name="emailLog">
 
-        <!-- Modal inscription  -->
-        <div class="modal fade" id="Modalinscription" tabindex="-1" role="dialog" aria-labelledby="Modalinscription"  aria-hidden="true" >
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3>Inscription</h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
 
-                    </div>
-                    <form method="post" action="./register" >
-                    <div class="modal-body" >
-                        <div class="form-group row">
-                            <label for="prenom" class="col-sm-4 col-form-label" name="PrenomReg">Prénom</label>
-                            <div class="col-sm-8">
-                                <input type="text" required="required" class="form-control" id="prenom" placeholder="Jules" name="PrenomReg">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="nom" class="col-sm-4 col-form-label" name="NomReg">Nom</label>
-                            <div class="col-sm-8">
-                                <input type="text" required="required" class="form-control" id="nom" placeholder="Dupont" name="NomReg">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="email" class="col-sm-4 col-form-label">Email</label>
-                            <div class="col-sm-8">
-
-                                <input type="email" required="required" class="form-control" id="emailreg" placeholder="Email" name="EmailReg">
-
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="mdp" class="col-sm-4 col-form-label">Mot de passe</label>
-                            <div class="col-sm-4">
-                                <input type="password" required="required" class="form-control" id="mdp1" placeholder="*******" name="MdpReg">
-                            </div>
-                            <div class="col-sm-4">
-                                <input type="password" required="required" class="form-control" id="MdpReg2" placeholder="*******">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                              <label for="mdp" class="col-sm-4 col-form-label">Université</label>
-                              <div class="col-sm-4">
-                              <input type="text" required="required" class="form-control" id="mdp1" placeholder="" name="University">
-                              </div>
-
-                        </div>
-                         <div class="form-group row">
-                         <label for="adress" class="col-sm-4 col-form-label">Adresse</label>
-                         <input type="search" class="form-control input-lg" id="adr-depart-input" placeholder="Départ" name="adress">
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" >Annuler</button>
-                        <button type="submit"  class="btn btn-success" >Valider</button>
+                    <div class="form-group row">
+                        <label for="mdp" class="col-sm-4 col-5 col-form-label">Mot de passe</label>
+                        <div class="col-sm-8 col">
+                            <input type="password" required="required" class="form-control" id="mdp" placeholder="*******" name="passLog">
+                        </div>
+
                     </div>
-                    </form>
                 </div>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal" >Annuler</button>
+                    <button type="submit" class="btn btn-success">Valider</button>
+                </div>
+            </form>
         </div>
-        <!-- Fin Modal inscription  -->
+    </div>
+</div>
+<!-- Fin Modal   connexion -->
+
+<!-- Modal inscription  -->
+<div class="modal fade" id="Modalinscription" tabindex="-1" role="dialog" aria-labelledby="Modalinscription"  aria-hidden="true" >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Inscription</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+            <form method="post" action="./register" >
+                <div class="modal-body" >
+                    <div class="form-group row">
+                        <label for="prenom" class="col-sm-4 col-3 col-form-label" name="PrenomReg">Prénom</label>
+                        <div class="col-sm-8 col">
+                            <input type="text" required="required" class="form-control" id="prenom" placeholder="Jules" name="PrenomReg">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="nom" class="col-sm-4 col-3 col-form-label" name="NomReg">Nom</label>
+                        <div class="col-sm-8 col">
+                            <input type="text" required="required" class="form-control" id="nom" placeholder="Dupont" name="NomReg">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="email" class="col-sm-4 col-3 col-form-label">Email</label>
+                        <div class="col-sm-8 col">
+
+                            <input type="email" required="required" class="form-control" id="emailreg" placeholder="Email" name="EmailReg">
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="mdp" class="col-sm-4 col-3 col-form-label">Mot de passe</label>
+                        <div class="col-sm-4 col">
+                            <input type="password" required="required" class="form-control" id="mdp1" placeholder="*******" name="MdpReg">
+                        </div>
+                        <div class="col-sm-4 col">
+                            <input type="password" required="required" class="form-control" id="MdpReg2" placeholder="*******">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="mdp" class="col-sm-4 col-3 col-form-label">Université</label>
+                        <div class="col-sm-8 col">
+                            <input type="text" required="required" class="form-control" id="mdp1" placeholder="" name="University">
+                        </div>
+
+                    </div>
+                    <div class="form-group row">
+                        <label for="adress" class="col-sm-4 col-3 col-form-label">Adresse</label>
+                        <div class="col-sm-8 col">
+                            <input type="search" class="form-control " id="adr-depart-input" placeholder="Départ" name="adress">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal" >Annuler</button>
+                    <button type="submit"  class="btn btn-success" >Valider</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Fin Modal inscription  -->
 
 
 <script src="https://cdn.jsdelivr.net/npm/places.js@1.18.1/dist/cdn/placesInstantsearchWidget.min.js"></script>
+
 <script>
-(function() {
+    (function() {
         var searchBox = placesInstantsearchWidget({
-          appId: 'plKD0BHKH6A7',
-          apiKey: 'd73e81b8f89e712327f4c6daa086e67c',
-          container: document.querySelector('#adr-depart-input')
+            appId: 'plKD0BHKH6A7',
+            apiKey: 'd73e81b8f89e712327f4c6daa086e67c',
+            container: document.querySelector('#adr-depart-input')
         });
         var searchBox2 = placesInstantsearchWidget({
-          appId: 'plKD0BHKH6A7',
-          apiKey: 'd73e81b8f89e712327f4c6daa086e67c',
-          container: document.querySelector('#adr-dest-input')
+            appId: 'plKD0BHKH6A7',
+            apiKey: 'd73e81b8f89e712327f4c6daa086e67c',
+            container: document.querySelector('#adr-dest-input')
         });
         search.addWidget(searchBox);
         search.addWidget(searchBox2);
 
         search.start();
     })();
-   </script>
+</script>
