@@ -20,6 +20,7 @@
                     <div class="col-md-4 col-12">
 
                         <div class="list-group" id="list-tab" role="tablist" style="height: 500px; background-color: white">
+                            <a href="#" id="amis">Léa CLiquer pour Ouvrir la conversation</a>
                             <a style="pointer-events: none; cursor: default;" class="list-group-item list-group-item-action conversation" id="MyUsername" data-toggle="list" href="#<%= user %>" role="tab" aria-controls="home"><%= user %></a>
                             <% for(var i=0; i < users.length; i++) { %>
                             <a class="list-group-item list-group-item-action conversation" id="<%= users[i].Id %>" data-toggle="list" href="#<%= users[i].Id %>" role="tab" aria-controls="home"><%= users[i].Id %></a>
@@ -38,7 +39,8 @@
 </button>
 </div>
 -->
-                        <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-content animated fadeInRight" id="nav-tabContent">
+                            <button class="backbtn" id="btnBack" >&#8592;</button>
                             <!--  Détail conseration  -->
                             <div class="tab-pane fade show active afficheConversation" id="list-home" role="tabpanel" aria-labelledby="messages">
                                 <ul id="messages" >
@@ -69,6 +71,7 @@
 
         <script> 
             $(document).ready(function(){
+                
                 /*je colore l'icone msg pour dire que je suis sur cette page*/
                 $('#mySidebar .menu a:nth-child(n)').find('i').removeClass('change_page')
                 $('#mySidebar .menu a:nth-child(3)').find('i').addClass('change_page')
