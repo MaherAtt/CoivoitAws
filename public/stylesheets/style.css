@@ -7,7 +7,7 @@ header, .haut {
     border-bottom: 1pt solid #842929;
 }
 
-h1, h5 {
+h1, h5, .modal-header {
     color: #842929;
 }
 
@@ -19,14 +19,23 @@ h1, h5 {
 #inscription_connexion {
     /*  position: absolute;*/
     top: 5px;
+/*
     right: 5px;
     max-width: 300px;
+*/
     /* margin-righ: -5%;*/
 }
-#inscription_connexion a, #deconnexion p  {
+#inscription_connexion a, #deconnexion p, #bjr  {
     color: #842929;
     font-size: 20px;
 }
+
+#bjr {
+    position: relative;
+    top: -63px;
+    left: 0;
+}
+
 #inscription_connexion a:hover{
     color: #66748a;
     font-size: 20px;
@@ -130,6 +139,7 @@ h1, h5 {
     #mySidebar #ptmenu .closebtn {
         position: absolute;
         top: -75px;
+        left: -52px;
 
     }
 }
@@ -161,7 +171,7 @@ h1, h5 {
 
 
 .openbtn:hover {
-    background-color: #66748a;
+    background-color: #842929;
 }
 
 
@@ -271,12 +281,18 @@ height: 400px;
     #deconnexion {
         padding-top: 10px;
         position: absolute;
-        right: 0px;
+/*        right: 0px;*/
 
     }
 
-    #inscription_connexion p, #deconnexion p {
+    #inscription_connexion p, #deconnexion p, #bjr {
         font-size: 11px;
+    }
+    
+    #bjr {
+        position: relative;
+        top: -63px;
+        left: -31px;
     }
 
 }
@@ -291,7 +307,8 @@ height: 400px;
 /* CSS files add styling rules to your content */
 
 body {
-    font-family: helvetica, arial, sans-serif;
+    font-family: 'Comic Neue', cursive;
+/*    font-family: helvetica, arial, sans-serif;*/
     margin: 0px 0px 0px 0px;
     padding: 0px 0px 0px 0px;
     background-color: #ededed;
@@ -303,9 +320,8 @@ body {
 .change_page, .sidebar .change_page {
     color: black;
 }
+
 /*
-
-
 .menu {
     position: relative;
     background-color: #99ffcc;
@@ -397,7 +413,7 @@ body {
     overflow-x: hidden;
     overflow-y: auto;
 }
-#profil .form-control[readonly] , #profil .progress-bar {
+#profil .form-control, #profil .progress-bar {
     background-color: #842929;
 }
 
@@ -409,9 +425,9 @@ body {
     header img {
         max-width: 30%;
         position: absolute;
-        top: 25px;
-        left: 35%;
-        right: 35%;
+        top: 12px;
+        left: 40%;
+        right: 30%;
     }
     /* Réduire la taille du menu sur les smartphones */
     .sidebar {
@@ -458,8 +474,6 @@ body {
 
     }
 
-
-
 }
 
 @media screen and (min-width: 450px) {
@@ -501,8 +515,8 @@ body {
     header img {
         max-width: 240px;
         position: absolute;
-        top: -50px;
-        left: 40%;
+        top: -60px;
+        left: 45%;
     }
 }
 
@@ -519,6 +533,10 @@ body {
     top: -18px;
     left: -10px;
 
+}
+    
+#profil .commentaire {
+    font-family: 'Comic Neue', cursive;
 }
 
 /* fin profil */
@@ -778,3 +796,25 @@ body {
 
 
 /*Fin Proposer */
+
+
+
+/*Modal inscription*/
+
+@media screen and (max-width:450px) {
+    .modal-dialog {
+        margin: 0px;
+        padding: 0px 30px 0px 15px;
+    }
+}
+
+.btn-dark {
+    color: #fff;
+    background-color: #4a43419c !important;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #227d35 !important;
+}
+/*Modal inscription*/

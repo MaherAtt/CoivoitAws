@@ -64,7 +64,7 @@
                     <div class="col-md-4 col-4 align-self-center"> 
                         <img class="rounded mx-auto d-block img-fluid rounded-circle border_img" alt="photo_profil" src="img/img-profil.jpg"/>
                     </div>
-                    <div class="col-md-8 col-8 ">
+                    <div class="col-md-8 col-8" id="voir_profil" value="id_personne">
                         <ul>
                             <li class="">Nom : <%= profils[i].Nom  %> </li>
                             <li class="">Prénom : <%= profils[i].Prenom  %></li>
@@ -82,6 +82,10 @@
 
 
         <script> 
+            $('#voir_profil').click(function(){
+                window.location = "./voir_profil"
+                
+            })
             $(document).ready(function(){
                 /*je colore l'icone search pour dire que je suis sur cette page*/
                 $('#mySidebar .menu a:nth-child(n)').find('i').removeClass('change_page')
