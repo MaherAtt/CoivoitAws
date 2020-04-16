@@ -44,7 +44,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"  >Note supérieure à :</span>
                                         </div>
-                                        <div class="rating">
+                                        <div class="rating col">
                                             <a onclick="myFunctionNote(5)" href="#" title="Donner 5 étoiles">☆</a>
                                             <a onclick="myFunctionNote(4)" href="#" title="Donner 4 étoiles">☆</a>
                                             <a onclick="myFunctionNote(3)" href="#" title="Donner 3 étoiles">☆</a>
@@ -60,11 +60,11 @@
             </div>
             <div id="liste" class="d-flex justify-content-center row">
                 <% for(var i=0; i < profils.length; i++) { %>
-                <div class="userCard profil col-md-3 row  card  " id="profils" >
+                <div class="userCard profil col-md-3  col-sm-5 row  card  " id="profils" >
                     <div class="col-md-4 col-4 align-self-center"> 
                         <img class="rounded mx-auto d-block img-fluid rounded-circle border_img" alt="photo_profil" src="img/img-profil.jpg"/>
                     </div>
-                    <div class="col-md-8 col-8" id="voir_profil" value="id_personne">
+                    <div class="col-md-8 col-8 align-self-center" id="voir_profil" value="id_personne">
                         <ul>
                             <li class="">Nom : <%= profils[i].Nom  %> </li>
                             <li class="">Prénom : <%= profils[i].Prenom  %></li>

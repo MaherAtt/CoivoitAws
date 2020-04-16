@@ -7,7 +7,7 @@
     padding-bottom: 60px;
     padding-top: 60px;
     */
-    font-size: 60px;
+    font-size: 40px;
     padding-bottom: 15px;
     padding-top: 15px;
 }
@@ -123,6 +123,7 @@ border-left: 5px solid black;
 
 #container1 .espace {
     padding: 15px;
+    margin-bottom: 0px;
 }
 
 @media screen and (max-width: 450px) {

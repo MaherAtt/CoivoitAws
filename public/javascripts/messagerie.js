@@ -1,6 +1,38 @@
 
 $(document).ready(function(){
     //var pos_contenu_conversation = 0;;
+    
+    $('#amis').click(function(){
+                    if($(window).width() < 451) {
+                        $(".list-group").hide();
+                        $("#nav-tabContent").show()
+                        
+                    }
+                })
+                $("#btnBack").click(function(){
+                    if($(window).width() < 451) {
+                        $('#nav-tabContent').removeClass('fadeInRight')
+                        $('#nav-tabContent').addClass('fadeOutRight').delay(2000).hide()
+
+    //                    $("#nav-tabContent").hide();
+                        $(".list-group").show();
+                        $('#nav-tabContent').addClass('fadeInRight')
+                        $('#nav-tabContent').removeClass('fadeOutRight')
+                    }
+                })
+                $(window).on('resize', function() {
+                    if($(window).width() > 450) {
+                        $(".list-group").show();
+                        $("#nav-tabContent").show()
+                        $('#nav-tabContent').removeClass('fadeInRight')
+                        $('#nav-tabContent').removeClass('fadeOutRight')
+                        $('#nav-tabContent').addClass('fadeInRight')
+                    }
+                    else {
+                         $(".list-group").show();
+                        $("#nav-tabContent").hide();
+                    }
+                })
 
     let socket = io();
 

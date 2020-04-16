@@ -499,8 +499,8 @@ body {
     header img {
         max-width: 160px;
         position: absolute;
-        top: -8px;
-        left: 10%;
+        top: -46px;
+        left: 38%;
     }
 }
 
@@ -574,6 +574,7 @@ body {
     height: 400px;
     overflow: auto;
     font-size: 25px;
+    padding: 0px;
 }
 #messagerie #messages .id_moi{
     /*  background-color: orange;*/
@@ -582,10 +583,40 @@ body {
 
 @media screen and (max-width: 450px) {
     #messagerie #nav-tabContent {
-        background: red;
-        margin-top: 60px;
+        border: 1px solid #842929;
+/*        margin-top: 60px;*/
+        display: none;
+        
     }
+    
+    #messagerie #messages {
+    height: 340px;
+    }
+    
+    #messagerie #btnBack {
+        position: fixed;
+        top: -45px;
+        background-color: transparent;
+        border: none;
+        color: #842929;
+    }
+    
 
+}
+
+@media screen and (min-width: 450px) {
+     #messagerie #btnBack {
+         display: none;
+    }
+    
+    #messagerie #nav-tabContent {
+        display: block;
+    }
+    
+     #messagerie .list-group {
+         display: flex;
+    }
+    
 }
 
 /* fin Messagerie */
@@ -635,7 +666,7 @@ body {
 }
 
 #recherche_profil #liste .profil {
-    height: 150px;
+/*    height: 150px;*/
     margin: 15px;
     border-radius: 2%;
 }
@@ -689,9 +720,11 @@ body {
         max-width: 30%;
     }
 
+/*
     #recherche_profil #liste .profil {
-        height: 250px;
+        height: 100px;
     }
+*/
 
 }
 
@@ -748,7 +781,7 @@ body {
         margin: 0px;
     }
     #recherche_profil .input-group-lg span {
-        font-size: 15px;
+        font-size: 13px;
     }
     
     .rating a {
