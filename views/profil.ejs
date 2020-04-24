@@ -43,33 +43,35 @@
                         </div>
                         <div id="infos" class=" col-md-8 col-sm-12">
                             <div class="list-group">
-                                <form>
+                                <form action="./edit" method="post">
                                     <div class="form-group row">
                                         <label for="prenom" class="col-sm-3 col-4 col-form-label">Prénom</label>
                                         <div class="col-sm-9 col">
-                                            <input type="text"  class="form-control " id="prenom" value="<%= prenom %>" readonly>
+                                            <input type="text"  class="form-control " name="prenom" id="prenom" value="<%= prenom %>" readonly >
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="nom" class="col-sm-3 col-4 col-form-label">Nom</label>
                                         <div class="col-sm-9 col">
-                                            <input type="text"  class="form-control " id="nom" value="<%= nom %>" readonly>
+                                            <input type="text"  class="form-control " name ="nom" id="nom" value="<%= nom %>" readonly >
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="email" class="col-sm-3 col-4 col-form-label">Email </label>
                                         <div class="col-sm-9 col input-group mb-2">
-                                            <input type="email"  class="form-control " id="email" value="<%= useremail %>" readonly>
+                                            <input type="email"  class="form-control " name="email" id="email" value="<%= useremail %>" readonly
+                                            >
                                         </div>
                                     </div>
                                      <div class="form-group row">
                                         <label for="email" class="col-sm-3 col-4 col-form-label">Adresse </label>
                                         <div class="col-sm-9 col input-group mb-2">
-                                            <input type="text"  class="form-control " id="adresse" value="Adresse" >
+                            <input type="search" class="form-control " id="adr-depart-input" placeholder="<%= adrPers %>" name="adress">
                                         </div>
                                     </div>
                                     <div class="text-center my-4">
-                                        <button class="btn btn-info btn-sm" type="submit">Modifier</button>
+                                        <%if (canEdit==true) {%> <button class="btn btn-info btn-sm" type="submit">Modifier</button> <%}%>
+
                                     </div>
 
 
@@ -87,7 +89,7 @@
                             <p class="col-sm-5 col-7">Ponctualité </p>
                             <div class="col-sm-7 col">
                                 <div class="progress ">
-                                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" ></div>
+                                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <%= Ponctu %>%" aria-valuenow="<%= Ponctu %>" aria-valuemin="0" aria-valuemax="5" ></div>
                                 </div>
                             </div>
                         </div>
@@ -95,7 +97,7 @@
                             <p class="col-sm-5 col-7">Confiance </p>
                             <div class="col-sm-7 col">
                                 <div class="progress ">
-                                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <%= Confiance %>%" aria-valuenow="<%= Confiance %>" aria-valuemin="0" aria-valuemax="5"></div>
                                 </div>
                             </div>
                         </div>
@@ -131,6 +133,7 @@
                                             <%if (canEdit==false) { %>
                                             <form action="../Poster" method="post">
                                                 <input type="hidden" name="profilOf" value="<%= useremail %> ">
+                                                Note Génerale :
                                                 <label>
                                                     <input type="radio" name="stars" value="1" />
                                                     <span class="icon">★</span>
@@ -161,6 +164,68 @@
                                                     <span class="icon">★</span>
                                                     <span class="icon">★</span>
                                                 </label> <br/>
+                                                Note Confiance :
+                                                                                                <label>
+                                                                                                    <input type="radio" name="confiance" value="1" />
+                                                                                                    <span class="icon">★</span>
+                                                                                                </label>
+                                                                                                <label>
+                                                                                                    <input type="radio" name="confiance" value="2" />
+                                                                                                    <span class="icon">★</span>
+                                                                                                    <span class="icon">★</span>
+                                                                                                </label>
+                                                                                                <label>
+                                                                                                    <input type="radio" name="confiance" value="3" />
+                                                                                                    <span class="icon">★</span>
+                                                                                                    <span class="icon">★</span>
+                                                                                                    <span class="icon">★</span>
+                                                                                                </label>
+                                                                                                <label>
+                                                                                                    <input type="radio" name="confiance" value="4" />
+                                                                                                    <span class="icon">★</span>
+                                                                                                    <span class="icon">★</span>
+                                                                                                    <span class="icon">★</span>
+                                                                                                    <span class="icon">★</span>
+                                                                                                </label>
+                                                                                                <label>
+                                                                                                    <input type="radio" name="confiance" value="5" />
+                                                                                                    <span class="icon">★</span>
+                                                                                                    <span class="icon">★</span>
+                                                                                                    <span class="icon">★</span>
+                                                                                                    <span class="icon">★</span>
+                                                                                                    <span class="icon">★</span>
+                                                                                                </label> <br/>
+             Note Ponctualité :
+                                                             <label>
+                                                                 <input type="radio" name="Poctu" value="1" />
+                                                                 <span class="icon">★</span>
+                                                             </label>
+                                                             <label>
+                                                                 <input type="radio" name="Ponctu" value="2" />
+                                                                 <span class="icon">★</span>
+                                                                 <span class="icon">★</span>
+                                                             </label>
+                                                             <label>
+                                                                 <input type="radio" name="Ponctu" value="3" />
+                                                                 <span class="icon">★</span>
+                                                                 <span class="icon">★</span>
+                                                                 <span class="icon">★</span>
+                                                             </label>
+                                                             <label>
+                                                                 <input type="radio" name="Ponctu" value="4" />
+                                                                 <span class="icon">★</span>
+                                                                 <span class="icon">★</span>
+                                                                 <span class="icon">★</span>
+                                                                 <span class="icon">★</span>
+                                                             </label>
+                                                             <label>
+                                                                 <input type="radio" name="Ponctu" value="5" />
+                                                                 <span class="icon">★</span>
+                                                                 <span class="icon">★</span>
+                                                                 <span class="icon">★</span>
+                                                                 <span class="icon">★</span>
+                                                                 <span class="icon">★</span>
+                                                             </label> <br/>
                                                 <label for="quickReplyFormComment">Votre Avis :</label>
                                                 <textarea class="form-control" id="quickReplyFormComment" rows="5" name="commentaire"></textarea>
                                                 <div class="text-center my-4">
@@ -179,7 +244,7 @@
                                                      src='../Pictures/<%= avis[i].photo.split("@")[0] %>.png' onerror="this.onerror=null; this.src='../img/img-profil.jpg'">
                                                 <div class="media-body text-center text-md-left ml-md-3 ml-0">
                                                     <p class="font-weight-bold my-0">
-                                                        <%= avis[i].NomEmm + " " + avis[i].PrenomEmm %> -- [ Note Attribué : <%= avis[i].Note %> ]
+                                                        <%= avis[i].NomEmm + " " + avis[i].PrenomEmm %> -- [ Note Attribué : Génerale: <%= avis[i].Note %> Confiance: <%= avis[i].Confiance %> Ponctualité: <%= avis[i].Ponctualite %> ]
                                                         <a href="" class="pull-right ml-1">
                                                             <i class="fa fa-reply"></i>
                                                         </a>
@@ -232,6 +297,26 @@
         <script src="javascripts/profil.js"></script>
         <%- include('./partials/footerProfil'); -%>
 
+        <script src="https://cdn.jsdelivr.net/npm/places.js@1.18.1/dist/cdn/placesInstantsearchWidget.min.js"></script>
+
+        <script>
+            (function() {
+                var searchBox = placesInstantsearchWidget({
+                    appId: 'plKD0BHKH6A7',
+                    apiKey: 'd73e81b8f89e712327f4c6daa086e67c',
+                    container: document.querySelector('#adr-depart-input')
+                });
+                var searchBox2 = placesInstantsearchWidget({
+                    appId: 'plKD0BHKH6A7',
+                    apiKey: 'd73e81b8f89e712327f4c6daa086e67c',
+                    container: document.querySelector('#adr-dest-input')
+                });
+                search.addWidget(searchBox);
+                search.addWidget(searchBox2);
+
+                search.start();
+            })();
+        </script>
 
 
     </body>

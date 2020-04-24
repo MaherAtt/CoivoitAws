@@ -8,11 +8,12 @@ router.get('/', function(req, res, next) {
 
         app.connection.query('Select * from profils',function(err,result){
 
-            res.render('recherche_profil', {logged: true,profils:result});
+            res.render('recherche_profil', {logged: true,profils:result,User:req.session.prenom});
         });
 
     }
     else {
+        req.session.erreur="Vous Devez étre connecté pour acceder a cette fonctionalité";
         res.redirect('./');
     }
 });

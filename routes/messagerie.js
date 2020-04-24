@@ -2,19 +2,32 @@ var express = require('express');
 var fs=require('fs');
 var router = express.Router();
 var app=require('../app');
+var users=[];
+
 router.get('/', function(req, res, next) {
 
     if(req.session.Username) {
         data = [req.session.Username, req.session.Username];
-        app.connection.query('Select IdEmmeteur as Id from Messages where  IdRecepteur=? UNION Select IdRecepteur as Id from Messages where  IdEmmeteur=? ', data, function (err, result) {
+        app.connection.query('Select P1.Username as Id,P1.Nom,P1.Prenom from Messages,Profils P1 where  (IdEmmeteur=P1.Username and IdRecepteur=?) UNION Select P2.Username as Id,P2.Nom,P2.Prenom as Id from Profils P2,Messages where  (IdRecepteur=P2.Username and IdEmmeteur=?)  ', data, function (err, result) {
 
-            res.render('messagerie', {logged:true,user: req.session.Username, users: result});
+            res.render('messagerie', {logged:true,user: req.session.Username, users: result,User:req.session.prenom});
 
         })
 
-
-        res.io.on('connection', function (client) {
-
+        res.io.once('connection', function (client) {
+            var found=false;
+            for(i=0;i<users.length;i++)
+            {
+                if(users[i].userName==req.session.Username)
+                {
+                    found=true;
+                }
+            }
+            if(found==false) {
+            users.push({
+                id : client.id,
+                userName : req.session.Username
+            });}
             /* Lit fichier .jon contenant une conversation. Renvoie le contenu si tout se passe bien*/
             client.on('afficher conversation', function (datak) {
 
@@ -34,9 +47,24 @@ router.get('/', function(req, res, next) {
 
 
             /* Lit le message l'affiche et le sauvegarde dans un fichier json */
-            client.on('new message', function (data) {
+            client.on('actu message', function (data) {
+                console.log("Exec; Message"+data);
+                console.log(users);
+                var dest;
+                var emm;
+                for(i=0;i<users.length;i++)
+                {
 
-                res.io.emit('new message', data);
+                    if(users[i].userName==data.Destinataire)
+                    {
+                        dest=users[i].id;
+                    }
+
+                }
+                console.log(dest);
+                //client.emit('new message', data);
+                client.to(dest).emit('new message', data);
+
                 data = [data.Emmeteur, data.Destinataire, data.Message, 'GETDATE();'];
                 app.connection.query('Insert into messages set IdEmmeteur=?,IdRecepteur=?,Message=?,DateMsg=? ', data, function (err, result) {
 
@@ -56,6 +84,7 @@ router.get('/', function(req, res, next) {
     }
     else
     {
+        req.session.erreur="Vous Devez étre connecté pour acceder a cette fonctionalité";
         res.redirect('./');
     }
 });

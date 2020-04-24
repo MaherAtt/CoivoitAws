@@ -6,15 +6,13 @@
     <body>
         <% if(logged==true){ %>
         <%- include('./partials/headerLogged'); -%>
+        <div id="corps text-center">
+         <p class="offset-1 col-8 col-md-8 offset-md-0" id="bjr">Bonjour <%= User %></p>
         <% } else{ %>
         <%- include('./partials/header'); -%>
         <% } %>
 
-        <script>
-            <% if (typeof error!='undefined') { %>
-            alert('<%= error %>');
-                  <% } %>
-        </script>
+
 
 
 
@@ -80,7 +78,40 @@
             </div>
             <!-- -->
         </div>
-        
+
+        <!-- Button trigger modal-->
+
+
+        <!--Modal: modalConfirmDelete-->
+        <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+            <!--Content-->
+            <div class="modal-content text-center">
+              <!--Header-->
+              <div class="modal-header d-flex justify-content-center">
+                <p class="heading"><%if ( typeof MessageErr != 'undefined' ) {%> <%= MessageErr %> <%}%></p>
+              </div>
+
+              <!--Body-->
+              <div class="modal-body">
+
+                <i class="fas fa-times fa-4x animated rotateIn"></i>
+
+              </div>
+
+              <!--Footer-->
+              <div class="modal-footer flex-center">
+                <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">Ok</a>
+              </div>
+            </div>
+            <!--/.Content-->
+          </div>
+        </div>
+        <!--Modal: modalConfirmDelete-->
+         <script>
+               <%if ( typeof MessageErr != 'undefined' ) {%> $('#modalConfirmDelete').modal(); <%}%>
+                </script>
         <script> 
             $(document).ready(function(){
                 /*je colore l'icone accueil pour dire que je suis sur cette page*/

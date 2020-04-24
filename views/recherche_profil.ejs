@@ -6,6 +6,8 @@
     <body>
         <% if(logged==true){ %>
         <%- include('./partials/headerLogged'); -%>
+        <div id="corps text-center">
+                 <p class="offset-1 col-8 col-md-8 offset-md-0" id="bjr">Bonjour <%= User %></p>
         <% } else{ %>
         <%- include('./partials/header'); -%>
         <% } %>
@@ -64,7 +66,7 @@
                     <div class="col-md-4 col-4 align-self-center"> 
                         <img class="rounded mx-auto d-block img-fluid rounded-circle border_img" alt="photo_profil" src="img/img-profil.jpg"/>
                     </div>
-                    <div class="col-md-8 col-8 align-self-center" id="voir_profil" value="id_personne">
+                    <div class="col-md-8 col-8 align-self-center" id="voir_profil" onClick="redirPro('<%= profils[i].Nom  %>_<%= profils[i].Prenom  %>')">
                         <ul>
                             <li class="">Nom : <%= profils[i].Nom  %> </li>
                             <li class="">Prénom : <%= profils[i].Prenom  %></li>
@@ -82,10 +84,7 @@
 
 
         <script> 
-            $('#voir_profil').click(function(){
-                window.location = "./voir_profil"
-                
-            })
+
             $(document).ready(function(){
                 /*je colore l'icone search pour dire que je suis sur cette page*/
                 $('#mySidebar .menu a:nth-child(n)').find('i').removeClass('change_page')
@@ -99,6 +98,11 @@
         <%- include('./partials/footer'); -%>
 
         <script>
+            function redirPro(data)
+            {
+              window.location.href = "./Profil/"+data;
+            }
+
             function myFunctionVille() {
                 var input, filter, ul, li, a, i, txtValue;
 

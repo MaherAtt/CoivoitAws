@@ -9,9 +9,11 @@ var NodeGeocoder = require('node-geocoder');
 /* GET home page. */
 router.get('/', function(req, res, next) {
     if(req.session.Username)
-    res.render('proposer',{logged:true});
-    else
-    res.redirect('./');
+    res.render('proposer',{logged:true,User:req.session.prenom,err:req.session.erreur});
+    else {
+        req.session.erreur="Vous Devez étre connecté pour acceder a cette fonctionalité";
+        res.redirect('./');
+    }
 });
 
 router.post('/', function(req, res, next) {
@@ -41,14 +43,21 @@ router.post('/', function(req, res, next) {
             var dateStr2= moment(dateDep, 'DD MMM YYYY HH:mm').add(dureeTrajet,'h').format('YYYY-MM-DD HH:mm:ss');
             var data=['NULL',req.session.Username,adrDepFinal,adrDestFinal,dateStr,dateStr2,4,prix,resDep[0].latitude,resDep[0].longitude,resDes[0].latitude,resDes[0].longitude,details];
             app.connection.query('INSERT INTO trajets SET IdTrajet=?, IdChauffeur =?,AdresseDep=?, AdresseArr=?,DateDep=?,DateArr=?, NbPlaces=?, Prix=?, latitudeDep=?, longitudeDep=?, latitudeArr=?, longitudeArr=?,Commentaire=?',data,function(err,result){
-                console.log(err);
+                if( typeof result === 'undefined')
+                {
+                    req.session.erreur="L'ajout du trajet a échoué veuillez réessayer";
+                    res.redirect('./proposer');
+                } else {
+                    req.session.erreur="Votre trajet a été ajouté vous pouvez dés a présent commencer a gérer les demandes";
+                    res.redirect('./proposer');
+                }
 
             })
         })
     })
 
 
-    res.redirect('./proposer');
+
 
 
 

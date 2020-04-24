@@ -60,9 +60,16 @@ $(document).ready(function(){
             Destinataire: $('.active.conversation').text(),
             Message : $('#Message').val()
         };
+        var user= $('#MyUsername').text();
+        if(data.Emmeteur==user){
+            $('#messages').append('<li class="id_moi d-flex justify-content-end"><p class=" badge badge-info"> ' + XSSPatcher(data.Message) + '</p></li>');
 
-
-        socket.emit('new message', data);
+        }else {
+            if(data.Destinataire==user) {
+                $('#messages').append('<li  class=" d-flex justify-content-start"><p class=" badge badge-light">     ' + XSSPatcher(data.Message) + '</p></li>');
+            }
+        }
+        socket.emit('actu message', data);
 
     });
 
@@ -85,9 +92,13 @@ $(document).ready(function(){
     }
 
     /* j'affiche le message dans une balise <li> elle a des caractéristiques différentes en fonction de l'id */
+    socket.on('actu message', function(data){
+
+
+    });
+
     socket.on('new message', function(data){
         var user= $('#MyUsername').text();
-        console.log("Sent By:"+data.Emmeteur+" "+data.Destinataire+" "+user);
         if(data.Emmeteur==user){
             $('#messages').append('<li class="id_moi d-flex justify-content-end"><p class=" badge badge-info"> ' + XSSPatcher(data.Message) + '</p></li>');
 

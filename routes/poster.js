@@ -4,7 +4,7 @@ var router = express.Router();
 var app=require('../app');
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('proposer');
+    res.render('proposer',{User:req.session.prenom});
 });
 
 router.post('/', function(req, res, next) {
@@ -13,8 +13,8 @@ router.post('/', function(req, res, next) {
     var profOf=req.body.profilOf.replace(" ",'');
 
 
-    var data=[req.session.Username,profOf,0,req.body.commentaire,req.body.stars, new Date()];
-    app.connection.query('INSERT INTO avis SET IdEmmeteur =?,IdRecepteur=?, Sens=?,Commentaire=?, Note=?,DateAvis=?',data,function(err,result){
+    var data=[req.session.Username,profOf,0,req.body.commentaire,req.body.stars, new Date(),req.body.Ponctu,req.body.confiance];
+    app.connection.query('INSERT INTO avis SET IdEmmeteur =?,IdRecepteur=?, Sens=?,Commentaire=?, Note=?,DateAvis=?,Ponctualite=?,Confiance=?',data,function(err,result){
         console.log(err);
     })
     sess=req.session;

@@ -6,6 +6,8 @@
     <body>
         <% if(logged==true){ %>
         <%- include('./partials/headerLogged'); -%>
+        <div id="corps text-center">
+                 <p class="offset-1 col-8 col-md-8 offset-md-0" id="bjr">Bonjour <%= User %></p>
         <% } else{ %>
         <%- include('./partials/header'); -%>
         <% } %>
@@ -61,7 +63,7 @@
 
         <!-- les Trajets recherchés,  -->
         <div id="trajets_recherche" class="row d-flex justify-content-center">
-            <input type="hidden" value="<%= user %>"/>
+            <input type="hidden" value="<%= User %>"/>
             <% for(var i=0; i < trajecto.length; i++) { %>
             <div class="col-md-7">
                 <div class="container shadow-lg p-3 mb-5 rounded" id="container2" style=" margin-top: 30px;" >
@@ -102,7 +104,7 @@
                                 </div>
                                 <div class="col-lg-4 col-md-5 col-sm-6 col-xs-6">
                                     <div class="short-div" id="trajet-nom-prenom">
-                                        <a href="./Profil/<%= trajecto[i].IdChauffeur %>"><%= trajecto[i].NomChauffeur %> <%= trajecto[i].PrenomChauffeur %> </a><br>  
+                                        <a href="./Profil/<%= trajecto[i].IdChauffeur %>"><%= trajecto[i].NomChauffeur %> <%= trajecto[i].PrenomChauffeur %> </a><br>
                                         <img src="img/star.png" id="trajet-star" alt="img-star" height="10" width="10" />5
                                     </div>
                                 </div>
@@ -122,10 +124,10 @@
                             <p>Contacter  &nbsp;</p><a href="" style="display: block;"><%= trajecto[i].IdChauffeur %></a>
                         </div>
                         <div class="row" style="margin-bottom: 10px;">
-                            <p>Golf</p>
+
                         </div>
                         <div class="row">
-                            <button class="btn btn-success btn-lg" style="margin: 0 auto;" onclick="reserveTrajet('<%= trajecto[i].IdTrajet %>','<%= trajecto[i].IdChauffeur %>','<%= user %>')">Réserver </button>
+                            <button class="btn btn-success btn-lg" style="margin: 0 auto;" onclick="reserveTrajet('<%= trajecto[i].IdTrajet %>')">Réserver </button>
                         </div>
                     </div>
                 </div>
@@ -147,12 +149,8 @@
 
                     <form action="./Reserver" method="post">
                         <div class="modal-body">
-                            <label for="Emet" class="col-sm-4 col-form-label">IdDemandeur</label>
-                            <input id="Emet"  value="" name="Emmeteur" readonly>
                             <label for="Trajet" class="col-sm-4 col-form-label">IdTrajet</label>
                             <input id="Traj"  value="" name="Trajet" readonly>
-                            <label for="Chauff" class="col-sm-4 col-form-label">IdChauffeur</label>
-                            <input id="Chauff"  value="" name="Chauffeur" readonly>
                             <label for="Msg" class="col-sm-4 col-form-label">Message</label>
                             <input type="text" id="Msg"  value="" name="Message" >
 
@@ -166,6 +164,33 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                          aria-hidden="true">
+                          <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+                            <!--Content-->
+                            <div class="modal-content text-center">
+                              <!--Header-->
+                              <div class="modal-header d-flex justify-content-center">
+                              </div>
+
+                              <!--Body-->
+                              <div class="modal-body">
+
+                                                       <p><%if ( typeof msg != 'undefined' ) {%> <%= msg %> <%}%></p>
+
+
+                              </div>
+
+                              <!--Footer-->
+                              <div class="modal-footer flex-center">
+                                <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">Ok</a>
+                              </div>
+                            </div>
+                            <!--/.Content-->
+                          </div>
+                        </div>
+                        <!--Modal: modalConfirmDelete-->
 
 
         <!-- Affichage du calendrier de la date et l'heure-->
@@ -238,10 +263,10 @@
 
 
             //enregistrer la demande de reservation d'un trajet
-            function reserveTrajet(trajet,chauffeur,demandeur){
-                $("#Emet").val(demandeur);
+            function reserveTrajet(trajet){
+
                 $("#Traj").val(trajet);
-                $("#Chauff").val(chauffeur);
+
                 $("#exampleModalCenter").modal('toggle');
             }
 
@@ -262,7 +287,9 @@
 
         </script>
 
-
+        <script>
+         <%if ( typeof msg != 'undefined' ) {%> $('#modalConfirmDelete').modal(); <%}%>
+        </script>
         <script> 
             $(document).ready(function(){
                 /*je colore l'icone rechercher pour dire que je suis sur cette page*/

@@ -9,8 +9,8 @@ var NodeGeocoder = require('node-geocoder');
 router.get('/', function(req, res, next) {
     var isLogged=true;
     if(!req.session.Username) isLogged=false;
-
-    res.render('rechercher',{logged:isLogged,trajecto:[],user:'Haja'});
+    var message;
+    res.render('rechercher',{logged:isLogged,trajecto:[],User:'',msg:message});
 });
 
 router.post('/', async (req, res) => {
@@ -34,32 +34,40 @@ router.post('/', async (req, res) => {
             geocoder.geocode(adrDep,( err, userDep ) => {
                 geocoder.geocode(adrDest,( err, userDest ) => {
                     app.connection.query('Select t.*,p.Nom as NomChauffeur,p.Prenom as PrenomChauffeur,p.Note as Note from trajets t,profils p where t.IdChauffeur=p.Username',( err, result ) => {
-                        var tabResultat=[];
-                        for(i=0;i<result.length;i++) {
 
-                    var distanceDest=getDistance(userDest[0].latitude,userDest[0].longitude,result[i].latitudeArr,result[i].longitudeArr);
-                    var distanceTrajet=getDistance(result[i].latitudeArr,result[i].longitudeArr,result[i].latitudeDep,result[i].longitudeDep);
-                    var distanceDep=getDistance(result[i].latitudeDep,result[i].longitudeDep,userDep[0].latitude,userDep[0].longitude);
-                    var dureeTrajet=distanceTrajet/20;
-                    console.log("User :" +userDep[0].latitude+" "+ userDep[0].longitude);
-                    console.log("D :" +result[i].latitudeDep+" "+ result[i].longitudeDep);
-                    var dureeRejoindreDep=distanceDep/2;
-                    moment.locale('fr');
-                    var dateStr = moment(result[i].DateDep, 'DD MMM YYYY HH:mm');
-                    dateStr.add(dureeTrajet+dureeRejoindreDep,'h');
-                    var dateStr2= moment(dateDep, 'DD MMM YYYY HH:mm');
-                    var Jour1=dateStr.format('DD MMM YYYY');
-                    var Jour2=dateStr2.format('DD MMM YYYY');
-
-                    if(distanceDest<2 && dateStr.isBefore(dateStr2) && Jour1==Jour2)
-                    {
-                        tabResultat.push(result[i]);
-                    }
-
+                        if(typeof result === 'undefined' || result.length==0) {
+                            res.render('rechercher',{logged:isLogged,trajecto:[],user:'',msg:"Aucun trajet ne correspond a votre recherche"});
                         }
-                        console.log(tabResultat);
-                    res.render('rechercher', {logged: true, trajecto: tabResultat,user:sess.Username});
-                });
+                        else {
+
+
+                            var tabResultat = [];
+                            for (i = 0; i < result.length; i++) {
+
+                                var distanceDest = getDistance(userDest[0].latitude, userDest[0].longitude, result[i].latitudeArr, result[i].longitudeArr);
+                                var distanceTrajet = getDistance(result[i].latitudeArr, result[i].longitudeArr, result[i].latitudeDep, result[i].longitudeDep);
+                                var distanceDep = getDistance(result[i].latitudeDep, result[i].longitudeDep, userDep[0].latitude, userDep[0].longitude);
+                                var dureeTrajet = distanceTrajet / 20;
+                                console.log("User :" + userDep[0].latitude + " " + userDep[0].longitude);
+                                console.log("D :" + result[i].latitudeDep + " " + result[i].longitudeDep);
+                                var dureeRejoindreDep = distanceDep / 2;
+                                moment.locale('fr');
+                                var dateStr = moment(result[i].DateDep, 'DD MMM YYYY HH:mm');
+                                dateStr.add(dureeTrajet + dureeRejoindreDep, 'h');
+                                var dateStr2 = moment(dateDep, 'DD MMM YYYY HH:mm');
+                                var Jour1 = dateStr.format('DD MMM YYYY');
+                                var Jour2 = dateStr2.format('DD MMM YYYY');
+
+                                if (distanceDest < 2 && dateStr.isBefore(dateStr2) && Jour1 == Jour2) {
+                                    tabResultat.push(result[i]);
+                                }
+
+                            }
+                            if(tabResultat.length==0) {   res.render('rechercher',{logged:true,trajecto:[],User:'',msg:"Aucun trajet ne correspond a votre recherche"});
+                             }
+                            else res.render('rechercher', {logged: true, trajecto: tabResultat, user: sess.Username,User:''});
+                        }
+                        });
             });
         });
 

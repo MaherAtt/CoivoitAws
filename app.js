@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
+var editRouter = require('./routes/edit');
 var usersRouter = require('./routes/users');
 var rechercherRouter = require('./routes/rechercher');
 var inscriptionRouter = require('./routes/inscription');
@@ -88,6 +89,8 @@ app.use('/repondre',repondre);
 app.use('/reserver',reserver);
 app.use('/messages',messages);
 app.use('/upload',upload);
+app.use('/edit',editRouter);
+
 
 
 // catch 404 and forward to error handler

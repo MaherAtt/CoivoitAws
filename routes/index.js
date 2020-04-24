@@ -7,9 +7,9 @@ router.get('/', function(req, res, next) {
   sess.lastError = sess.erreur;
   sess.erreur=undefined;
   if(req.session.Username)
-  res.render('acceuil',{logged:true,error:sess.lastError});
+  res.render('acceuil',{logged:true,MessageErr:sess.lastError,User:sess.prenom});
   else
-  res.render('acceuil',{logged:false,error:sess.lastError});
+  res.render('acceuil',{logged:false,MessageErr:sess.lastError,User:sess.prenom});
 
 });
 

@@ -6,6 +6,8 @@
     <body>
         <% if(logged==true){ %>
         <%- include('./partials/headerLogged'); -%>
+        <div id="corps text-center">
+                 <p class="offset-1 col-8 col-md-8 offset-md-0" id="bjr">Bonjour <%= User %></p>
         <% } else{ %>
         <%- include('./partials/header'); -%>
         <% } %>
@@ -50,14 +52,14 @@
                         <div class="row ">
                             <div class="col-md-2 align-self-center">
                                 <% if(demandes[i].Emmeteur!=user){ %>
-                                <a type="button" href="./Profil/<%= demandes[i].Emmeteur %>"><img class="rounded mx-auto d-block img-fluid rounded border_img" alt="photo_profil" title="voir le profil" src='../Pictures/<%= demandes[i].Emmeteur.split("@")[0] %>.png' onerror="this.onerror=null; this.src='../img/img-profil.jpg'"/>
-                                    <%= demandes[i].Emmeteur %>
+                                <a type="button" href="./Profil/<%= demandes[i].NomDem %>_<%= demandes[i].PrenomDem %>"><img class="rounded mx-auto d-block img-fluid rounded border_img" alt="photo_profil" title="voir le profil" src='../Pictures/<%= demandes[i].Emmeteur.split("@")[0] %>.png' onerror="this.onerror=null; this.src='../img/img-profil.jpg'"/>
+                                    <%= demandes[i].NomDem %> <%= demandes[i].PrenomDem %>
                                 </a>
 
                                 <% } %>
                                 <% if(demandes[i].Emmeteur==user){ %>
-                                <a type="button" href="./Profil/<%= demandes[i].Recepteur %>"><img class="rounded mx-auto d-block img-fluid rounded border_img" alt="photo_profil" title="voir le profil" src='../Pictures/<%= demandes[i].Recepteur.split("@")[0] %>.png' onerror="this.onerror=null; this.src='../img/img-profil.jpg'"/>
-                                    <%= demandes[i].Recepteur %>
+                                <a type="button" href="./Profil/<%= demandes[i].NomDem %>_<%= demandes[i].PrenomDem %>"><img class="rounded mx-auto d-block img-fluid rounded border_img" alt="photo_profil" title="voir le profil" src='../Pictures/<%= demandes[i].Recepteur.split("@")[0] %>.png' onerror="this.onerror=null; this.src='../img/img-profil.jpg'"/>
+                                   <%= demandes[i].NomDem %> <%= demandes[i].PrenomDem %>
                                 </a>
 
                                 <% } %>
@@ -66,11 +68,11 @@
                             </div>
                             <div class="col-md-4 align-self-center"> <%= demandes[i].AdrDep %> <br/> <%= demandes[i].AdrArr %> <br/>  <%= demandes[i].DateTrajet %>
                             </div>
-                            <div class="col-md-1 align-self-center"> <%= demandes[i].NbPlacesDispo %>
+                            <div class="col-md-1 align-self-center"> <%= demandes[i].NbPlacesDispo %> Places disponibles
                             </div>
                             <div class="col-md-2 align-self-center">
                                 <% if(demandes[i].Etat==2 && demandes[i].Emmeteur!=user){ %>
-                                <button type="button" class="btn btn-warning etat" title="répondre" onclick="showModal('<%= demandes[i].IdTrajet %>','<%= demandes[i].AdrDep %>','<%= demandes[i].AdrArr %>','<%= demandes[i].DateTrajet %>','<%= demandes[i].Emmeteur %>')" ><span>EN ATTENTE</span></button>
+                                <button type="button" class="btn btn-warning etat" title="répondre" onclick="showModal('<%= demandes[i].IdTrajet %>','<%= demandes[i].AdrDep %>','<%= demandes[i].AdrArr %>','<%= demandes[i].DateTrajet %>','<%= demandes[i].Emmeteur %>','<%= demandes[i].NomDem %>','<%= demandes[i].PrenomDem %>')" ><span>EN ATTENTE</span></button>
                                 <% } %>
                                 <% if(demandes[i].Etat==2 && demandes[i].Emmeteur==user){ %>
                                 <button type="button" class="btn btn-warning etat" title="répondre"  ><span>EN ATTENTE</span></button>
@@ -109,7 +111,7 @@
                         <div class="modal-body">
                             <input id="Emet" type="hidden" value="" name="Emmeteur">
                             <input id="Traj" type="hidden" value="" name="Trajet">
-                            Acceptez-vous que Nom Prénom vous accompagne sur votre trajet ? <br/>
+                            Acceptez-vous que <span id="NomDemandeur">Nom Prénom</span> vous accompagne sur votre trajet ? <br/>
                             <h5>De :</h5> <div id="AdrDep">Mantes-la-jolie</div>
                             <h5>Vers :</h5>  <div id="AdrDest"> Versailles </div>
                             <h5>Le :</h5>   <div id="DateDep"> 10/04/2020 </div>
@@ -139,9 +141,10 @@
         </script>
 
     <script>
-        function showModal(data,adrD,adrA,DateD,Nom)
+        function showModal(data,adrD,adrA,DateD,Nom,NomD,PrenD)
         {
             $("#exampleModalCenter #exampleModalLongTitle").text('Trajet N'+data);
+            $("#NomDemandeur").text(NomD+" "+PrenD);
             $("#Emet").val(Nom);
             $("#Traj").val(data);
             $("#exampleModalCenter #AdrDep").text(adrD);
