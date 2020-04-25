@@ -48,6 +48,7 @@ $(document).ready(function(){
         $('.alert').show();
         $("#messages").empty();
         socket.emit('afficher conversation', res);
+        $('#amis').click();
 
     });
 
@@ -56,8 +57,8 @@ $(document).ready(function(){
         e.preventDefault();
 
         let data = {
-            Emmeteur:$('#MyUsername').text(),
-            Destinataire: $('.active.conversation').text(),
+            Emmeteur:'',
+            Destinataire: $('.active.conversation').attr('id'),
             Message : $('#Message').val()
         };
         var user= $('#MyUsername').text();

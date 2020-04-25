@@ -65,7 +65,7 @@ router.get('/', function(req, res, next) {
                 //client.emit('new message', data);
                 client.to(dest).emit('new message', data);
 
-                data = [data.Emmeteur, data.Destinataire, data.Message, 'GETDATE();'];
+                data = [req.session.Username, data.Destinataire, data.Message, 'GETDATE();'];
                 app.connection.query('Insert into messages set IdEmmeteur=?,IdRecepteur=?,Message=?,DateMsg=? ', data, function (err, result) {
 
                 })

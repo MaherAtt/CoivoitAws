@@ -22,6 +22,8 @@ var recherche_profil = require('./routes/recherche_profil');
 var reserver = require('./routes/reserver');
 var messages = require('./routes/messages');
 var upload=require('./routes/upload');
+var contactRouter=require('./routes/contact');
+
 
 var app = express();
 //msgerie
@@ -90,6 +92,7 @@ app.use('/reserver',reserver);
 app.use('/messages',messages);
 app.use('/upload',upload);
 app.use('/edit',editRouter);
+app.use('/contact',contactRouter);
 
 
 
