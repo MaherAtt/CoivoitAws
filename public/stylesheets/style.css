@@ -17,13 +17,7 @@ h1, h5, .modal-header {
     overflow: hidden;
 }
 #inscription_connexion {
-    /*  position: absolute;*/
     top: 5px;
-/*
-    right: 5px;
-    max-width: 300px;
-*/
-    /* margin-righ: -5%;*/
 }
 #inscription_connexion a, #deconnexion p, #bjr  {
     color: #842929;
@@ -50,7 +44,6 @@ h1, h5, .modal-header {
 /* Menu */
 .sidebar {
     height: 100%;
-    /*  height: inherit;*/
     width: 0; /* c'est l'attribut qui permet d'afficher ou non le menu (width=0 => menu fermé)*/
     position: absolute;
     z-index: 5;
@@ -181,32 +174,17 @@ h1, h5, .modal-header {
     transition: margin-left .5s;
     padding: 20px;
     padding-top: 35px;
-    /*background-image:url(../img/arizona1.jpg); */
-    /*   background-image:url(../img/arizona.jpg)no-repeat center center fixed; */
-    /*-webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;*/
-    /*background-color: #ededed;*/
-    /* background-color: #bedff1;*/
-    /*background-color: white;*/
 
 }
 
 
 
 /*carousel */
-#aa {
-    /*  background: red;*/
-}
-#aa #carous {
-    /*  background: blue;*/
+
+#acceuil #aa #carous {
     width: 70%;
 }
-.carousel-inner {
-    /*  height: 650px;*/
 
-}
 .carousel-inner img {
     max-height: 600px;
     width: 100%;
@@ -509,9 +487,6 @@ body {
         margin: 5px;
         margin-left: 15%  ;
     }
-    .titre_page {
-        /*    margin-left: 6%  ;*/
-    }
     header img {
         max-width: 240px;
         position: absolute;
@@ -738,7 +713,6 @@ body {
         height: 120px;
     }
     #recherche_profil #search  {
-        /*    width: 70%;*/
         height: 45px;
         font-size: 15px;
 
@@ -767,9 +741,7 @@ body {
         margin: 0px;
         color: #842929;
     }
-    #recherche_profil #headingOne button:hover {
-/*        color: orange;*/
-    }
+    
     
     #recherche_profil .input-group {
         margin-top: 10px;

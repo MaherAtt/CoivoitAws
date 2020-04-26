@@ -1,197 +1,202 @@
 <!DOCTYPE html>
 <html lang="fr">
+
     <head>
         <%- include('./partials/head'); -%>
     </head>
+
     <body>
         <% if(logged==true){ %>
         <%- include('./partials/headerLogged'); -%>
         <div id="corps text-center">
-                 <p class="offset-1 col-8 col-md-8 offset-md-0" id="bjr">Bonjour <%= User %></p>
-        <% } else{ %>
-        <%- include('./partials/header'); -%>
-        <% } %>
-
-
-        <div class="container" id="container1" >
-            <form id="myForm" action="./rechercher" method="post" class="form-horizontal"  role="form">
-                <!--<img src="img/road.jpg"/>-->
-                <div class="mx-auto offset-md-2 col-md-8 card d-flex justify-content-center">
-                    <div class="col-md-12  text-center" id="titre">
-                        <div class="col-md-12">
-
-                            <img src="https://img.icons8.com/nolan/96/user-location.png"/>
-                        </div>
-                        <div class="col-md-12 align-self-center">
-                            <h1 class=" text-center recherche-title">Envie de se déplacer ?</h1>
-                        </div>
-                    </div>
-
-                    <div class="form-group espace" >
-                        <input type="search" class="form-control input-lg" id="adr-depart-input" placeholder="Départ" name="AdresseDep">
-                    </div>
-                    <div class="form-group espace" >
-                        <input type="text" class="form-control input-lg" onFocus="geolocate()" id="adr-dest-input" placeholder="Destination" name="AdresseDest">
-                    </div>
-
-
-                    <div class="row espace" >
-                        <div class="col-md" >
-                            <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd"  >
-                                <input class="form-control input-lg" type="text" value="Quand ?" name="DateDep" readonly>
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                            </div>
-                            <input type="hidden" id="dtp_input2" value="" /><br/>
-                        </div>
-                        <div class="col-md">
-                            <div class="input-group date form_time" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
-                                <input class="form-control input-lg" type="text" value="Heure d'arrivée souhaitée ?" name="HeureDep" readonly>
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
-                            </div>
-                            <input type="hidden" id="dtp_input3" value="" /><br/>
-                        </div>
-                    </div>
-
-                    <div class="text-center" >
-                        <button type="submit" type="button" class="btn btn-primary btn-lg" >Rechercher</button>
-                    </div>
-
-                </div>
-            </form>
-        </div>
-
-
-        <!-- les Trajets recherchés,  -->
-        <div id="trajets_recherche" class="row d-flex justify-content-center">
-            <input type="hidden" value="<%= User %>"/>
-            <% for(var i=0; i < trajecto.length; i++) { %>
-            <div class="col-md-7">
-                <div class="container shadow-lg p-3 mb-5 rounded" id="container2" style=" margin-top: 30px;" >
-                    <div class="row">
-                        <div class="container" id="'+i+'" onclick="showDetail(this.id)" style="cursor: pointer;">
-                            <div class="row" >
-                                <div class="container">
-                                    <div class="row no-gutter" >
-                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">
-                                            <div class="trajet-place" id="depart-time-trajet" style="text-align: center; height: 25px;"><%= trajecto[i].DateDep.toString().substring(16,21) %></div>
-                                            <div class="trajet-vertical-separator"></div>
-                                            <div class="trajet-place" id="arrivee-time-trajet" style="text-align: center; height: 25px;"><%= trajecto[i].DateArr.toString().substring(16,21) %></div>
-                                        </div>
-                                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-                                            <div class="" style="height: 25px; text-align: center;">
-                                                <span class="trajet-circle" style="margin-top: 9px;"></span>
-                                            </div>
-                                            <div class="" style=" text-align: center;">
-                                                <div class="vertical-line"></div>
-                                            </div>
-                                            <div class="" style=" height: 25px; text-align: center;">
-                                                <span class="trajet-circle"></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4" >
-                                            <div class="trajet-place" id="depart-trajet" style="text-align: center; height: 25px;"><%= trajecto[i].AdresseDep %></div>
-                                            <div class="trajet-vertical-separator" ></div>
-                                            <div class="trajet-place" id="arrivee-trajet" style="text-align: center; height: 25px;"><%= trajecto[i].AdresseArr %></div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-1" ></div>
-                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="text-align: center;"><%= trajecto[i].Prix %>$</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top: 30px;">
-                                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-4"  >
-                                    <img src='../Pictures/<%= trajecto[i].IdChauffeur.split("@")[0] %>.png' onerror="this.onerror=null; this.src='../img/img-profil.jpg'" id="img-profile" alt="img-profile" height="32" width="32">
-                                </div>
-                                <div class="col-lg-4 col-md-5 col-sm-6 col-xs-6">
-                                    <div class="short-div" id="trajet-nom-prenom">
-                                        <a href="./Profil/<%= trajecto[i].IdChauffeur %>"><%= trajecto[i].NomChauffeur %> <%= trajecto[i].PrenomChauffeur %> </a><br>
-                                        <img src="img/star.png" id="trajet-star" alt="img-star" height="10" width="10" />5
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" >
-                                    <img src="img/down-arrow.png" id="img-arrow-'+i+'" class="img-arrow" alt="img-profile">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" id="detail-container-'+i+'" style="display: none; border-top: solid 0.5px black; padding: 25px; margin : 5px;">
-                        <div class="row" style="margin-bottom: 10px;">
-                            <p><%= trajecto[i].Commentaire %></p>
-                        </div>
-                        <div class="row" style="margin-bottom: 10px;">
-                            <p>Contacter  &nbsp;</p><a href="" style="display: block;"><%= trajecto[i].IdChauffeur %></a>
-                        </div>
-                        <div class="row" style="margin-bottom: 10px;">
-
-                        </div>
-                        <div class="row">
-                            <button class="btn btn-success btn-lg" style="margin: 0 auto;" onclick="reserveTrajet('<%= trajecto[i].IdTrajet %>')">Réserver </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            <p class="offset-1 col-8 col-md-8 offset-md-0" id="bjr">Bonjour <%= User %></p>
+            <% } else{ %>
+            <%- include('./partials/header'); -%>
             <% } %>
-        </div>
 
-        <!-- Modal reservation -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+
+            <div class="container" id="container1">
+                <form id="myForm" action="./rechercher" method="post" class="form-horizontal" role="form">
+                    <!--<img src="img/road.jpg"/>-->
+                    <div class="mx-auto offset-md-2 col-md-8 card d-flex justify-content-center">
+                        <div class="col-md-12  text-center" id="titre">
+                            <div class="col-md-12">
+
+                                <img src="https://img.icons8.com/nolan/96/user-location.png" />
+                            </div>
+                            <div class="col-md-12 align-self-center">
+                                <h1 class=" text-center recherche-title">Envie de se déplacer ?</h1>
+                            </div>
+                        </div>
+
+                        <div class="form-group espace">
+                            <input type="search" class="form-control input-lg" id="adr-depart-input" placeholder="Départ" name="AdresseDep">
+                        </div>
+                        <div class="form-group espace">
+                            <input type="text" class="form-control input-lg" onFocus="geolocate()" id="adr-dest-input" placeholder="Destination" name="AdresseDest">
+                        </div>
+
+
+                        <div class="row espace">
+                            <div class="col-md">
+                                <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                    <input class="form-control input-lg" type="text" value="Quand ?" name="DateDep" readonly>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                </div>
+                                <input type="hidden" id="dtp_input2" value="" /><br />
+                            </div>
+                            <div class="col-md">
+                                <div class="input-group date form_time" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+                                    <input class="form-control input-lg" type="text" value="Heure d'arrivée souhaitée ?" name="HeureDep" readonly>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                                </div>
+                                <input type="hidden" id="dtp_input3" value="" /><br />
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" type="button" class="btn btn-primary btn-lg">Rechercher</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+
+            <!-- les Trajets recherchés,  -->
+            <div id="trajets_recherche" class="row d-flex justify-content-center">
+                <input type="hidden" value="<%= User %>" />
+                <% for(var i=0; i < trajecto.length; i++) { %>
+                <div class="col-md-6 shadow-lg p-3 mb-5 mt-5 rounded" >
+                    <div class="col-md-12" >
+                        <div id="'+i+'" class="row" onclick="showDetail(this.id)">
+                            <div class="col-md-4  ">
+                                <div class="col-md-12 ">
+
+                                    <div class="col-md-12">
+                                        <img src='../Pictures/<%= trajecto[i].IdChauffeur.split("@")[0] %>.png' onerror="this.onerror=null; this.src='../img/img-profil.jpg'" id="img-profile" alt="img-profile" class="mx-auto d-block rounded-circle" >
+                                    </div>
+                                    <div class="col-md-12 col-12 ">
+                                        <div id="trajet-nom-prenom" class="row">
+                                            <a  class="col-md-12 col-8" href="./Profil/<%= trajecto[i].IdChauffeur %>"><%= trajecto[i].NomChauffeur %> <%= trajecto[i].PrenomChauffeur %> </a>
+                                            <p  class="col-md-2 col-2" >5</p>
+                                            <img src="img/star.png"  class="col-md-3 col"  id="trajet-star" alt="img-star" /> 
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-8 col-12 row">
+                                <div class="col-md-2 col-3">
+                                    <div class="trajet-place col-md-12" id="depart-time-trajet"><%= trajecto[i].DateDep.toString().substring(16,21) %></div>
+                                    <div class="trajet-vertical-separator col-md-12"></div>
+                                    <div class="trajet-place col-md-12" id="arrivee-time-trajet"><%= trajecto[i].DateArr.toString().substring(16,21) %></div>
+                                </div>
+                                <div class="col-md-1 col-1 pl-1 ">
+                                    <div class="col-md-12 pl-0">
+                                        <span class="trajet-circle"></span>
+                                    </div>
+                                    <div class="col-md-12 pl-0">
+                                        <div class="vertical-line"></div>
+                                    </div>
+                                    <div class="col-md-12 pl-0">
+                                        <span class="trajet-circle"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-7 col-7">
+                                    <div class="trajet-place col-md-12" id="depart-trajet"><%= trajecto[i].AdresseDep %></div>
+                                    <div class="trajet-vertical-separator col-md-12" id="suppr_trajet-vertical-separator"></div>
+                                    <div class="trajet-place col-md-12" id="arrivee-trajet"><%= trajecto[i].AdresseArr %></div>
+                                </div>
+                                <div class="col-md-2 col-1 row">
+                                    <div class="col-md-12"><%= trajecto[i].Prix %>$</div>
+
+                                    <div class="col-md-12 d-flex align-items-end">
+                                        <img src="img/down-arrow.png" id="img-arrow-'+i+'" class="img-arrow" alt="img-profile">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row" id="detail-container-'+i+'">
+                            <div id="ligne-horizontale" class="col-md-12 col-12  row">
+                            <div class="col-md-6 col-12" >
+                                <p class="col-md-12 col-12"><%= trajecto[i].Commentaire %></p>
+                                <div class="col-md-12 col-12 row">
+                                    <p class="col-md-4 col-5 ">Contacter</p>
+                                    <a class="col-md col" href=""><%= trajecto[i].IdChauffeur %></a>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12 text-center">
+                                <button class="btn btn-success btn-lg" onclick="reserveTrajet('<%= trajecto[i].IdTrajet %>')">Réserver </button>
+                            </div>
+                        </div>
+                        </div>
                     </div>
 
-                    <form action="./Reserver" method="post">
-                        <div class="modal-body">
-                            <label for="Trajet" class="col-sm-4 col-form-label">IdTrajet</label>
-                            <input id="Traj"  value="" name="Trajet" readonly>
-                            <label for="Msg" class="col-sm-4 col-form-label">Message</label>
-                            <input type="text" id="Msg"  value="" name="Message" >
+                </div>
 
+                <% } %>
+
+            </div>
+
+
+            <!-- Modal reservation -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
 
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger"  data-dismiss="modal">Anuller</button>
-                            <button type="submit" class="btn btn-success" name="Reserver" >Valider</button>
-                        </div>
-                    </form>
+                        <form action="./Reserver" method="post">
+                            <div class="modal-body">
+                                <label for="Trajet" class="col-sm-4 col-form-label">IdTrajet</label>
+                                <input id="Traj" value="" name="Trajet" readonly>
+                                <label for="Msg" class="col-sm-4 col-form-label">Message</label>
+                                <input type="text" id="Msg" value="" name="Message">
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Anuller</button>
+                                <button type="submit" class="btn btn-success" name="Reserver">Valider</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                          aria-hidden="true">
-                          <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
-                            <!--Content-->
-                            <div class="modal-content text-center">
-                              <!--Header-->
-                              <div class="modal-header d-flex justify-content-center">
-                              </div>
-
-                              <!--Body-->
-                              <div class="modal-body">
-
-                                                       <p><%if ( typeof msg != 'undefined' ) {%> <%= msg %> <%}%></p>
-
-
-                              </div>
-
-                              <!--Footer-->
-                              <div class="modal-footer flex-center">
-                                <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">Ok</a>
-                              </div>
-                            </div>
-                            <!--/.Content-->
-                          </div>
+            <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+                    <!--Content-->
+                    <div class="modal-content text-center">
+                        <!--Header-->
+                        <div class="modal-header d-flex justify-content-center">
                         </div>
-                        <!--Modal: modalConfirmDelete-->
 
+                        <!--Body-->
+                        <div class="modal-body">
+
+                            <p><%if ( typeof msg != 'undefined' ) {%> <%= msg %> <%}%></p>
+
+
+                        </div>
+
+                        <!--Footer-->
+                        <div class="modal-footer flex-center">
+                            <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">Ok</a>
+                        </div>
+                    </div>
+                    <!--/.Content-->
+                </div>
+            </div>
+            <!--Modal: modalConfirmDelete-->
+        </div>
 
         <!-- Affichage du calendrier de la date et l'heure-->
         <script type="text/javascript" src="javascripts//bootstrap-datetimepicker.js" charset="UTF-8"></script>
@@ -274,7 +279,7 @@
             function showDetail(clicked_id){
 
                 if (document.getElementById("detail-container-"+clicked_id).style.display == "none") {
-                    document.getElementById("detail-container-"+clicked_id).style.display = "block";
+                    document.getElementById("detail-container-"+clicked_id).style.display = "flex";
                     document.getElementById("img-arrow-"+clicked_id).src = "img/up-arrow.png";
                 }
                 else{
@@ -288,7 +293,7 @@
         </script>
 
         <script>
-         <%if ( typeof msg != 'undefined' ) {%> $('#modalConfirmDelete').modal(); <%}%>
+            <%if ( typeof msg != 'undefined' ) {%> $('#modalConfirmDelete').modal(); <%}%>
         </script>
         <script> 
             $(document).ready(function(){
@@ -303,4 +308,5 @@
         <%- include('./partials/footer'); -%>
 
     </body>
+
 </html>
