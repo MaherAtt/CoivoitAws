@@ -811,6 +811,12 @@ body {
     width: 150px;
 }
 
+
+
+.modaledemande .modal-body h5 {
+    padding-right: 5px;
+}
+
 /*Fin Demande */
 
 

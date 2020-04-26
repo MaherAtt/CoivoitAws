@@ -66,7 +66,10 @@
                             </div>
                             <div class="col-md-3 align-self-center"> <%= demandes[i].Message %>
                             </div>
-                            <div class="col-md-4 align-self-center"> <%= demandes[i].AdrDep %> <br/> <%= demandes[i].AdrArr %> <br/>  <%= demandes[i].DateTrajet %>
+                            <div class="col-md-4 align-self-center row"> 
+                                <div class="col-md-12"><%= demandes[i].AdrDep %> </div>
+                                <div class="col-md-12"><%= demandes[i].AdrArr %></div>
+                                <div class="col-md-12"><%= demandes[i].DateTrajet %></div>
                             </div>
                             <div class="col-md-1 align-self-center"> <%= demandes[i].NbPlacesDispo %> Places disponibles
                             </div>
@@ -98,7 +101,7 @@
         </div>
 
         <!-- Modal reponse demandes -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal fade modaledemande" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -108,13 +111,14 @@
                         </button>
                     </div>
                     <form action="./Repondre" method="post">
-                        <div class="modal-body">
+                        <div class="modal-body ">
                             <input id="Emet" type="hidden" value="" name="Emmeteur">
                             <input id="Traj" type="hidden" value="" name="Trajet">
-                            Acceptez-vous que <span id="NomDemandeur">Nom Prénom</span> vous accompagne sur votre trajet ? <br/>
-                            <h5>De :</h5> <div id="AdrDep">Mantes-la-jolie</div>
-                            <h5>Vers :</h5>  <div id="AdrDest"> Versailles </div>
-                            <h5>Le :</h5>   <div id="DateDep"> 10/04/2020 </div>
+                            <div class=" offset-md-2 col-md-8 text-center " id="titre">Acceptez-vous que <span id="NomDemandeur">Nom Prénom</span> vous accompagne sur votre trajet ? 
+                            </div>
+                            <div class="col-md-12 row"> <h5 class="col-md-2">De :</h5> <div class="col-md" id="AdrDep">Mantes-la-jolie</div> </div>
+                            <div class="col-md-12 row"> <h5 class="col-md-2">Vers :</h5>  <div class="col-md" id="AdrDest"> Versailles </div> </div>
+                            <div class="col-md-12 row"> <h5 class="col-md-2">Le :</h5>   <div class="col-md" id="DateDep"> 10/04/2020 </div></div>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-danger"  name="Reponse" value="Refuser">Refuser</button>
