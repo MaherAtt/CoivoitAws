@@ -12,17 +12,7 @@
 
         <!-- le profil de l'utilisateur -->
         <div id="profil" class="col-md-12 row">
-            <div class="col-6" id="photo_profil2">
-                <img src='../Pictures/<%= photo %>' onerror="this.onerror=null; this.src='../img/img-profil.jpg'" alt="photo de profil" title="photo de profil" class="rounded-circle"/>
-                <%if (canEdit==true) { %>
-                <form action="upload" method="post" enctype="multipart/form-data">
-
-                    <div class="col-md-12">
-                        <input type="file" onchange="form.submit()" class="form-control-file" id="exampleFormControlFile1" name="PictureFile" >
-                    </div>
-                </form>
-                <% } %>
-            </div>
+            
             <h1 class="col-6 col col-md-12 text-center titre_page">Informations personnelles</h1>
             <div class="d-flex justify-content-center row" >
                 <!-- Info perso -->

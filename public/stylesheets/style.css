@@ -1,39 +1,47 @@
 /* Fichier Css */
+/* Général */
+h1, h5, .modal-header {
+    color: #842929;
+}
+#bjr {
+    position: relative;
+    top: -63px;
+    left: 0;
+}
+
+body {
+    font-family: 'Comic Neue', cursive;
+/*    font-family: helvetica, arial, sans-serif;*/
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    background-color: #ededed;
+    min-height:100vh;
+    width: 100%;
+    position: relative;
+}
+/* Fin Général */
+
+
 /* header */
 header, .haut {
-    /*  padding-top: 5px;*/
     background: white;
     height: 80px;
     border-bottom: 1pt solid #842929;
 }
 
-h1, h5, .modal-header {
-    color: #842929;
-}
+/* Fin header */
+
 
 /* lien inscription_connexion */
-
 .modal-open .modal {
     overflow: hidden;
 }
 #inscription_connexion {
-    /*  position: absolute;*/
     top: 5px;
-/*
-    right: 5px;
-    max-width: 300px;
-*/
-    /* margin-righ: -5%;*/
 }
 #inscription_connexion a, #deconnexion p, #bjr  {
     color: #842929;
     font-size: 20px;
-}
-
-#bjr {
-    position: relative;
-    top: -63px;
-    left: 0;
 }
 
 #inscription_connexion a:hover{
@@ -46,11 +54,14 @@ h1, h5, .modal-header {
 
 
 
-/* Fin header */
 /* Menu */
+
+.change_page, .sidebar .change_page {
+    color: black;
+}
+
 .sidebar {
     height: 100%;
-    /*  height: inherit;*/
     width: 0; /* c'est l'attribut qui permet d'afficher ou non le menu (width=0 => menu fermé)*/
     position: absolute;
     z-index: 5;
@@ -81,6 +92,19 @@ h1, h5, .modal-header {
     transition: 0.3s;
 }
 
+.sidebar a:hover {
+    color: black;
+}
+
+/* le bouton qui ferme le menu */
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
 .buttonProf {
     background-color: #4CAF50; /* Green */
     border: none;
@@ -100,18 +124,6 @@ h1, h5, .modal-header {
     border: 2px solid #4CAF50;
 }
 
-.sidebar a:hover {
-    color: black;
-}
-
-/* le bouton qui ferme le menu */
-.sidebar .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-}
 
 #mySidebar #gdmenu a:nth-child(1) {
     /*padding-top: 110px;*/
@@ -124,36 +136,6 @@ h1, h5, .modal-header {
 }
 
 
-@media screen and (max-width: 600px) {
-    #mySidebar #gdmenu {
-        visibility: hidden;
-        height: 0px;
-        width: 0px;
-        overflow: hidden;
-    }
-    #mySidebar #ptmenu{
-        visibility: visible;
-        margin-top: 70px;
-    }
-
-    #mySidebar #ptmenu .closebtn {
-        position: absolute;
-        top: -75px;
-        left: -52px;
-
-    }
-}
-
-@media screen and (min-width: 601px) {
-    #mySidebar #gdmenu {
-        visibility: visible;
-    }
-    #mySidebar #ptmenu {
-        visibility: hidden;
-        height: 0px;
-        overflow: hidden;
-    }
-}
 /* le bouton qui ouvre le menu */
 .openbtn {
     font-size: 20px;
@@ -175,38 +157,20 @@ h1, h5, .modal-header {
 }
 
 
-
-
 #pageContent {
     transition: margin-left .5s;
     padding: 20px;
     padding-top: 35px;
-    /*background-image:url(../img/arizona1.jpg); */
-    /*   background-image:url(../img/arizona.jpg)no-repeat center center fixed; */
-    /*-webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;*/
-    /*background-color: #ededed;*/
-    /* background-color: #bedff1;*/
-    /*background-color: white;*/
 
 }
 
 
 
-/*carousel */
-#aa {
-    /*  background: red;*/
-}
-#aa #carous {
-    /*  background: blue;*/
+/*accueil */
+#acceuil #aa #carous {
     width: 70%;
 }
-.carousel-inner {
-    /*  height: 650px;*/
 
-}
 .carousel-inner img {
     max-height: 600px;
     width: 100%;
@@ -217,40 +181,14 @@ h1, h5, .modal-header {
     left: 30%;
 }
 
-@media screen and (max-width: 450px) {
-    #acceuil #description article p {
-        font: 12px;
-    }
 
-    #acceuil #description {
-        padding-top: 20px;
-    }
-
-    #acceuil #aa #carous {
-        height: 150px;
-    }
-
-    #acceuil section {
-        visibility: visible;
-    }
-
-}
-
-@media screen and (min-width: 451px) {
-    #acceuil section {
-        visibility: hidden;
-        height: 0px;
-        overflow: hidden;
-    }
-
-}
 
 /* Inscription / connexion */
 #exampleModalCenter .modal-content{
     box-shadow: 2px 2px 2px #2a3951
 }
-#exampleModalCenter .form-control{
 
+#exampleModalCenter .form-control{
     border: 0.1px solid white;
 }
 
@@ -263,101 +201,11 @@ h1, h5, .modal-header {
     border-radius: 10px;
 }
 
-
-/*.modal-content{
-height: 400px;
-}*/
-
-
-
-@media screen and (max-width: 450px) {
-    #inscription_connexion {
-        padding-top: 10px;
-        position: absolute;
-        right: 0px;
-
-    }
-
-    #deconnexion {
-        padding-top: 10px;
-        position: absolute;
-/*        right: 0px;*/
-
-    }
-
-    #inscription_connexion p, #deconnexion p, #bjr {
-        font-size: 11px;
-    }
-    
-    #bjr {
-        position: relative;
-        top: -63px;
-        left: -31px;
-    }
-
-}
-
-
 /* Fin Inscription / connexion */
 
 
 
-
-
-/* CSS files add styling rules to your content */
-
-body {
-    font-family: 'Comic Neue', cursive;
-/*    font-family: helvetica, arial, sans-serif;*/
-    margin: 0px 0px 0px 0px;
-    padding: 0px 0px 0px 0px;
-    background-color: #ededed;
-    min-height:100vh;
-    width: 100%;
-    position: relative;
-}
-
-.change_page, .sidebar .change_page {
-    color: black;
-}
-
-/*
-.menu {
-    position: relative;
-    background-color: #99ffcc;
-    width: 20%;
-    height: 700px;
-    float: left;
-    display: block;
-    text-align: center;
-    margin-top: 0px;
-    margin-right: 10px;
-    margin-left: 0%;
-    transition-duration: 0.2s;
-}
-.img-container {
-    text-align: center;
-    display: block;
-    width:100%;
-    height:38%;
-}
-.img-container img {
-    width:70%;
-    height:100%;
-}
-.menu {
-    position: relative;
-    line-height: 1.9;
-    text-align: left;
-    font-weight: bold;
-    padding: 0px 1px 1px 1px;
-}
-*/
-
-
 /* debut Profil */
-
-
 .form-control-file, .form-control-range{
     width: 60%;
 }
@@ -367,13 +215,13 @@ body {
     padding-right: 50px; */
 }
 
+/*
 .userCard {
     display: "";
 }
+*/
 #profil .card{
     background-color: #7366a54f;
-    /*border: 2px solid red;*/
-    /*height: 100px;*/
     box-shadow: 2px 2px 2px #2a3951;
 }
 
@@ -399,10 +247,7 @@ body {
 #profil #photo_profil1 img{
     height: 150px;
     width: 70%;
-
 }
-
-
 
 #profil #avis #voir_com {
     font-size: 10px;
@@ -413,6 +258,7 @@ body {
     overflow-x: hidden;
     overflow-y: auto;
 }
+
 #profil .form-control, #profil .progress-bar {
     background-color: #842929;
 }
@@ -421,104 +267,6 @@ body {
     color: white; 
 }
 
-@media screen and (max-width: 650px) {
-    header img {
-        max-width: 30%;
-        position: absolute;
-        top: 12px;
-        left: 40%;
-        right: 30%;
-    }
-    /* Réduire la taille du menu sur les smartphones */
-    .sidebar {
-        padding-top: 15px;
-        /*background-color: #1236340f;*/
-        /*    min-height: 100%;*/
-        /*    width: 150px;*/
-
-    }
-    .sidebar a {
-        font-size: 18px;
-    }
-}
-@media screen and (max-width: 450px) {
-    #profil .card {
-        background: none;
-        box-shadow: none;
-    }
-
-    #profil #avis {
-        margin: 0px; 
-    }
-    #profil .titre_page {
-        /*        visibility: hidden;*/
-        /*        height: 0px;*/
-        padding-top: 10px;
-        padding-bottom: 0px;
-        font-size: 25px;
-    }
-
-    #profil #photo_profil1 {
-        visibility: hidden;
-        height: 0px;
-        width: 0px;
-        margin: 0px;
-        padding: 0px;
-    }
-    #profil #photo_profil2 {
-        visibility: visible;
-    }
-    #profil #photo_profil2 img{
-        height: 75px;
-        width: 40%;
-
-    }
-
-}
-
-@media screen and (min-width: 450px) {
-    #profil #photo_profil2 {
-        visibility: hidden;
-        height: 0px;
-        width: 0px;
-        margin: 0px;
-        padding: 0px;
-    }
-    #profil #photo_profil1 {
-        visibility: visible;
-    }
-}
-
-@media  (min-width: 650px) and  (max-width: 800px) {
-    #profil #info_perso {
-        margin: 5px  ;
-    }
-    .titre_page {
-        margin: 0px 0px 8px;
-    }
-    header img {
-        max-width: 160px;
-        position: absolute;
-        top: -46px;
-        left: 38%;
-    }
-}
-
-@media screen and (min-width: 800px) {
-    #profil #info_perso {
-        margin: 5px;
-        margin-left: 15%  ;
-    }
-    .titre_page {
-        /*    margin-left: 6%  ;*/
-    }
-    header img {
-        max-width: 240px;
-        position: absolute;
-        top: -60px;
-        left: 45%;
-    }
-}
 
 .separation_paragraphe {
     height: 30px;
@@ -545,8 +293,6 @@ body {
 
 
 
-
-
 /* Messagerie */
 
 #messagerie form {
@@ -555,16 +301,12 @@ body {
 #messagerie #response {
     position: absolute;
     z-index: 5;
-    /*    opacity:0.8;*/
 }
 #messagerie textarea {
     resize : none ;
 }
 
 
-#messagerie #messages .id_moi, #messagerie #messages .id_julia{
-    /* max-width: 50px;*/
-}
 #messagerie #messages .badge {
     white-space:normal;
     text-align: left;
@@ -576,49 +318,6 @@ body {
     font-size: 25px;
     padding: 0px;
 }
-#messagerie #messages .id_moi{
-    /*  background-color: orange;*/
-}
-
-
-@media screen and (max-width: 450px) {
-    #messagerie #nav-tabContent {
-        border: 1px solid #842929;
-/*        margin-top: 60px;*/
-        display: none;
-        
-    }
-    
-    #messagerie #messages {
-    height: 340px;
-    }
-    
-    #messagerie #btnBack {
-        position: fixed;
-        top: -45px;
-        background-color: transparent;
-        border: none;
-        color: #842929;
-    }
-    
-
-}
-
-@media screen and (min-width: 450px) {
-     #messagerie #btnBack {
-         display: none;
-    }
-    
-    #messagerie #nav-tabContent {
-        display: block;
-    }
-    
-     #messagerie .list-group {
-         display: flex;
-    }
-    
-}
-
 /* fin Messagerie */
 
 
@@ -631,12 +330,10 @@ body {
     margin-top:1%;
     margin-bottom:1%;
 }
+
 #recherche_profil #search  {
     margin-left: 15%;
     margin-right: 15%;
-
-
-    /*  width: 70%;*/
     height: 90px;
     font-size: 40px;
 }
@@ -645,12 +342,12 @@ body {
     padding-bottom: 50px;
 }
 
-
 #recherche_profil .border_img {
     border-width: 1px;
     border-color: #ededed;
     border-style: solid;
 }
+
 #recherche_profil img {
     max-width: 100%;
 }
@@ -658,6 +355,7 @@ body {
 #recherche_profil #liste {
     padding: 5px;
 }
+
 #recherche_profil #liste  .card {
     padding-top: 1%;
     background: #842929;
@@ -666,7 +364,6 @@ body {
 }
 
 #recherche_profil #liste .profil {
-/*    height: 150px;*/
     margin: 15px;
     border-radius: 2%;
 }
@@ -674,6 +371,7 @@ body {
 #recherche_profil #liste .profil ul {
     padding-left: 0px;
 }
+
 #recherche_profil #liste .profil {
     opacity: 1;
 }
@@ -711,25 +409,109 @@ body {
     color: #842929;
     cursor: pointer;
 } 
+/*Fin Recherche profil */
 
 
 
+/*Demande */
+#demande .liste {
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
 
-@media (min-width: 450px) and (max-width: 800px) {
-    #recherche_profil img {
-        max-width: 30%;
-    }
+    margin: 20px;
+}
 
-/*
-    #recherche_profil #liste .profil {
-        height: 100px;
-    }
-*/
-
+#demande .liste .etat {
+    width: 150px;
 }
 
 
-@media screen and (max-width: 450px) {
+
+.modaledemande .modal-body h5 {
+    padding-right: 5px;
+}
+
+/*Fin Demande */
+
+
+
+
+/*Début Proposer */
+#proposer .form-check-input {
+     position: relative; 
+}
+
+#proposer .form-group {
+    margin : 0px;
+    margin-bottom: 5px;
+}
+
+/*Fin Proposer */
+
+
+
+/*Modal inscription*/
+
+.btn-dark {
+    color: #fff;
+    background-color: #4a43419c !important;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #227d35 !important;
+}
+/*Modal inscription*/
+
+
+
+
+/************************* @Media ******************************/
+@media screen and (max-width: 650px) {
+    /*Profil */
+    #profil .card {
+        background: none;
+        box-shadow: none;
+    }
+
+    #profil #avis {
+        margin: 0px; 
+    }
+    #profil .titre_page {
+        padding-top: 10px;
+        padding-bottom: 0px;
+        font-size: 25px;
+    }
+
+    #profil #photo_profil1 {
+        visibility: hidden;
+        height: 0px;
+        width: 0px;
+        margin: 0px;
+        padding: 0px;
+    }
+    #profil #photo_profil2 {
+        visibility: visible;
+    }
+    #profil #photo_profil2 img{
+        height: 75px;
+        width: 40%;
+
+    }
+
+    #profil #photo_profil2 {
+        visibility: hidden;
+        height: 0px;
+        width: 0px;
+        margin: 0px;
+        padding: 0px;
+    }
+    #profil #photo_profil1 {
+        visibility: visible;
+    }
+
+    /* Rechercher profil */
     #recherche_profil img {
         max-width: 100%;
     }
@@ -738,7 +520,6 @@ body {
         height: 120px;
     }
     #recherche_profil #search  {
-        /*    width: 70%;*/
         height: 45px;
         font-size: 15px;
 
@@ -767,9 +548,7 @@ body {
         margin: 0px;
         color: #842929;
     }
-    #recherche_profil #headingOne button:hover {
-/*        color: orange;*/
-    }
+    
     
     #recherche_profil .input-group {
         margin-top: 10px;
@@ -794,60 +573,188 @@ body {
     }
 
 
-}
-/*Fin Recherche profil */
+    
+    /*Inscription /connexion */
+    #inscription_connexion {
+        padding-top: 10px;
+        position: absolute;
+        right: 0px;
 
+    }
 
-/*Demande */
-#demande .liste {
-    padding: 5px;
-    padding-left: 15px;
-    padding-right: 15px;
+    #deconnexion {
+        padding-top: 10px;
+        position: absolute;
 
-    margin: 20px;
-}
+    }
 
-#demande .liste .etat {
-    width: 150px;
-}
+    #inscription_connexion p, #deconnexion p, #bjr {
+        font-size: 11px;
+    }
+    
+    #bjr {
+        position: relative;
+        top: -63px;
+        left: -31px;
+    }
 
-/*Fin Demande */
-
-
-
-
-/*Début Proposer */
-#proposer .form-check-input {
-     position: relative; 
-}
-
-#proposer .form-group {
-    margin : 0px;
-    margin-bottom: 5px;
-}
-
-
-
-/*Fin Proposer */
-
-
-
-/*Modal inscription*/
-
-@media screen and (max-width:450px) {
-    .modal-dialog {
+     .modal-dialog {
         margin: 0px;
         padding: 0px 30px 0px 15px;
     }
+    
+    /*Messagerie */
+    #messagerie #nav-tabContent {
+        border: 1px solid #842929;
+/*        margin-top: 60px;*/
+        display: none;
+        
+    }
+    
+    #messagerie #messages {
+    height: 340px;
+    }
+    
+    #messagerie #btnBack {
+        position: fixed;
+        top: -45px;
+        background-color: transparent;
+        border: none;
+        color: #842929;
+    }
+    
+    
+     #messagerie #btnBack {
+         display: none;
+    }
+    
+    #messagerie #nav-tabContent {
+        display: block;
+    }
+    
+     #messagerie .list-group {
+         display: flex;
+    }
+    
+
+    
+    /*Acceuil */
+    #acceuil #description article p {
+        font: 12px;
+    }
+
+    #acceuil #description {
+        padding-top: 20px;
+    }
+
+    #acceuil #aa #carous {
+        height: 150px;
+    }
+
+    #acceuil section {
+        visibility: visible;
+    }
+
+    /*Menu */
+    #mySidebar #gdmenu {
+        visibility: hidden;
+        height: 0px;
+        width: 0px;
+        overflow: hidden;
+    }
+    #mySidebar #ptmenu{
+        visibility: visible;
+        margin-top: 70px;
+    }
+
+    #mySidebar #ptmenu .closebtn {
+        position: absolute;
+        top: -75px;
+        left: -52px;
+
+    }
+
+    
+    
+    /* Réduire la taille du menu sur les smartphones */
+    .sidebar {
+        padding-top: 15px;=
+
+    }
+    .sidebar a {
+        font-size: 18px;
+    }
+    
+    
+    /* Head */
+    header img {
+        max-width: 30%;
+        position: absolute;
+        top: 12px;
+        left: 40%;
+        right: 30%;
+    }
 }
 
-.btn-dark {
-    color: #fff;
-    background-color: #4a43419c !important;
+
+
+@media screen and (min-width: 650px) {
+    /*accueil */
+    #acceuil section {
+        visibility: hidden;
+        height: 0px;
+        overflow: hidden;
+    }
+
+    /*menu */
+    #mySidebar #gdmenu {
+        visibility: visible;
+    }
+    #mySidebar #ptmenu {
+        visibility: hidden;
+        height: 0px;
+        overflow: hidden;
+    }
 }
 
-.btn-success {
-    color: #fff;
-    background-color: #227d35 !important;
+@media (min-width: 650px) and (max-width: 800px) {
+    /* rechercher un profil */
+    #recherche_profil img {
+        max-width: 30%;
+    }
+
+    /*profil */
+    
+    #profil #info_perso {
+        margin: 5px  ;
+    }
+    .titre_page {
+        margin: 0px 0px 8px;
+    }
+    
+    /* head */
+    header img {
+        max-width: 160px;
+        position: absolute;
+        top: -46px;
+        left: 38%;
+    }
 }
-/*Modal inscription*/
+
+
+
+
+@media screen and (min-width: 800px) {
+    #profil #info_perso {
+        margin: 5px;
+        margin-left: 15%  ;
+    }
+    header img {
+        max-width: 240px;
+        position: absolute;
+        top: -60px;
+        left: 45%;
+    }
+}
+
+
