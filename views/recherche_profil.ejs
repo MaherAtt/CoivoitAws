@@ -11,18 +11,15 @@
         <% } else{ %>
         <%- include('./partials/header'); -%>
         <% } %>
-        <!--Reste de la page-->
+        <!--Reste de la page rechercher profil-->
         <div id="recherche_profil" class="col-md-12 align-middle">
-            <!--
-<div class="text-center">
-<img class="rounded mx-auto d-block img-fluid " src="img/img2.jpg"/>
-</div>
--->
             <div class="text-center box_search align-middle d-flex justify-content-center row">
 
+                <!-- Barre de recherche -->
                 <div id="search" class="badge-pill badge-dark "><input class=" col-md-10 col-9 " type="text"  onkeyup="myFunction()" id="data"  placeholder="Rechercher un profil ..."><i class="fas fa-search col-md-1 col-1"></i></div>
                 <div class="col-md-12 row justify-content-center">
 
+                    <!-- Acordéon recherche avancée-->
                     <div id="accordion" >
 
                         <div class="" id="headingOne">
@@ -60,6 +57,8 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Résultat recherche -- liste des profils -->
             <div id="liste" class="d-flex justify-content-center row">
                 <% for(var i=0; i < profils.length; i++) { %>
                 <div class="userCard profil col-md-3  col-sm-5 row  card  " id="profils" >
@@ -99,17 +98,18 @@
         <%- include('./partials/footer'); -%>
 
         <script>
-            function redirPro(data)
-            {
+            /*Quand je clic sur un profil, je suis redirigé vers cette page*/
+            function redirPro(data){
               window.location.href = "./Profil/"+data;
             }
 
+            /*Afiche le résultat de la recherche profil en regardant l'attribut ville*/
             function myFunctionVille() {
                 var input, filter, ul, li, a, i, txtValue;
 
                 input = document.getElementById('lieux');
                 filter = input.value.toUpperCase();
-                liste=document.getElementById("liste");
+                liste = document.getElementById("liste");
                 elements = liste.getElementsByClassName('profil');
 
                 for (i = 0; i < elements.length; i++) {
@@ -127,11 +127,11 @@
                 }
             }
 
+            /*Afiche le résultat de la recherche profil en regardant l'attribut note*/
             function myFunctionNote(val) {
                 var input, filter, ul, li, a, i, txtValue;
 
-
-                liste=document.getElementById("liste");
+                liste = document.getElementById("liste");
                 elements = liste.getElementsByClassName('profil');
 
                 for (i = 0; i < elements.length; i++) {
@@ -149,6 +149,7 @@
                 }
             }
 
+            /*Afiche le résultat de la recherche profil en regardant l'attribut nom*/
             function myFunction() {
                 var input, filter, ul, li, a, i, txtValue;
 
@@ -171,8 +172,6 @@
                     }
                 }
             }
-
-
 
         </script>
     </body>

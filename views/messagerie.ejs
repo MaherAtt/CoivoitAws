@@ -8,72 +8,64 @@
         <% if(logged==true){ %>
         <%- include('./partials/headerLoggedProfil'); -%>
         <div id="corps text-center">
-                 <p class="offset-1 col-8 col-md-8 offset-md-0" id="bjr">Bonjour <%= User %></p>
-        <% } else{ %>
-        <%- include('./partials/headerProfil'); -%>
-        <% } %>
+            <p class="offset-1 col-8 col-md-8 offset-md-0" id="bjr">Bonjour <%= User %></p>
+            <% } else{ %>
+            <%- include('./partials/headerProfil'); -%>
+            <% } %>
 
-        <div id="messagerie" class="col-md-12">
+            <!--Reste de la page messagerie -->
+            <div id="messagerie" class="col-md-12">
 
-            <h1 class="col-sm-12 col-md-12 text-center titre_page">Messagerie</h1>
-            <div class="col-md-12">
-                <div class="row">
-                    <!--  Liste des conversations  -->
-                    <div class="col-md-4 col-12">
+                <h1 class="col-sm-12 col-md-12 text-center titre_page">Messagerie</h1>
+                <div class="col-md-12">
+                    <div class="row">
+                        <!--  Liste des conversations -- Colonne de gauche  -->
+                        <div class="col-md-4 col-12">
 
-                        <div class="list-group" id="list-tab" role="tablist" style="height: 500px; background-color: white">
-                            <a href="#" id="amis"></a>
-                            <a style="pointer-events: none; cursor: default;" class="list-group-item list-group-item-action conversation" id="MyUsername" data-toggle="list" href="#<%= user %>" role="tab" aria-controls="home"><%= user %></a>
-                            <% for(var i=0; i < users.length; i++) { %>
-                            <a class="list-group-item list-group-item-action conversation" id="<%= users[i].Id %>" data-toggle="list" href="#<%= users[i].Id %>" role="tab" aria-controls="home"><%= users[i].Nom %> <%= users[i].Prenom %></a>
+                            <div class="list-group" id="list-tab" role="tablist" style="height: 500px; background-color: white">
+                                <a href="#" id="amis"></a>
+                                <a style="pointer-events: none; cursor: default;" class="list-group-item list-group-item-action conversation" id="MyUsername" data-toggle="list" href="#<%= user %>" role="tab" aria-controls="home"><%= user %></a>
+                                <% for(var i=0; i < users.length; i++) { %>
+                                <a class="list-group-item list-group-item-action conversation" id="<%= users[i].Id %>" data-toggle="list" href="#<%= users[i].Id %>" role="tab" aria-controls="home"><%= users[i].Nom %> <%= users[i].Prenom %></a>
 
-                            <% } %>
-                        </div>
-                    </div>
-                    <!-- FIN Liste des conversations  -->
-
-                    <!--  Colonne de droite  -->
-                    <div class="col-md-8 col-12">
-                        <!--
-<div class=" col-md-12 alert alert-warning " id="response" role="alert">
-<button type="button" class="close" data-dismiss="alert" aria-hidden="true" aria-label="Close">
-<span aria-hidden="true">&times;</span>
-</button>
-</div>
--->
-                        <div class="tab-content animated fadeInRight" id="nav-tabContent">
-                            <button class="backbtn" id="btnBack" >&#8592;</button>
-                            <!--  Détail conseration  -->
-                            <div class="tab-pane fade show active afficheConversation" id="list-home" role="tabpanel" aria-labelledby="messages">
-                                <ul id="messages" >
-                                </ul>
-
-                                <!-- Formulaire d'envoie de message -->
-                                <form class="col-md-12 row">
-                                    <textarea class="form-control col-md-9" rows="2" id="Message" placeholder="Votre message" ></textarea>
-                                    <button type="submit" id="send" class="btn btn-primary col-md">Envoyer</button>
-                                </form>
-                                <!-- Fin Formulaire d'envoie de message  -->
-
+                                <% } %>
                             </div>
                         </div>
-                        <!--  Fin détail conversation  -->
+                        <!-- FIN Liste des conversations  -- Colonne de gauche -->
+
+                        <!--  Colonne de droite  -->
+                        <div class="col-md-8 col-12">
+                            <div class="tab-content animated fadeInRight" id="nav-tabContent">
+                                <button class="backbtn" id="btnBack" >&#8592;</button>
+                                <!--  Détail conseration  -->
+                                <div class="tab-pane fade show active afficheConversation" id="list-home" role="tabpanel" aria-labelledby="messages">
+                                    <!--SMS -->
+                                    <ul id="messages" > </ul>
+
+                                    <!-- Formulaire d'envoie de message -->
+                                    <form class="col-md-12 row">
+                                        <textarea class="form-control col-md-9" rows="2" id="Message" placeholder="Votre message" ></textarea>
+                                        <button type="submit" id="send" class="btn btn-primary col-md">Envoyer</button>
+                                    </form>
+                                    <!-- Fin Formulaire d'envoie de message  -->
+
+                                </div>
+                            </div>
+                            <!--  Fin détail conversation  -->
+                        </div>
+                        <!-- FIN Colonne de droite  -->
                     </div>
-                    <!-- FIN Colonne de droite  -->
                 </div>
             </div>
 
-
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
             <script src="/socket.io/socket.io.js"></script>
-
-
-
+            
         </div>
 
         <script> 
             $(document).ready(function(){
-                
+
                 /*je colore l'icone msg pour dire que je suis sur cette page*/
                 $('#mySidebar .menu a:nth-child(n)').find('i').removeClass('change_page')
                 $('#mySidebar .menu a:nth-child(3)').find('i').addClass('change_page')

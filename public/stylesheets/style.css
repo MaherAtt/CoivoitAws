@@ -624,17 +624,7 @@ header, .haut {
     }
     
     
-     #messagerie #btnBack {
-         display: none;
-    }
-    
-    #messagerie #nav-tabContent {
-        display: block;
-    }
-    
-     #messagerie .list-group {
-         display: flex;
-    }
+  
     
 
     
@@ -714,6 +704,19 @@ header, .haut {
         visibility: hidden;
         height: 0px;
         overflow: hidden;
+    }
+    
+    /*messagerie*/
+       #messagerie #btnBack {
+         display: none;
+    }
+    
+    #messagerie #nav-tabContent {
+        display: block;
+    }
+    
+     #messagerie .list-group {
+         display: flex;
     }
 }
 

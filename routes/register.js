@@ -14,27 +14,27 @@ function Inscription(prenom, nom, email, mdp,univ,adr){
 
     let crypto = require('crypto')
     const hash = crypto.createHmac('sha256', mdp)
-        .update('I love cupcakes')
-        .digest('hex');
+    .update('I love cupcakes')
+    .digest('hex');
 
 
 
-            var data = [email, hash]
+    var data = [email, hash]
 
-            app.connection.query('INSERT INTO accounts SET Username =?, Password=?',data,function(err,result){
+    app.connection.query('INSERT INTO accounts SET Username =?, Password=?',data,function(err,result){
 
-            })
-            geocoder.geocode(adr,function (err,adrComp) {
-                var ville=adrComp[0].city;
-                var dataProf= [email,nom, prenom,univ,'default_pic.png',4,ville]
-                app.connection.query('INSERT INTO profils SET Username =?,Nom=?,Prenom=?, University=?, Picture=?, Note=?,Adresse=?',dataProf,function(err,result){
+    })
+    geocoder.geocode(adr,function (err,adrComp) {
+        var ville=adrComp[0].city;
+        var dataProf= [email,nom, prenom,univ,'default_pic.png',4,ville]
+        app.connection.query('INSERT INTO profils SET Username =?,Nom=?,Prenom=?, University=?, Picture=?, Note=?,Adresse=?',dataProf,function(err,result){
 
-                })
-                });
+        })
+    });
 
 
 
-    }
+}
 
 
 /* GET home page. */

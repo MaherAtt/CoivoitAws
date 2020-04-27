@@ -7,97 +7,97 @@
         <% if(logged==true){ %>
         <%- include('./partials/headerLogged'); -%>
         <div id="corps text-center">
-                 <p class="offset-1 col-8 col-md-8 offset-md-0" id="bjr">Bonjour <%= User %></p>
-        <% } else{ %>
-        <%- include('./partials/header'); -%>
-        <% } %>
-        <!--Reste de la page-->
-        <div id="demande" class="col-md-12">
-            <div  class="text-center box_search align-middle justify-content-center">
-                <div class="col-md-12 row justify-content-center">
-                    <div class="col-md-12" id="accordion" >
+            <p class="offset-1 col-8 col-md-8 offset-md-0" id="bjr">Bonjour <%= User %></p>
+            <% } else{ %>
+            <%- include('./partials/header'); -%>
+            <% } %>
+            <!--Reste de la page demande -->
+            <div id="demande" class="col-md-12">
+                <div  class="text-center box_search align-middle justify-content-center">
+                    <div class="col-md-12 row justify-content-center">
+                        <!--accordeon -- recherche avancée-->
+                        <div class="col-md-12" id="accordion" >
+                            <div class="" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                        Recherche avancée
+                                    </button>
+                                </h5>
+                            </div>
+                            <div class=" justify-content-center" id="filtre">
+                                <form id="collapseOne">
+                                    <div class="form-check form-check-inline">
+                                        <input onClick="filterDemandes('EN ATTENTE')" type="radio" name="filtre" class="form-check-input" id="attendre">
+                                        <label class="form-check-label" for="attendre">En attente</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input onClick="filterDemandes('REFUSÉ')" type="radio" name="filtre" class="form-check-input" id="refuse">
+                                        <label class="form-check-label" for="refuse">Refusé</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input onClick="filterDemandes('VALIDÉ')" type="radio" name="filtre" class="form-check-input" id="accepte">
+                                        <label class="form-check-label" for="accepte">Accepté</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input onClick="filterDemandes('ALL')" type="radio" name="filtre" class="form-check-input" name="filte" id="historique">
+                                        <label class="form-check-label" for="historique">Toutes les demandes</label>
+                                    </div>
+                                    <a type="submit"  title="rechercher"><i class="fas fa-search"></i></a>
+                                </form>
+                            </div>
+                        </div>
 
-                        <div class="" id="headingOne">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                    Recherche avancée
-                                </button>
-                            </h5>
+                        <% for(var i=0; i < demandes.length; i++) { %>
+                        <!-- résultat de la recherche de la liste des demandes de trajet -->
+                        <div class="demandeContainer card liste">
+                            <div class="row ">
+                                <div class="col-md-2 align-self-center">
+                                    <% if(demandes[i].Emmeteur!=user){ %>
+                                    <a type="button" href="./Profil/<%= demandes[i].NomDem %>_<%= demandes[i].PrenomDem %>"><img class="rounded mx-auto d-block img-fluid rounded border_img" alt="photo_profil" title="voir le profil" src='../Pictures/<%= demandes[i].Emmeteur.split("@")[0] %>.png' onerror="this.onerror=null; this.src='../img/img-profil.jpg'"/>
+                                        <%= demandes[i].NomDem %> <%= demandes[i].PrenomDem %>
+                                    </a>
+
+                                    <% } %>
+                                    <% if(demandes[i].Emmeteur==user){ %>
+                                    <a type="button" href="./Profil/<%= demandes[i].NomDem %>_<%= demandes[i].PrenomDem %>"><img class="rounded mx-auto d-block img-fluid rounded border_img" alt="photo_profil" title="voir le profil" src='../Pictures/<%= demandes[i].Recepteur.split("@")[0] %>.png' onerror="this.onerror=null; this.src='../img/img-profil.jpg'"/>
+                                        <%= demandes[i].NomDem %> <%= demandes[i].PrenomDem %>
+                                    </a>
+
+                                    <% } %>
+                                </div>
+                                <div class="col-md-3 align-self-center"> <%= demandes[i].Message %>
+                                </div>
+                                <div class="col-md-4 align-self-center row"> 
+                                    <div class="col-md-12"><%= demandes[i].AdrDep %> </div>
+                                    <div class="col-md-12"><%= demandes[i].AdrArr %></div>
+                                    <div class="col-md-12"><%= demandes[i].DateTrajet %></div>
+                                </div>
+                                <div class="col-md-1 align-self-center"> <%= demandes[i].NbPlacesDispo %> Places disponibles
+                                </div>
+                                <div class="col-md-2 align-self-center">
+                                    <% if(demandes[i].Etat==2 && demandes[i].Emmeteur!=user){ %>
+                                    <button type="button" class="btn btn-warning etat" title="répondre" onclick="showModal('<%= demandes[i].IdTrajet %>','<%= demandes[i].AdrDep %>','<%= demandes[i].AdrArr %>','<%= demandes[i].DateTrajet %>','<%= demandes[i].Emmeteur %>','<%= demandes[i].NomDem %>','<%= demandes[i].PrenomDem %>')" ><span>EN ATTENTE</span></button>
+                                    <% } %>
+                                    <% if(demandes[i].Etat==2 && demandes[i].Emmeteur==user){ %>
+                                    <button type="button" class="btn btn-warning etat" title="répondre"  ><span>EN ATTENTE</span></button>
+                                    <% } %>
+                                    <% if(demandes[i].Etat==0){ %>
+                                    <button type="button" class="btn btn-danger disabled etat" ><span>REFUSÉ</span></button>
+                                    <% } %>
+                                    <% if(demandes[i].Etat==1){ %>
+                                    <button type="button" class="btn btn-success disabled etat" ><span>VALIDÉ</span></button>
+                                    <% } %>
+
+
+                                </div>
+                            </div>
                         </div>
-                        <div class=" justify-content-center" id="filtre">
-                            <form id="collapseOne">
-                                <div class="form-check form-check-inline">
-                                    <input onClick="filterDemandes('EN ATTENTE')" type="radio" name="filtre" class="form-check-input" id="attendre">
-                                    <label class="form-check-label" for="attendre">En attente</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input onClick="filterDemandes('REFUSÉ')" type="radio" name="filtre" class="form-check-input" id="refuse">
-                                    <label class="form-check-label" for="refuse">Refusé</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input onClick="filterDemandes('VALIDÉ')" type="radio" name="filtre" class="form-check-input" id="accepte">
-                                    <label class="form-check-label" for="accepte">Accepté</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input onClick="filterDemandes('ALL')" type="radio" name="filtre" class="form-check-input" name="filte" id="historique">
-                                    <label class="form-check-label" for="historique">Toutes les demandes</label>
-                                </div>
-                                <a type="submit"  title="rechercher"><i class="fas fa-search"></i></a>
-                            </form>
-                        </div>
+                        <% } %>
+
                     </div>
-                    <% for(var i=0; i < demandes.length; i++) { %>
-
-                    <div class="demandeContainer card liste">
-                        <div class="row ">
-                            <div class="col-md-2 align-self-center">
-                                <% if(demandes[i].Emmeteur!=user){ %>
-                                <a type="button" href="./Profil/<%= demandes[i].NomDem %>_<%= demandes[i].PrenomDem %>"><img class="rounded mx-auto d-block img-fluid rounded border_img" alt="photo_profil" title="voir le profil" src='../Pictures/<%= demandes[i].Emmeteur.split("@")[0] %>.png' onerror="this.onerror=null; this.src='../img/img-profil.jpg'"/>
-                                    <%= demandes[i].NomDem %> <%= demandes[i].PrenomDem %>
-                                </a>
-
-                                <% } %>
-                                <% if(demandes[i].Emmeteur==user){ %>
-                                <a type="button" href="./Profil/<%= demandes[i].NomDem %>_<%= demandes[i].PrenomDem %>"><img class="rounded mx-auto d-block img-fluid rounded border_img" alt="photo_profil" title="voir le profil" src='../Pictures/<%= demandes[i].Recepteur.split("@")[0] %>.png' onerror="this.onerror=null; this.src='../img/img-profil.jpg'"/>
-                                   <%= demandes[i].NomDem %> <%= demandes[i].PrenomDem %>
-                                </a>
-
-                                <% } %>
-                            </div>
-                            <div class="col-md-3 align-self-center"> <%= demandes[i].Message %>
-                            </div>
-                            <div class="col-md-4 align-self-center row"> 
-                                <div class="col-md-12"><%= demandes[i].AdrDep %> </div>
-                                <div class="col-md-12"><%= demandes[i].AdrArr %></div>
-                                <div class="col-md-12"><%= demandes[i].DateTrajet %></div>
-                            </div>
-                            <div class="col-md-1 align-self-center"> <%= demandes[i].NbPlacesDispo %> Places disponibles
-                            </div>
-                            <div class="col-md-2 align-self-center">
-                                <% if(demandes[i].Etat==2 && demandes[i].Emmeteur!=user){ %>
-                                <button type="button" class="btn btn-warning etat" title="répondre" onclick="showModal('<%= demandes[i].IdTrajet %>','<%= demandes[i].AdrDep %>','<%= demandes[i].AdrArr %>','<%= demandes[i].DateTrajet %>','<%= demandes[i].Emmeteur %>','<%= demandes[i].NomDem %>','<%= demandes[i].PrenomDem %>')" ><span>EN ATTENTE</span></button>
-                                <% } %>
-                                <% if(demandes[i].Etat==2 && demandes[i].Emmeteur==user){ %>
-                                <button type="button" class="btn btn-warning etat" title="répondre"  ><span>EN ATTENTE</span></button>
-                                <% } %>
-                                <% if(demandes[i].Etat==0){ %>
-                                <button type="button" class="btn btn-danger disabled etat" ><span>REFUSÉ</span></button>
-                                <% } %>
-                                <% if(demandes[i].Etat==1){ %>
-                                <button type="button" class="btn btn-success disabled etat" ><span>VALIDÉ</span></button>
-                                <% } %>
-
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <% } %>
 
                 </div>
-
             </div>
-
         </div>
 
         <!-- Modal reponse demandes -->
@@ -116,9 +116,9 @@
                             <input id="Traj" type="hidden" value="" name="Trajet">
                             <div class=" offset-md-2 col-md-8 text-center " id="titre">Acceptez-vous que <span id="NomDemandeur">Nom Prénom</span> vous accompagne sur votre trajet ? 
                             </div>
-                            <div class="col-md-12 row"> <h5 class="col-md-2">De :</h5> <div class="col-md" id="AdrDep">Mantes-la-jolie</div> </div>
-                            <div class="col-md-12 row"> <h5 class="col-md-2">Vers :</h5>  <div class="col-md" id="AdrDest"> Versailles </div> </div>
-                            <div class="col-md-12 row"> <h5 class="col-md-2">Le :</h5>   <div class="col-md" id="DateDep"> 10/04/2020 </div></div>
+                            <div class="col-md-12 row"> <h5 class="col-md-2">De :</h5> <div class="col-md" id="AdrDep">Départ</div> </div>
+                            <div class="col-md-12 row"> <h5 class="col-md-2">Vers :</h5>  <div class="col-md" id="AdrDest"> Arrivée </div> </div>
+                            <div class="col-md-12 row"> <h5 class="col-md-2">Le :</h5>   <div class="col-md" id="DateDep"> Date départ </div></div>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-danger"  name="Reponse" value="Refuser">Refuser</button>
@@ -131,9 +131,9 @@
 
 
 
-    <%- include('./partials/menu'); -%>
-    <%- include('./partials/footer'); -%>
-        
+        <%- include('./partials/menu'); -%>
+        <%- include('./partials/footer'); -%>
+
         <script> 
             $(document).ready(function(){
                 /*je colore l'icone demande pour dire que je suis sur cette page*/
@@ -142,50 +142,39 @@
                 $('#mySidebar .menu a:nth-child(n)').removeClass('change_page')
                 $('#mySidebar .menu a:nth-child(7)').addClass('change_page')
             })
-        </script>
-
-    <script>
-        function showModal(data,adrD,adrA,DateD,Nom,NomD,PrenD)
-        {
-            $("#exampleModalCenter #exampleModalLongTitle").text('Trajet N'+data);
-            $("#NomDemandeur").text(NomD+" "+PrenD);
-            $("#Emet").val(Nom);
-            $("#Traj").val(data);
-            $("#exampleModalCenter #AdrDep").text(adrD);
-            $("#exampleModalCenter #AdrDest").text(adrA);
-            $("#exampleModalCenter #DateDep").text(DateD);
-            $("#exampleModalCenter").modal('toggle');
-        }
+        
+            /*Quand j'afiche la modale réponse modale celle cette fonction permet d'afficher les champs de la modale*/
+            function showModal(data,adrD,adrA,DateD,Nom,NomD,PrenD){
+                $("#exampleModalCenter #exampleModalLongTitle").text('Trajet N'+data);
+                $("#NomDemandeur").text(NomD+" "+PrenD);
+                $("#Emet").val(Nom);
+                $("#Traj").val(data);
+                $("#exampleModalCenter #AdrDep").text(adrD);
+                $("#exampleModalCenter #AdrDest").text(adrA);
+                $("#exampleModalCenter #DateDep").text(DateD);
+                $("#exampleModalCenter").modal('toggle');
+            }
 
 
-        function filterDemandes(state) {
-
-
-
-
-
-            liste=document.getElementsByClassName("card liste");
-
-
-            for (i = 0; i < liste.length; i++) {
-
-                button=liste[i].getElementsByTagName("span")[0];
-                etat=button.innerText;
-                if(state=="ALL") {
-                    liste[i].style.display="inline";
-                }
-                else
-                {
-                    if (etat==state) {
+            /*En fonction du filtre appliqué à la recherche j'affiche ou je cache certains éléments */
+            function filterDemandes(state) {
+                liste=document.getElementsByClassName("card liste");
+                for (i = 0; i < liste.length; i++) {
+                    button = liste[i].getElementsByTagName("span")[0];
+                    etat = button.innerText;
+                    if(state == "ALL") {
                         liste[i].style.display="inline";
                     }
-                    else
-                    {
-                        liste[i].style.display="none";
+                    else {
+                        if (etat == state) {
+                            liste[i].style.display="inline";
+                        }
+                        else {
+                            liste[i].style.display="none";
+                        }
                     }
                 }
             }
-        }
-    </script>
+        </script>
     </body>
 </html>

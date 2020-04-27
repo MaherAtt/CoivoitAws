@@ -3,6 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mysql = require('mysql');
+
+//Création des routes 
 var indexRouter = require('./routes/index');
 var editRouter = require('./routes/edit');
 var usersRouter = require('./routes/users');
@@ -26,7 +29,7 @@ var contactRouter=require('./routes/contact');
 
 
 var app = express();
-//msgerie
+//messagerie
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
@@ -43,15 +46,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({secret: 'secretCovoiturage',saveUninitialized: true,resave: true}));
 
 
-//msg
+//messagerie
 app.use(function(req, res, next){
     res.io = io;
     next();
 });
 
 
-var mysql = require('mysql');
-
+//Connexion à la BDD
 var connection = mysql.createPool({
     host     : 'us-cdbr-iron-east-01.cleardb.net',
     user     : 'b68f308ddca3d1',
@@ -73,6 +75,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 
+//Liaison routes et url 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/profil', profileRouter);
@@ -112,12 +115,5 @@ app.use(function(err, req, res, next) {
     res.render('error');
 });
 
-
-
-
-
-
-
 module.exports = {app: app, server: server};
 exports.connection=connection;
-//module.exports = app;
