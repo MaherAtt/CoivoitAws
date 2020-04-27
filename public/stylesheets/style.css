@@ -171,14 +171,13 @@ header, .haut {
     width: 70%;
 }
 
-.carousel-inner img {
-    max-height: 600px;
+#acceuil .carousel-inner img {
+    height: 500px;
     width: 100%;
-
 }
 .carousel-caption {
-    right: 30%;
-    left: 30%;
+    right: 2%;
+    left: 2%;
 }
 
 
@@ -317,6 +316,11 @@ header, .haut {
     overflow: auto;
     font-size: 25px;
     padding: 0px;
+}
+
+
+#messagerie #MyUsername {
+    display: none;
 }
 /* fin Messagerie */
 
@@ -634,7 +638,7 @@ header, .haut {
     }
 
     #acceuil #description {
-        padding-top: 20px;
+        padding-top: 45px;
     }
 
     #acceuil #aa #carous {
@@ -760,4 +764,9 @@ header, .haut {
     }
 }
 
-
+@media screen and (max-width: 800px) {
+    #acceuil .carousel-inner img {
+        height: initial;
+        width: 100%;
+    }
+}

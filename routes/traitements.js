@@ -1,4 +1,5 @@
 var dbconnect = function(callback) {
+    /*Connexion à la BDD en ligne*/
     var mysql = require('mysql');
     var db_config = {
         host     : 'us-cdbr-iron-east-01.cleardb.net',
@@ -13,6 +14,7 @@ var dbconnect = function(callback) {
 };
 exports.dbconnect = dbconnect;
 
+/*Affiche les avis laissés par les utilisateurs*/
 var getAvis = function(data, callback) {
     var mysql = require('mysql');
     var connection;
@@ -39,7 +41,7 @@ module.exports.hello = function() {
 }
 
 
-
+/*info personnelles de l'utilisateur connecté*/
 module.exports.getUserProfil= function(userName) {
     var connection=dbconnect();
     connection.query('Select * from profils where Username =?',userName,function(err,result){

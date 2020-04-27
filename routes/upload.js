@@ -2,9 +2,11 @@ var express = require('express');
 var router = express.Router();
 var formidable = require('formidable');
 var multer = require('multer');
+
 /* GET users listing. */
 router.post('/', function(req, res, next) {
 
+    /*MAJ photo de profil */
     var storage = multer.diskStorage({
         destination: function (req, file, cb) {
             cb(null, 'public/Pictures')

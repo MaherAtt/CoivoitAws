@@ -4,22 +4,24 @@ var router = express.Router();
 var app=require('../app');
 var users=[];
 
+/*Messagerie*/
 router.get('/', function(req, res, next) {
 
     if(req.session.Username) {
         data = [req.session.Username, req.session.Username];
+        
+        /***********************************************/
         app.connection.query('Select P1.Username as Id,P1.Nom,P1.Prenom from Messages,Profils P1 where  (IdEmmeteur=P1.Username and IdRecepteur=?) UNION Select P2.Username as Id,P2.Nom,P2.Prenom as Id from Profils P2,Messages where  (IdRecepteur=P2.Username and IdEmmeteur=?)  ', data, function (err, result) {
 
             res.render('messagerie', {logged:true,user: req.session.Username, users: result,User:req.session.prenom});
 
         })
 
+        /*Je me connecte à la messagerie */
         res.io.once('connection', function (client) {
             var found=false;
-            for(i=0;i<users.length;i++)
-            {
-                if(users[i].userName==req.session.Username)
-                {
+            for(i=0;i<users.length;i++){
+                if(users[i].userName==req.session.Username){
                     found=true;
                 }
             }
@@ -28,7 +30,7 @@ router.get('/', function(req, res, next) {
                 id : client.id,
                 userName : req.session.Username
             });}
-            /* Lit fichier .jon contenant une conversation. Renvoie le contenu si tout se passe bien*/
+            /*  Renvoie le contenu de la conversation contenue dans la BDD si tout se passe bien*/
             client.on('afficher conversation', function (datak) {
 
                 try {
@@ -40,16 +42,16 @@ router.get('/', function(req, res, next) {
 
 
                 } catch (err) {
-                    client.emit('error message', "Problème lors de l'ouverture du fichier");
+                    client.emit('error message', "Problème lors de l'ouverture de la conversation ");
                     return;
                 }
             });
 
 
-            /* Lit le message l'affiche et le sauvegarde dans un fichier json */
+            /* Lit le message l'affiche et le sauvegarde dans la BDD */
             client.on('actu message', function (data) {
-                console.log("Exec; Message"+data);
-                console.log(users);
+//                console.log("Exec; Message"+data);
+//                console.log(users);
                 var dest;
                 var emm;
                 for(i=0;i<users.length;i++)
@@ -61,7 +63,7 @@ router.get('/', function(req, res, next) {
                     }
 
                 }
-                console.log(dest);
+//                console.log(dest);
                 //client.emit('new message', data);
                 client.to(dest).emit('new message', data);
 
@@ -84,7 +86,7 @@ router.get('/', function(req, res, next) {
     }
     else
     {
-        req.session.erreur="Vous Devez étre connecté pour acceder a cette fonctionalité";
+        req.session.erreur="Vous devez être connecté pour accéder à cette fonctionalité";
         res.redirect('./');
     }
 });

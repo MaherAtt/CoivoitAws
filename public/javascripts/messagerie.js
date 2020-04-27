@@ -32,7 +32,7 @@ $(document).ready(function(){
 
     let socket = io();
 
-    /* Lorsque je clique sur une conversation donnée avec une personne j'affiche cette conversation à partir d'un fichier */
+    /* Lorsque je clique sur une conversation donnée avec une personne j'affiche cette conversation à partir  de la BDD */
     $(".conversation").click(function() {
         var href = this.href;
         var res = href.substring(href.indexOf('#')+1, href.length );
@@ -106,7 +106,7 @@ $(document).ready(function(){
     });
 
 
-    /*Je récupère les conversations situés dans un fichier*/
+    /*Je récupère les conversations situés dans la BDD et j'affiche les mesagges par ligne un à un dans du html*/
     socket.on('last message', function(content){
         var user= $('#MyUsername').text();
 

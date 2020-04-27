@@ -49,16 +49,24 @@
                                     <div class="form-group row">
                                         <label for="email" class="col-sm-3 col-4 col-form-label">Email </label>
                                         <div class="col-sm-9 col input-group mb-2">
-                                            <input type="email"  class="form-control " name="email" id="email" value="<%= useremail %>" readonly
-                                                   >
+                                            <input type="email"  class="form-control " name="email" id="email" value="<%= useremail %>" readonly>
                                         </div>
                                     </div>
+                                    <% if(logged==true){ %>
                                     <div class="form-group row">
                                         <label for="email" class="col-sm-3 col-4 col-form-label">Adresse </label>
                                         <div class="col-sm-9 col input-group mb-2">
                                             <input type="search" class="form-control " id="adr-depart-input" placeholder="<%= adrPers %>" name="adress">
                                         </div>
                                     </div>
+                                    <% } else if(logged==false) { %>
+                                    <div class="form-group row">
+                                        <label for="email" class="col-sm-3 col-4 col-form-label">Adresse </label>
+                                        <div class="col-sm-9 col input-group mb-2">
+                                            <input type="text" class="form-control " name="adress" value="<%= adrPers %>" readonly >
+                                        </div>
+                                    </div>
+                                    <% } %>
                                     <div class="text-center my-4">
                                         <%if (canEdit==true) {%> <button class="btn btn-info btn-sm" type="submit">Modifier</button> <%}%>
 
@@ -67,7 +75,9 @@
 
                                 </form>
 
+                                <% if(logged==false){ %>
                                 <a href="../Contact/<%= useremail %>">Contacter</a>
+                                <% } %>
                             </div>
                         </div>
                     </div>

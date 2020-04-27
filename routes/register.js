@@ -4,14 +4,16 @@ var router = express.Router();
 var app=require('../app');
 var NodeGeocoder = require('node-geocoder')
 
-function Inscription(prenom, nom, email, mdp,univ,adr){
 
+/*Fonction appelée lors de l'inscription*/
+function Inscription(prenom, nom, email, mdp,univ,adr){
 
     var geocoder = NodeGeocoder({
         provider: 'opencage',
         apiKey: '7ba3430907eb4b55aa72623fd71ba90d'
     });
 
+    /*Hachage du mot de passe */
     let crypto = require('crypto')
     const hash = crypto.createHmac('sha256', mdp)
     .update('I love cupcakes')
@@ -19,11 +21,13 @@ function Inscription(prenom, nom, email, mdp,univ,adr){
 
 
 
+    /*insertion des données dans la BDD -- nouvelle inscription */
     var data = [email, hash]
-
     app.connection.query('INSERT INTO accounts SET Username =?, Password=?',data,function(err,result){
 
     })
+    
+    /*insertion des données dans la BDD -- MAJ donées personnelles */
     geocoder.geocode(adr,function (err,adrComp) {
         var ville=adrComp[0].city;
         var dataProf= [email,nom, prenom,univ,'default_pic.png',4,ville]
@@ -31,14 +35,13 @@ function Inscription(prenom, nom, email, mdp,univ,adr){
 
         })
     });
-
-
-
 }
 
 
 /* GET home page. */
 router.post('/', function(req, res, next) {
+    
+    /*Je récupère les données du formulaire inscription et je les ajoute dans la BDD si il n'y a pas de pb */
     var email=req.body.EmailReg;
     var name=req.body.NomReg;
     var surname=req.body.PrenomReg;
