@@ -34,7 +34,7 @@ router.get('/', function(req, res, next) {
             client.on('afficher conversation', function (datak) {
 
                 try {
-                    data = [req.session.Username, datak, datak, req.session.Username];
+                 data = [req.session.Username, datak, datak, req.session.Username];
                     app.connection.query('Select * from Messages where (IdEmmeteur=? and IdRecepteur=?) or (IdEmmeteur=? and IdRecepteur=?) ', data, function (err, result) {
 
                         client.emit('last message', result);
@@ -50,21 +50,13 @@ router.get('/', function(req, res, next) {
 
             /* Lit le message l'affiche et le sauvegarde dans la BDD */
             client.on('actu message', function (data) {
-//                console.log("Exec; Message"+data);
-//                console.log(users);
                 var dest;
                 var emm;
-                for(i=0;i<users.length;i++)
-                {
-
-                    if(users[i].userName==data.Destinataire)
-                    {
+                for(i=0;i<users.length;i++){
+                    if(users[i].userName==data.Destinataire){
                         dest=users[i].id;
                     }
-
                 }
-//                console.log(dest);
-                //client.emit('new message', data);
                 client.to(dest).emit('new message', data);
 
                 data = [req.session.Username, data.Destinataire, data.Message, 'GETDATE();'];

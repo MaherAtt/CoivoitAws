@@ -9,9 +9,8 @@ router.post('/', function(req, res, next) {
     else Repo=false;
     data=[Repo,req.body.Emmeteur,req.body.Trajet];
     app.connection.query('Update demandes set Etat=? where IdEmmeteur=? and IdTrajet=?',data,function(err,result){
-
     })
-
+    
     if(Repo==true){
         app.connection.query('Update trajets set NbPlaces=NbPlaces-1 where IdTrajet=? ',req.body.Trajet,function(err,result){
 

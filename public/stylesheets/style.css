@@ -417,8 +417,8 @@ header, .haut {
 
 
 
-/*Demande */
-#demande .liste {
+/*Demande + partie liste de proposer */
+#demande .liste, #container1Proposer  #proposer .liste{
     padding: 5px;
     padding-left: 15px;
     padding-right: 15px;
@@ -426,8 +426,8 @@ header, .haut {
     margin: 20px;
 }
 
-#demande .liste .etat {
-    width: 150px;
+#demande .liste .etat, #container1Proposer #proposer .liste .etat {
+    width: 145px;
 }
 
 
@@ -628,9 +628,6 @@ header, .haut {
     }
     
     
-  
-    
-
     
     /*Acceuil */
     #acceuil #description article p {

@@ -17,89 +17,136 @@
 
 
             <!-- Page proposer un nouveau trajet -->
-            <div class="container" id="container1" >
+            <div class="container" id="container1Proposer" >
                 <div id="proposer">
                     <!-- Formulaire proposer un trajet -->
-                    <form id="myForm" class="form-horizontal"  role="form" action="./proposer" method="post">
+                    <div class="col-md-12">
+                        <form id="myForm" class="form-horizontal"  role="form" action="./proposer" method="post">
 
-                        <div class=" d-flex justify-content-center row" >
-                            <h1 class="text-center recherche-title col-md-12">Nouveau Trajet</h1>
+                            <div class=" d-flex justify-content-center row" >
+                                <h1 class="text-center recherche-title col-md-12">Nouveau Trajet</h1>
 
-                            <div class="col-md-10 d-flex justify-content-center row">
+                                <div class="col-md-10 d-flex justify-content-center row">
 
-                                <div class="form-group col-md-12" >
-                                    <input type="search" class="form-control input-lg" id="adr-depart-input" required placeholder="Départ" name="adrDepart">
-                                </div>
-                                <div class="form-group col-md-12" >
-                                    <input type="text" class="form-control input-lg" onFocus="geolocate()" required id="adr-dest-input" placeholder="Destination" name="adrDestination">
-                                </div>
-                                <div class="form-check col-md-12">
-                                    <label class="form-check-label" for="Aller-retour">Aller-retour ?</label>
-                                    <input class="" type="checkbox"  name="Aller-retour" id="Aller-retour" value="Aller-retour" onclick="showRetourContainer()">
-                                </div>
+                                    <div class="form-group col-md-12" >
+                                        <input type="search" class="form-control input-lg" id="adr-depart-input" required placeholder="Départ" name="adrDepart">
+                                    </div>
+                                    <div class="form-group col-md-12" >
+                                        <input type="text" class="form-control input-lg" onFocus="geolocate()" required id="adr-dest-input" placeholder="Destination" name="adrDestination">
+                                    </div>
+                                    <div class="form-check col-md-12">
+                                        <label class="form-check-label" for="Aller-retour">Aller-retour ?</label>
+                                        <input class="" type="checkbox"  name="Aller-retour" id="Aller-retour" value="Aller-retour" onclick="showRetourContainer()">
+                                    </div>
 
-                                <div class="form-group col-md-12 row ">
-                                    <label class="col-md-4 col-12" for="Aller-retour">Date de l'aller :</label>
+                                    <div class="form-group col-md-12 row ">
+                                        <label class="col-md-4 col-12" for="Aller-retour">Date de l'aller :</label>
 
-                                    <div class="col-md-8 col-12 row">
-                                        <div class="col-md-6 col-6">
-                                            <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                                <input class="form-control input-lg"  type="text" value="Quand ?" name="dateDep" readonly="">
-                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        <div class="col-md-8 col-12 row">
+                                            <div class="col-md-6 col-6">
+                                                <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                                    <input class="form-control input-lg"  type="text" value="Quand ?" name="dateDep" readonly="">
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                </div>
+                                                <input type="hidden" id="dtp_input2" value="">
                                             </div>
-                                            <input type="hidden" id="dtp_input2" value="">
-                                        </div>
-                                        <div class="col-md-6 col-6">
-                                            <div class="input-group date form_time" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
-                                                <input class="form-control input-lg" type="text" value="À quelle heure ?" name="heureDep" readonly="">
-                                                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                                            <div class="col-md-6 col-6">
+                                                <div class="input-group date form_time" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+                                                    <input class="form-control input-lg" type="text" value="À quelle heure ?" name="heureDep" readonly="">
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                                                </div>
+                                                <input type="hidden" id="dtp_input3" value="">
                                             </div>
-                                            <input type="hidden" id="dtp_input3" value="">
                                         </div>
+                                    </div>
+
+
+                                    <div id="date-retour-container" class="form-group col-md-12 row" style="display: none;" >
+                                        <label class="col-md-4 col-12" for="Aller-retour" >Date du retour :</label>
+                                        <div class="col-md-8  col-12 row">
+                                            <div class="col-md-6 col-6">
+                                                <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                                    <input class="form-control input-lg" type="text" value="Quand ?" name="dateDep2" readonly>
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                </div>
+                                                <input type="hidden" id="dtp_input2" value="" />
+                                            </div>
+                                            <div class="col-md-6 col-6">
+                                                <div class="input-group date form_time" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+                                                    <input class="form-control input-lg" type="text" value="À quelle heure ?" name="heureDep2" readonly>
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                                                </div>
+                                                <input type="hidden" id="dtp_input3" value="" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group  col-md-12 col-12 row">
+                                        <label for="input-prix" class="col-md-1 col-1 form-label">Prix</label>
+                                        <div class="col-md-2 col-4">
+                                            <input class="form-control" type="number" required value="10" id="input-prix" name="prix">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-12 col-12 row ">
+                                        <label for="commentaire-trajet" >Ajoutez des détails !</label>
+                                        <textarea class="form-control" id="commentaire-trajet" rows="3" name="commentaire"></textarea>
+                                    </div>
+
+                                    <div class="text-center" >
+                                        <button type="submit" class="btn btn-primary btn-lg"  >Publier</button>
                                     </div>
                                 </div>
 
-
-                                <div id="date-retour-container" class="form-group col-md-12 row" style="display: none;" >
-                                    <label class="col-md-4 col-12" for="Aller-retour" >Date du retour :</label>
-                                    <div class="col-md-8  col-12 row">
-                                        <div class="col-md-6 col-6">
-                                            <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                                <input class="form-control input-lg" type="text" value="Quand ?" name="dateDep2" readonly>
-                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                                            </div>
-                                            <input type="hidden" id="dtp_input2" value="" />
-                                        </div>
-                                        <div class="col-md-6 col-6">
-                                            <div class="input-group date form_time" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
-                                                <input class="form-control input-lg" type="text" value="À quelle heure ?" name="heureDep2" readonly>
-                                                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
-                                            </div>
-                                            <input type="hidden" id="dtp_input3" value="" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group  col-md-12 col-12 row">
-                                    <label for="input-prix" class="col-md-1 col-1 form-label">Prix</label>
-                                    <div class="col-md-2 col-4">
-                                        <input class="form-control" type="number" required value="10" id="input-prix" name="prix">
-                                    </div>
-                                </div>
-
-                                <div class="form-group col-md-12 col-12 row ">
-                                    <label for="commentaire-trajet" >Ajoutez des détails !</label>
-                                    <textarea class="form-control" id="commentaire-trajet" rows="3" name="commentaire"></textarea>
-                                </div>
-
-                                <div class="text-center" >
-                                    <button type="submit" class="btn btn-primary btn-lg"  >Publier</button>
-                                </div>
                             </div>
 
-                        </div>
+                        </form>
+                    </div>
 
-                    </form>
+                    <!--div qui affiche tous les trajets que j'ai proposé -->
+                    <div class=" col-md-12">
+                        <div class=" d-flex justify-content-center row" >
+                            <div id="accordion" >
+
+                                <div class="" id="headingOne">
+                                    <h1 class="text-center recherche-title col-md-12"><button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Voir mes trajets proposés</button></h1>
+                                </div>
+                                <div id="collapseOne" class="collapse row"  aria-labelledby="headingOne" data-parent="#accordion">
+                                    <% for(var i=0; i < listTrajet.length; i++) { %>
+                                    <!-- résultat de la recherche de la liste des listTrajet de trajet -->
+                                    <div class="demandeContainer card liste" >
+                                        <div class="row ">
+                                            <div class="col-md-2 align-self-center">
+
+                                                <p><img class="rounded mx-auto d-block img-fluid rounded border_img" alt="photo_profil" title="voir le profil" src='../Pictures/<%= listTrajet[i].IdChauffeur.split("@")[0] %>.png' onerror="this.onerror=null; this.src='../img/img-profil.jpg'"/>
+                                                    <%= listTrajet[i].nom %> <%= listTrajet[i].prenom %>
+                                                </p>
+
+
+                                            </div>
+                                            <div class="col-md-3 align-self-center"> <%= listTrajet[i].Commentaire %>
+                                            </div>
+                                            <div class="col-md-4 align-self-center row"> 
+                                                <div class="col-md-12"><%= listTrajet[i].AdresseDep %> </div>
+                                                <div class="col-md-12"><%= listTrajet[i].AdresseArr %></div>
+                                                <div class="col-md-12"><%= listTrajet[i].DateDep %></div>
+                                            </div>
+                                            <div class="col-md-2 align-self-center "> 
+                                                <div><%= listTrajet[i].NbPlaces %> Places disponibles</div>
+                                            </div>
+                                            <div class="col-md-1 align-self-center "> 
+                                                <div><%= listTrajet[i].Prix %>€</div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!-- FIN résultat de la recherche de la liste des listTrajet de trajet -->
+                                    <% } %>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -135,14 +182,14 @@
 
 
         <script type="text/javascript">
-             $(document).ready(function(){
+            $(document).ready(function(){
                 /*je colore l'icone proposer pour dire que je suis sur cette page*/
                 $('#mySidebar .menu a:nth-child(n)').find('i').removeClass('change_page')
                 $('#mySidebar .menu a:nth-child(6)').find('i').addClass('change_page')
                 $('#mySidebar .menu a:nth-child(n)').removeClass('change_page')
                 $('#mySidebar .menu a:nth-child(6)').addClass('change_page')
             })
-            
+
             // Format de la date et du timePicker
             ;(function($){
                 $.fn.datetimepicker.dates['fr'] = {
@@ -228,7 +275,7 @@
 
             <%if ( typeof err != 'undefined' ) {%> $('#modalConfirmDelete').modal(); <%}%>
 
-           
+
         </script>
 
         <%- include('./partials/menu'); -%>

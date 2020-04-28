@@ -63,7 +63,8 @@
                 <% for(var i=0; i < profils.length; i++) { %>
                 <div class="userCard profil col-md-3  col-sm-5 row  card  " id="profils" >
                     <div class="col-md-4 col-4 align-self-center"> 
-                        <img class="rounded mx-auto d-block img-fluid rounded-circle border_img" alt="photo_profil" src="img/img-profil.jpg"/>
+<!--                        <img class="rounded mx-auto d-block img-fluid rounded-circle border_img" alt="photo_profil" src="img/img-profil.jpg"/>-->
+                        <img src='../Pictures/<%= profils[i].Username.split("@")[0] + '.png' %>' onerror="this.onerror=null; this.src='/img/img-profil.jpg'" alt="photo de profil" title="photo de profil" class="rounded mx-auto d-block img-fluid rounded-circle border_img" alt="photo_profil"/>
                     </div>
                     <div class="col-md-8 col-8 align-self-center" id="voir_profil" onClick="redirPro('<%= profils[i].Nom  %>_<%= profils[i].Prenom  %>')">
                         <ul>

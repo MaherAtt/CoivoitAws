@@ -3,7 +3,7 @@ var fs=require('fs');
 var router = express.Router();
 var app=require('../app');
 var NodeGeocoder = require('node-geocoder')
-
+resultat ="";
 
 /*Fonction appelée lors de l'inscription*/
 function Inscription(prenom, nom, email, mdp,univ,adr){
@@ -21,9 +21,11 @@ function Inscription(prenom, nom, email, mdp,univ,adr){
 
 
 
+    
     /*insertion des données dans la BDD -- nouvelle inscription */
     var data = [email, hash]
     app.connection.query('INSERT INTO accounts SET Username =?, Password=?',data,function(err,result){
+        resultat="inser1"
 
     })
     
@@ -32,7 +34,7 @@ function Inscription(prenom, nom, email, mdp,univ,adr){
         var ville=adrComp[0].city;
         var dataProf= [email,nom, prenom,univ,'default_pic.png',4,ville]
         app.connection.query('INSERT INTO profils SET Username =?,Nom=?,Prenom=?, University=?, Picture=?, Note=?,Adresse=?',dataProf,function(err,result){
-
+            resultat += "inser2"
         })
     });
 }
@@ -40,8 +42,8 @@ function Inscription(prenom, nom, email, mdp,univ,adr){
 
 /* GET home page. */
 router.post('/', function(req, res, next) {
-    
-    /*Je récupère les données du formulaire inscription et je les ajoute dans la BDD si il n'y a pas de pb */
+    if(resultat == "inser1inser2") {
+        /*Je récupère les données du formulaire inscription et je les ajoute dans la BDD si il n'y a pas de pb */
     var email=req.body.EmailReg;
     var name=req.body.NomReg;
     var surname=req.body.PrenomReg;
@@ -52,6 +54,12 @@ router.post('/', function(req, res, next) {
     sess=req.session;
     sess.erreur='Vous avez été enregistré avec succes';
     res.redirect('.');
+    }
+    else {
+        sess.erreur='Inscription échoué';
+        res.redirect('.');
+    }
+    
 });
 
 module.exports = router;

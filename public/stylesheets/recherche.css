@@ -75,13 +75,14 @@ span.trajet-circle{
 }
 
 
-#container1 .form-control {
+
+#container1 .form-control, #container1Proposer .form-control  {
     color: white;
     background-color: #8d3939;
     border-color: #8d3939;
 }
 
-#container1 .form-control:focus {
+#container1 .form-control:focus , #container1Proposer .form-control:focus {
     color: white;
     background-color: #8d3939;
     border-color: white;
@@ -89,7 +90,7 @@ span.trajet-circle{
     box-shadow: 0 0 0 0.2rem white;
 }
 
-#container1 .btn-primary {
+#container1 .btn-primary, #container1Proposer .btn-primary {
     color: #fff;
     background-color: #8d3939d6 !important;
 }
@@ -104,7 +105,7 @@ span.trajet-circle{
     margin-bottom: 0px;
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 650px) {
     .recherche-title{
         font-size: 20px;
         padding-bottom: 10px;
@@ -127,5 +128,7 @@ span.trajet-circle{
         background: transparent;
         box-shadow: none;
     }
+    #container1 .form-control, #container1Proposer .form-control {
+    margin-bottom: 5px;
 
 }

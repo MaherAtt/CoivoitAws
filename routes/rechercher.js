@@ -19,6 +19,8 @@ router.post('/', async (req, res) => {
         provider: 'opencage',
         apiKey: '7ba3430907eb4b55aa72623fd71ba90d'
     });
+    
+    /*Enregistrement dans des variables des données situés dans le formulaire de recherche d'un trajet */
     sess=req.session;
     var adrDep=req.body.AdresseDep;
     var adrDest=req.body.AdresseDest;
@@ -26,7 +28,7 @@ router.post('/', async (req, res) => {
     var heureDep=req.body.HeureDep;
     dateDep=dateDep+' '+heureDep;
 
-    console.log(adrDep);
+    //console.log(adrDep);
 
 
     if(sess.Username) {
@@ -35,22 +37,17 @@ router.post('/', async (req, res) => {
         geocoder.geocode(adrDep,( err, userDep ) => {
             geocoder.geocode(adrDest,( err, userDest ) => {
                 app.connection.query('Select t.*,p.Nom as NomChauffeur,p.Prenom as PrenomChauffeur,p.Note as Note from trajets t,profils p where t.IdChauffeur=p.Username',( err, result ) => {
-
+                    
                     if(typeof result === 'undefined' || result.length==0) {
                         res.render('rechercher',{logged:isLogged,trajecto:[],user:'',msg:"Désolé aucun trajet ne correspond à votre recherche"});
                     }
                     else {
-
-
                         var tabResultat = [];
                         for (i = 0; i < result.length; i++) {
-
                             var distanceDest = getDistance(userDest[0].latitude, userDest[0].longitude, result[i].latitudeArr, result[i].longitudeArr);
                             var distanceTrajet = getDistance(result[i].latitudeArr, result[i].longitudeArr, result[i].latitudeDep, result[i].longitudeDep);
                             var distanceDep = getDistance(result[i].latitudeDep, result[i].longitudeDep, userDep[0].latitude, userDep[0].longitude);
                             var dureeTrajet = distanceTrajet / 20;
-                            console.log("User :" + userDep[0].latitude + " " + userDep[0].longitude);
-                            console.log("D :" + result[i].latitudeDep + " " + result[i].longitudeDep);
                             var dureeRejoindreDep = distanceDep / 2;
                             moment.locale('fr');
                             var dateStr = moment(result[i].DateDep, 'DD MMM YYYY HH:mm');
@@ -60,18 +57,16 @@ router.post('/', async (req, res) => {
                             var Jour2 = dateStr2.format('DD MMM YYYY');
 
                             if (distanceDest < 2 && dateStr.isBefore(dateStr2) && Jour1 == Jour2) {
-                                tabResultat.push(result[i]);
+                                if(result[i].NbPlaces > 0) tabResultat.push(result[i]);
                             }
-
                         }
                         if(tabResultat.length==0) {   res.render('rechercher',{logged:true,trajecto:[],User:'',msg:"Aucun trajet ne correspond a votre recherche"});
-                                                  }
+                        }
                         else res.render('rechercher', {logged: true, trajecto: tabResultat, user: sess.Username,User:''});
                     }
                 });
             });
         });
-
     }
     else {
         res.redirect('.');

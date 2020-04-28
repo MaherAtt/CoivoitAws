@@ -74,12 +74,13 @@
                                 </div>
                                 <div class="col-md-1 align-self-center"> <%= demandes[i].NbPlacesDispo %> Places disponibles
                                 </div>
+                                <!-- Etat de la demande -->
                                 <div class="col-md-2 align-self-center">
                                     <% if(demandes[i].Etat==2 && demandes[i].Emmeteur!=user){ %>
                                     <button type="button" class="btn btn-warning etat" title="répondre" onclick="showModal('<%= demandes[i].IdTrajet %>','<%= demandes[i].AdrDep %>','<%= demandes[i].AdrArr %>','<%= demandes[i].DateTrajet %>','<%= demandes[i].Emmeteur %>','<%= demandes[i].NomDem %>','<%= demandes[i].PrenomDem %>')" ><span>EN ATTENTE</span></button>
                                     <% } %>
                                     <% if(demandes[i].Etat==2 && demandes[i].Emmeteur==user){ %>
-                                    <button type="button" class="btn btn-warning etat" title="répondre"  ><span>EN ATTENTE</span></button>
+                                    <button type="button" class="btn btn-dark disabled etat" title="répondre"  ><span>EN ATTENTE DE RÉPONSE DU CHAUFFEUR</span></button>
                                     <% } %>
                                     <% if(demandes[i].Etat==0){ %>
                                     <button type="button" class="btn btn-danger disabled etat" ><span>REFUSÉ</span></button>
@@ -87,11 +88,10 @@
                                     <% if(demandes[i].Etat==1){ %>
                                     <button type="button" class="btn btn-success disabled etat" ><span>VALIDÉ</span></button>
                                     <% } %>
-
-
                                 </div>
                             </div>
                         </div>
+                        <!-- FIN résultat de la recherche de la liste des demandes de trajet -->
                         <% } %>
 
                     </div>
@@ -130,7 +130,6 @@
         </div>
 
 
-
         <%- include('./partials/menu'); -%>
         <%- include('./partials/footer'); -%>
 
@@ -143,38 +142,6 @@
                 $('#mySidebar .menu a:nth-child(7)').addClass('change_page')
             })
         
-            /*Quand j'afiche la modale réponse modale celle cette fonction permet d'afficher les champs de la modale*/
-            function showModal(data,adrD,adrA,DateD,Nom,NomD,PrenD){
-                $("#exampleModalCenter #exampleModalLongTitle").text('Trajet N'+data);
-                $("#NomDemandeur").text(NomD+" "+PrenD);
-                $("#Emet").val(Nom);
-                $("#Traj").val(data);
-                $("#exampleModalCenter #AdrDep").text(adrD);
-                $("#exampleModalCenter #AdrDest").text(adrA);
-                $("#exampleModalCenter #DateDep").text(DateD);
-                $("#exampleModalCenter").modal('toggle');
-            }
-
-
-            /*En fonction du filtre appliqué à la recherche j'affiche ou je cache certains éléments */
-            function filterDemandes(state) {
-                liste=document.getElementsByClassName("card liste");
-                for (i = 0; i < liste.length; i++) {
-                    button = liste[i].getElementsByTagName("span")[0];
-                    etat = button.innerText;
-                    if(state == "ALL") {
-                        liste[i].style.display="inline";
-                    }
-                    else {
-                        if (etat == state) {
-                            liste[i].style.display="inline";
-                        }
-                        else {
-                            liste[i].style.display="none";
-                        }
-                    }
-                }
-            }
         </script>
     </body>
 </html>

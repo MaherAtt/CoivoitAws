@@ -36,7 +36,6 @@
                             <input type="text" class="form-control input-lg" onFocus="geolocate()" id="adr-dest-input" placeholder="Destination" name="AdresseDest">
                         </div>
 
-
                         <div class="row espace">
                             <div class="col-md">
                                 <div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
@@ -73,7 +72,6 @@
                         <div id="'+i+'" class="row" onclick="showDetail(this.id)">
                             <div class="col-md-4  ">
                                 <div class="col-md-12 ">
-
                                     <div class="col-md-12">
                                         <img src='../Pictures/<%= trajecto[i].IdChauffeur.split("@")[0] %>.png' onerror="this.onerror=null; this.src='../img/img-profil.jpg'" id="img-profile" alt="img-profile" class="mx-auto d-block rounded-circle" >
                                     </div>
@@ -110,8 +108,8 @@
                                     <div class="trajet-place col-md-12" id="arrivee-trajet"><%= trajecto[i].AdresseArr %></div>
                                 </div>
                                 <div class="col-md-2 col-1 row">
-                                    <div class="col-md-12"><%= trajecto[i].Prix %>$</div>
-
+                                    <div class="col-md-12"><%= trajecto[i].Prix %>€</div>
+                                    <div class="col-md-12"><%= trajecto[i].NbPlaces %> places restantes</div>
                                     <div class="col-md-12 d-flex align-items-end">
                                         <img src="img/down-arrow.png" id="img-arrow-'+i+'" class="img-arrow" alt="img-profile">
                                     </div>
@@ -125,14 +123,27 @@
                             <div id="ligne-horizontale" class="col-md-12 col-12  row">
                                 <div class="col-md-6 col-12" >
                                     <p class="col-md-12 col-12"><%= trajecto[i].Commentaire %></p>
+                                     <% if(user != trajecto[i].IdChauffeur){ %>
                                     <div class="col-md-12 col-12 row">
                                         <p class="col-md-4 col-5 ">Contacter</p>
                                         <a class="col-md col" href=""><%= trajecto[i].IdChauffeur %></a>
                                     </div>
+                                    <% } else { %>
+                                    <div class="col-md-12 col-12 row">
+                                        <p class="col-md-4 col-5 ">Contacter</p>
+                                        <p class="col-md col"><%= trajecto[i].IdChauffeur %></p>
+                                    </div>
+                                    <% } %>
                                 </div>
+                                <% if(user != trajecto[i].IdChauffeur){ %>
                                 <div class="col-md-6 col-12 text-center">
                                     <button class="btn btn-success btn-lg" onclick="reserveTrajet('<%= trajecto[i].IdTrajet %>')">Réserver </button>
                                 </div>
+                                <% } else { %>
+                                <div class="col-md-6 col-12 text-center">
+                                    <button class="btn btn-success btn-lg" disabled >Mon Trajet </button>
+                                </div>
+                                <% } %>
                             </div>
                         </div>
                     </div>
@@ -229,10 +240,11 @@
                 weekStart: 1,
                 todayBtn:  1,
                 autoclose: 1,
-                todayHighlight: 1,
+                todayHighlight: true,
                 startView: 2,
                 minView: 2,
                 forceParse: 0
+                
             });
             $('.form_time').datetimepicker({
                 language:  'fr',
@@ -246,7 +258,7 @@
                 forceParse: 0
             });
 
-            //Autocomplete pour addresse
+            //Autocomplete pour addresse --> aide à la saisie
             (function() {
                 var searchBox = placesInstantsearchWidget({
                     appId: 'plKD0BHKH6A7',

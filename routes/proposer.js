@@ -8,12 +8,19 @@ var NodeGeocoder = require('node-geocoder');
 
 /* Page proposer un nouveau trajet */
 router.get('/', function(req, res, next) {
-    if(req.session.Username)
-        res.render('proposer',{logged:true,User:req.session.prenom,err:req.session.erreur});
-    else {
+    if(req.session.Username){
+        app.connection.query('SELECT  t.*, p.nom, p.prenom  FROM trajets t, profils p WHERE t.IdChauffeur = p.Username AND t.IdChauffeur=? ORDER BY t.DateDep DESC', req.session.Username, function (err, result) {
+
+            res.render('proposer',{logged:true,User:req.session.prenom,err:req.session.erreur, listTrajet: result });
+        });
+        
+    }else {
         req.session.erreur="Vous devez être connecté pour accéder à cette fonctionalité";
         res.redirect('./');
     }
+
+
+
 });
 
 router.post('/', function(req, res, next) {
@@ -50,7 +57,7 @@ router.post('/', function(req, res, next) {
                     req.session.erreur="L'ajout du trajet a échoué veuillez réessayer";
                     res.redirect('./proposer');
                 } else {
-                    req.session.erreur="Votre trajet a été ajouté vous pouvez dès à présent commencer à gérer les demandes";
+                    req.session.succes="Votre trajet a été ajouté vous pouvez dès à présent commencer à gérer les demandes";
                     res.redirect('./proposer');
                 }
 

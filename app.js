@@ -7,12 +7,11 @@ var mysql = require('mysql');
 
 //Création des routes 
 var indexRouter = require('./routes/index');
-var editRouter = require('./routes/edit');
 var usersRouter = require('./routes/users');
-var rechercherRouter = require('./routes/rechercher');
+var profileRouter = require('./routes/profil');
 var inscriptionRouter = require('./routes/inscription');
 var connexionRouter = require('./routes/login');
-var profileRouter = require('./routes/profil');
+var rechercherRouter = require('./routes/rechercher');
 var proposerRouter = require('./routes/proposer');
 var messagerieRouter = require('./routes/messagerie');
 var registerRouter = require('./routes/register');
@@ -20,11 +19,12 @@ var loginRouter = require('./routes/login');
 var logOutRouter = require('./routes/logout');
 var PosterRouter = require('./routes/poster');
 var demande = require('./routes/demande');
-var repondre = require('./routes/repondre');
 var recherche_profil = require('./routes/recherche_profil');
+var repondre = require('./routes/repondre');
 var reserver = require('./routes/reserver');
-var messages = require('./routes/messages');
+//var messages = require('./routes/messages');
 var upload=require('./routes/upload');
+var editRouter = require('./routes/edit');
 var contactRouter=require('./routes/contact');
 
 
@@ -36,6 +36,7 @@ var io = require('socket.io')(server);
 
 
 app.use(express.static(path.join(__dirname, 'public')));
+
 // view engine setup
 var cons = require('consolidate');
 
@@ -53,6 +54,7 @@ app.use(function(req, res, next){
 });
 
 
+
 //Connexion à la BDD
 var connection = mysql.createPool({
     host     : 'us-cdbr-iron-east-01.cleardb.net',
@@ -67,6 +69,7 @@ var connection = mysql.createPool({
 app.engine('html', cons.swig)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
 
 var sess;
 app.use(logger('dev'));
@@ -92,11 +95,10 @@ app.use('/demande',demande);
 app.use('/search',recherche_profil);
 app.use('/repondre',repondre);
 app.use('/reserver',reserver);
-app.use('/messages',messages);
+//app.use('/messages',messages);
 app.use('/upload',upload);
 app.use('/edit',editRouter);
 app.use('/contact',contactRouter);
-
 
 
 // catch 404 and forward to error handler
