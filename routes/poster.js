@@ -2,11 +2,14 @@ var express = require('express');
 var fs=require('fs');
 var router = express.Router();
 var app=require('../app');
-/* GET home page. */
+
+
+/*appelé lorsqu'un utilisateur poste un nouveau trajet*/
 router.get('/', function(req, res, next) {
     res.render('proposer',{User:req.session.prenom});
 });
 
+/*appelé lorsqu'un utilisateur poste un nouvel avis sur une autre personne*/
 router.post('/', function(req, res, next) {
     var user=req.session.nom+" "+req.session.prenom ;
     var message=req.body.commentaire;

@@ -3,13 +3,15 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mysql = require('mysql');
+
+//Création des routes 
 var indexRouter = require('./routes/index');
-var editRouter = require('./routes/edit');
 var usersRouter = require('./routes/users');
-var rechercherRouter = require('./routes/rechercher');
+var profileRouter = require('./routes/profil');
 var inscriptionRouter = require('./routes/inscription');
 var connexionRouter = require('./routes/login');
-var profileRouter = require('./routes/profil');
+var rechercherRouter = require('./routes/rechercher');
 var proposerRouter = require('./routes/proposer');
 var messagerieRouter = require('./routes/messagerie');
 var registerRouter = require('./routes/register');
@@ -17,22 +19,24 @@ var loginRouter = require('./routes/login');
 var logOutRouter = require('./routes/logout');
 var PosterRouter = require('./routes/poster');
 var demande = require('./routes/demande');
-var repondre = require('./routes/repondre');
 var recherche_profil = require('./routes/recherche_profil');
+var repondre = require('./routes/repondre');
 var reserver = require('./routes/reserver');
-var messages = require('./routes/messages');
+//var messages = require('./routes/messages');
 var upload=require('./routes/upload');
+var editRouter = require('./routes/edit');
 var contactRouter=require('./routes/contact');
 
 
 var app = express();
-//msgerie
+//messagerie
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
 
 
 app.use(express.static(path.join(__dirname, 'public')));
+
 // view engine setup
 var cons = require('consolidate');
 
@@ -43,15 +47,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({secret: 'secretCovoiturage',saveUninitialized: true,resave: true}));
 
 
-//msg
+//messagerie
 app.use(function(req, res, next){
     res.io = io;
     next();
 });
 
 
-var mysql = require('mysql');
 
+//Connexion à la BDD
 var connection = mysql.createPool({
     host     : 'us-cdbr-iron-east-01.cleardb.net',
     user     : 'b68f308ddca3d1',
@@ -66,6 +70,7 @@ app.engine('html', cons.swig)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+
 var sess;
 app.use(logger('dev'));
 app.use(express.json());
@@ -73,6 +78,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 
+//Liaison routes et url 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/profil', profileRouter);
@@ -89,11 +95,10 @@ app.use('/demande',demande);
 app.use('/search',recherche_profil);
 app.use('/repondre',repondre);
 app.use('/reserver',reserver);
-app.use('/messages',messages);
+//app.use('/messages',messages);
 app.use('/upload',upload);
 app.use('/edit',editRouter);
 app.use('/contact',contactRouter);
-
 
 
 // catch 404 and forward to error handler
@@ -112,12 +117,5 @@ app.use(function(err, req, res, next) {
     res.render('error');
 });
 
-
-
-
-
-
-
 module.exports = {app: app, server: server};
 exports.connection=connection;
-//module.exports = app;

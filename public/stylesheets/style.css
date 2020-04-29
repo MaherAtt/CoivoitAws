@@ -171,14 +171,13 @@ header, .haut {
     width: 70%;
 }
 
-.carousel-inner img {
-    max-height: 600px;
+#acceuil .carousel-inner img {
+    height: 500px;
     width: 100%;
-
 }
 .carousel-caption {
-    right: 30%;
-    left: 30%;
+    right: 2%;
+    left: 2%;
 }
 
 
@@ -318,6 +317,11 @@ header, .haut {
     font-size: 25px;
     padding: 0px;
 }
+
+
+#messagerie #MyUsername {
+    display: none;
+}
 /* fin Messagerie */
 
 
@@ -413,8 +417,8 @@ header, .haut {
 
 
 
-/*Demande */
-#demande .liste {
+/*Demande + partie liste de proposer */
+#demande .liste, #container1Proposer  #proposer .liste{
     padding: 5px;
     padding-left: 15px;
     padding-right: 15px;
@@ -422,8 +426,8 @@ header, .haut {
     margin: 20px;
 }
 
-#demande .liste .etat {
-    width: 150px;
+#demande .liste .etat, #container1Proposer #proposer .liste .etat {
+    width: 145px;
 }
 
 
@@ -624,19 +628,6 @@ header, .haut {
     }
     
     
-     #messagerie #btnBack {
-         display: none;
-    }
-    
-    #messagerie #nav-tabContent {
-        display: block;
-    }
-    
-     #messagerie .list-group {
-         display: flex;
-    }
-    
-
     
     /*Acceuil */
     #acceuil #description article p {
@@ -644,7 +635,7 @@ header, .haut {
     }
 
     #acceuil #description {
-        padding-top: 20px;
+        padding-top: 45px;
     }
 
     #acceuil #aa #carous {
@@ -715,6 +706,19 @@ header, .haut {
         height: 0px;
         overflow: hidden;
     }
+    
+    /*messagerie*/
+       #messagerie #btnBack {
+         display: none;
+    }
+    
+    #messagerie #nav-tabContent {
+        display: block;
+    }
+    
+     #messagerie .list-group {
+         display: flex;
+    }
 }
 
 @media (min-width: 650px) and (max-width: 800px) {
@@ -757,4 +761,9 @@ header, .haut {
     }
 }
 
-
+@media screen and (max-width: 800px) {
+    #acceuil .carousel-inner img {
+        height: initial;
+        width: 100%;
+    }
+}

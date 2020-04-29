@@ -1,3 +1,4 @@
+/*Modales inscription et connexion*/
 $(".menu_connexion").click(function(){
     $("#Modalconnexion").modal("show");
     

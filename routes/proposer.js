@@ -6,17 +6,25 @@ var app=require('../app');
 var NodeGeocoder = require('node-geocoder');
 
 
-/* GET home page. */
+/* Page proposer un nouveau trajet */
 router.get('/', function(req, res, next) {
-    if(req.session.Username)
-    res.render('proposer',{logged:true,User:req.session.prenom,err:req.session.erreur});
-    else {
-        req.session.erreur="Vous Devez étre connecté pour acceder a cette fonctionalité";
+    if(req.session.Username){
+        app.connection.query('SELECT  t.*, p.nom, p.prenom  FROM trajets t, profils p WHERE t.IdChauffeur = p.Username AND t.IdChauffeur=? ORDER BY t.DateDep DESC', req.session.Username, function (err, result) {
+
+            res.render('proposer',{logged:true,User:req.session.prenom,err:req.session.erreur, listTrajet: result });
+        });
+        
+    }else {
+        req.session.erreur="Vous devez être connecté pour accéder à cette fonctionalité";
         res.redirect('./');
     }
+
+
+
 });
 
 router.post('/', function(req, res, next) {
+    /* je récupère ces informaions du formalaire rempli pour l'ajout d'un nouveau trajet*/
     var adrDep=req.body.adrDepart;
     var adrDest=(req.body.adrDestination);
     var dateDep=req.body.dateDep;
@@ -36,6 +44,7 @@ router.post('/', function(req, res, next) {
     var dateStr = moment(dateDep, 'DD MMM YYYY HH:mm').format('YYYY-MM-DD HH:mm:ss');
 
 
+    /* Ajout d'un nouveau trajet dans la BDD*/
     geocoder.geocode(adrDep,function (err,resDep) {
         geocoder.geocode(adrDest,function (err,resDes) {
             var distanceTrajet=getDistance(resDep[0].latitude,resDep[0].longitude,resDes[0].latitude,resDes[0].longitude);
@@ -48,7 +57,7 @@ router.post('/', function(req, res, next) {
                     req.session.erreur="L'ajout du trajet a échoué veuillez réessayer";
                     res.redirect('./proposer');
                 } else {
-                    req.session.erreur="Votre trajet a été ajouté vous pouvez dés a présent commencer a gérer les demandes";
+                    req.session.succes="Votre trajet a été ajouté vous pouvez dès à présent commencer à gérer les demandes";
                     res.redirect('./proposer');
                 }
 
@@ -56,15 +65,9 @@ router.post('/', function(req, res, next) {
         })
     })
 
-
-
-
-
-
-
-
 });
 
+/* Calcul de la distance entre un point de départ et un point d'arrivé*/
 function getDistance(lat1,lon1,lat2,lon2) {
     var R = 6371; // Radius of the earth in km
     var dLat = deg2rad(lat2-lat1);  // deg2rad below

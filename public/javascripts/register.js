@@ -1,8 +1,10 @@
 
 function verifInsc() {
 
+    /* Quand l'utilisateur veut s'inscrre je vérifie s'est informations*/
+    
     var erreur;
-
+    
     var prenom = document.getElementById("prenom");
     var nom = document.getElementById("nom");
     var email = document.getElementById("emailreg");

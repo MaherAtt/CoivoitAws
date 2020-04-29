@@ -2,13 +2,7 @@ $("#voir_com").click(function(){
     $("#Modalavis").modal("show");
 });
 
-
-
-
-
-//var c = document.getElementById('lineChart');//.getContext('2d');
-//var ctxL = c.getContext('2d');
-//console.log(ctxL);
+/* graphe répertoriant le Nombre de trajet par mois*/
 
 var ctxL = $('#lineChart');
 var myLineChart = new Chart(ctxL, {

@@ -8,7 +8,7 @@ var NodeGeocoder = require('node-geocoder');
 
 /* GET home page. */
 
-
+/*MAJ des informations personnelles dans le profil*/
 router.post('/', function(req, res, next) {
 
     var geocoder = NodeGeocoder({
