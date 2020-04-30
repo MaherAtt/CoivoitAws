@@ -34,7 +34,6 @@ router.post('/', function(req, res, next) {
     adrDepFinal=adrDep.replace("'"," ");
     adrDestFinal=adrDest.replace("'"," ");
     dateDep=dateDep+' '+heureDep;
-    console.log(dateDep);
     moment.locale('fr');
     var geocoder = NodeGeocoder({
         provider: 'opencage',

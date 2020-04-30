@@ -28,7 +28,6 @@ router.post('/', async (req, res) => {
     var heureDep=req.body.HeureDep;
     dateDep=dateDep+' '+heureDep;
 
-    //console.log(adrDep);
 
 
     if(sess.Username) {

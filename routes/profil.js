@@ -13,11 +13,11 @@ router.get('/', function(req, res, next) {
 
     /*J'ouvre ma page profil avec mes infos personnelles*/
     if(sess.Username) {
-        //         app.connection.query('Select COUNT(d.IdTrajet), d.IdEmmeteur FROM demandes d, trajets t WHERE d.IdTrajet = t.IdTrajet AND d.Etat = "true" AND d.IdEmmeteur=?  GROUP BY d.IdEmmeteur', sess.Username, function (err, nbtrajets) {
         app.connection.query('Select d.* FROM demandes d, trajets t WHERE d.IdTrajet = t.IdTrajet AND d.Etat =1 AND d.IdRecepteur=?  GROUP BY d.IdEmmeteur', sess.Username, function (err, nbtrajets) {
             nbtrajet = nbtrajets;
         });
         app.connection.query('Select p.Adresse,a.Username as photo,a.Nom as NomEmm,a.Prenom as PrenomEmm,a2.Commentaire,a2.Note,a2.Confiance,a2.Ponctualite from profils a,avis a2,profils p where a2.IdRecepteur=? and a2.IdEmmeteur=a.Username and p.Username=a2.IdRecepteur',sess.Username,function(err,avis){
+            
             app.connection.query('Select AVG(Ponctualite) as Ponc,AVG(Confiance) as Conf from avis where IdRecepteur =?', sess.Username, function (err, CfPon) {
                 res.render('profil', {
                     photo: req.session.Username.split("@")[0] + '.png',
@@ -26,17 +26,19 @@ router.get('/', function(req, res, next) {
                     prenom: sess.prenom,
                     nom: sess.nom,
                     useremail: sess.Username,
-                    adrPers: avis[0].Adresse ,
+                    adrPers: sess.adresse ,
                     avis: avis,
                     Ponctu:CfPon[0].Ponc*20,
                     Confiance:CfPon[0].Conf*20,
                     isViewingAvis: isView,
-                    Nbtrajet: nbtrajet,
-                    User: sess.Username
+                    Nbtrajet: nbtrajet
                 });
             });
+        
         });
     }
+    
+ 
     else {
         req.session.erreur="Vous devez être connecté pour accéder à cette fonctionalité";
         res.redirect('.');
@@ -86,8 +88,7 @@ router.get('/:user', function(req, res, next) {
                                 Ponctu:CfPon[0].Ponc*20,
                                 Confiance:CfPon[0].Conf*20,
                                 isViewingAvis: isView,
-                                Nbtrajet: nbtrajet,
-                                User: sess.Username
+                                Nbtrajet: nbtrajet
                             });
                     });
                 });

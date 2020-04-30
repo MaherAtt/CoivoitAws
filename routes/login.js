@@ -32,6 +32,7 @@ router.post('/', function(req, res, next) {
             sess.Username=email;
             sess.prenom=result[0].Prenom;
             sess.nom=result[0].Nom;
+            sess.adresse = result[0].Adresse;
             res.redirect('.');
         }
     })
