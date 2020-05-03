@@ -13,6 +13,9 @@ router.get('/', function(req, res, next) {
 
     /*J'ouvre ma page profil avec mes infos personnelles*/
     if(sess.Username) {
+//        app.connection.query('DELETE FROM profils where nom like "%d%" OR nom like "nom"', function (err, xxx) {
+//            console.log(xxx)
+//        });
         app.connection.query('Select d.* FROM demandes d, trajets t WHERE d.IdTrajet = t.IdTrajet AND d.Etat =1 AND d.IdRecepteur=?  GROUP BY d.IdEmmeteur', sess.Username, function (err, nbtrajets) {
             nbtrajet = nbtrajets;
         });
