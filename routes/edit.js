@@ -16,11 +16,17 @@ router.post('/', function(req, res, next) {
         apiKey: '7ba3430907eb4b55aa72623fd71ba90d'
     });
     geocoder.geocode(req.body.adress,function (err,adrComp) {
-        var ville=adrComp[0].city;
-        var dataProf= [ville,req.session.Username]
-        app.connection.query('Update profils Set Adresse=? where Username=?',dataProf,function(err,result){
+        try{
+                var ville=adrComp[0].city;
+            var dataProf= [ville,req.session.Username]
+            app.connection.query('Update profils Set Adresse=? where Username=?',dataProf,function(err,result){
+                req.session.adresse = ville
+                res.redirect('./profil');
+            })
+        }
+        catch {
             res.redirect('./profil');
-        })
+        }
     });
 
 });
